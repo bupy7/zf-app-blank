@@ -66,6 +66,10 @@ $checkList = [
         'name' => 'uglify-js2',
         'condition' => shellCommandExists('uglifyjs'),
     ],
+    [
+        'name' => 'java',
+        'condition' => shellCommandExists('java'),
+    ],
 ];
 
 $errors = 0;

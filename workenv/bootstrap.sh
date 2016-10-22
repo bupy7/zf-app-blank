@@ -105,6 +105,10 @@ fi
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get -y install nodejs build-essential
 
+# java
+# ----
+apt-get -y install default-jre-headless java-wrappers libjargs-java
+
 # bower
 # -----
 npm install -g bower
