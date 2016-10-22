@@ -8,6 +8,7 @@ Coding standart [PSR-2](http://www.php-fig.org/psr/psr-2/).
 Features
 --------
 
+- PHP7
 - [Zend Framework 3](https://github.com/zendframework/zendframework)
 - [Backbone.js](http://backbonejs.org/)
 - [Bootstrap 3](http://getbootstrap.com/)
