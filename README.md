@@ -39,10 +39,10 @@ configure its.
 $ vagrant up
 ```
 
-4) Then preparing the work environment. Run:
+4) Run init the work environment.
 
 ```
-$ php bin/init
+$ vagrant ssh -c 'php bin/init'
 ```
 
 5) Run install PHP packages:
