@@ -38,7 +38,7 @@ return [
                             'js/routers/auth.js',
                         ],
                         'filters' => [
-                            '?JsCompressorFilter',
+                            '?UglifyJs2Filter',
                         ],
                         'options' => [
                             'output' => 'js/auth.min.js',
