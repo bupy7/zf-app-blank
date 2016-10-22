@@ -1,0 +1,5 @@
+<?php
+
+/**
+ * Defined global constants.
+ */

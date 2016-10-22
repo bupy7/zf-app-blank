@@ -1,0 +1,83 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Application requirement checker script.
+ */
+
+require_once __DIR__ . '/include/functions.php';
+
+echo "Zend Framework Application Requirement Checker Script\n\n";
+
+$checkList = [
+    [
+        'name' => 'php-bcmath',
+        'condition' => extension_loaded('bcmath'),
+    ],
+    [
+        'name' => 'php-curl',
+        'condition' => extension_loaded('curl'),
+    ],
+    [
+        'name' => 'php-intl',
+        'condition' => extension_loaded('intl'),
+    ],
+    [
+        'name' => 'php-json',
+        'condition' => extension_loaded('json'),
+    ],
+    [
+        'name' => 'php-mbstring',
+        'condition' => extension_loaded('mbstring'),
+    ],
+    [
+        'name' => 'php-pdo-pgsql',
+        'condition' => extension_loaded('pdo_pgsql'),
+    ],
+    [
+        'name' => 'php-mcrypt',
+        'condition' => extension_loaded('mcrypt'),
+    ],
+    [
+        'name' => 'php-bz2',
+        'condition' => extension_loaded('bz2'),
+    ],
+    [
+        'name' => 'php-zip',
+        'condition' => extension_loaded('zip'),
+    ],
+    [
+        'name' => 'php-xml',
+        'condition' => extension_loaded('xml'),
+    ],
+    [
+        'name' => 'bower',
+        'condition' => shellCommandExists('bower'),
+    ],
+    [
+        'name' => 'less',
+        'condition' => shellCommandExists('lessc'),
+    ],
+    [
+        'name' => 'yui-compressor',
+        'condition' => shellCommandExists('yui-compressor'),
+    ],
+];
+
+$errors = 0;
+foreach ($checkList as $checkItem) {
+    $errors += !$checkItem['condition'];
+    $result = $checkItem['condition'] ? colorStr('OK', 'green') : colorStr('FAIL', 'red');
+    echo sprintf("%s: %s\n", $result, $checkItem['name']);
+}
+echo "---\n";
+if ($errors) {
+    echo colorStr(sprintf("%d Error(s)\n", $errors), 'red');
+} else {
+    echo colorStr("OK\n", 'green');
+}
+
+function shellCommandExists($cmd)
+{
+    return !empty(shell_exec(sprintf('which %s', $cmd)));
+}

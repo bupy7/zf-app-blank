@@ -1,0 +1,22 @@
+<doctrine-mapping
+    xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+    https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
+>
+    <entity name="User\Entity\User" table="`user`" repository-class="User\Repository\UserRepository">
+        <indexes>
+            <index name="user_index_1" columns="role" />
+        </indexes>
+        <unique-constraints>
+            <unique-constraint name="user_index_2" columns="email" />
+        </unique-constraints>
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO" />
+        </id>
+        <field name="person" type="string" length="255" nullable="false" />
+        <field name="email" type="string" unique="true" length="255" nullable="false"/>
+        <field name="password" type="string" length="60" nullable="false" />
+        <field name="role" type="string" length="64" nullable="false" />
+    </entity>
+</doctrine-mapping>

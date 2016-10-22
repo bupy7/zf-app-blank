@@ -1,0 +1,69 @@
+<ul class="{{ navigation(container).menu().getUlClass() }}">
+    {% for page in container if navigation().accept(page) %}
+        {% set hasChildren = page.hasPages() %}
+        {% if not hasChildren %}
+            <li{{ page.isActive() ? ' class="active"' : '' }}>
+                <a
+                    class="nav-header"
+                    href="{{ page.getHref() }}"
+                    {% if page.getTarget() != '' %}
+                        target="{{ page.getTarget() }}"
+                    {% endif %}
+                >
+                    {% if page.get('icon') != '' %}
+                        <span class="{{ page.get('icon') }}"></span>
+                    {% endif %}
+                    {{ translate(
+                        page.getLabel(),
+                        page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
+                    ) | e }}
+                </a>
+            </li>
+        {% else %}
+            {% set access = false %}
+            {% for child in page.getPages() %}
+                {% if navigation().accept(child) and child.get('separator') != true %}
+                    {% set access = true %}
+                {% endif %}
+            {% endfor %}
+            {% if access %}
+                <li class="dropdown{{ page.isActive(true) ? ' active' : '' }}">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        {% if page.get('icon') != '' %}
+                            <span class="{{ page.get('icon') }}"></span>
+                        {% endif %}
+                        {{ translate(
+                            page.getLabel(),
+                            page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
+                        ) | e }}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% for child in page.getPages() if navigation.accept(child) %}
+                            {% if child.get('separator') %}
+                                <li class="divider"></li>
+                            {% else %}
+                                <li{{ child.isActive() ? ' class="active"' : '' }}>
+                                    <a
+                                        href="{{ child.getHref() }}"
+                                        {% if (child.getTarget() != '') %}
+                                            target="{{ child.getTarget() }}"
+                                        {% endif %}
+                                    >
+                                        {% if child.get('icon') != '' %}
+                                            <span class="{{child.get('icon') }}"></span>
+                                        {% endif %}
+                                        {{ translate(
+                                            child.getLabel(), 
+                                            child.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
+                                        ) }}
+                                    </a>
+                                </li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </li>
+            {% endif %}
+        {% endif %}
+    {% endfor %}
+</ul>

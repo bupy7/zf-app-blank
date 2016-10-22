@@ -1,0 +1,14 @@
+{% extends 'layout/layout.twig' %}
+
+{% do headTitle(translate('TITLE_404', 'Application')) %}
+
+{% block content %}
+    <div class="page-404">
+        <div class="text-center">
+            <h1>{{ translate('DESC_404', 'Application') }}</h1>
+        </div>
+        <div class="col-sm-6 col-sm-offset-3">
+            <img src="{{ basePath('assets/img/404.png') }}" class="img-responsive">
+        </div>
+    </div>
+{% endblock content %}

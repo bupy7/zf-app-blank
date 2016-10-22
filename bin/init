@@ -1,0 +1,223 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Zend Framework Application Initialization Tool
+ *
+ * In order to run in non-interactive mode:
+ *
+ * init --env=dev --overwrite=n
+ */
+
+require_once __DIR__ . '/include/functions.php';
+
+$params = getParams();
+$root = __DIR__ . '/..';
+chdir($root);
+$envs = require "$root/env/config.php";
+$envNames = array_keys($envs);
+
+echo "Zend Framework Application Initialization Tool\n\n";
+
+$envName = null;
+if (empty($params['env']) || $params['env'] === '1') {
+    echo colorStr("Which environment do you want the application to be initialized in?\n\n", 'yellow');
+    foreach ($envNames as $i => $name) {
+        echo "  [{$i}] {$name}\n";
+    }
+    echo "\n  Your choice [0-" . (count($envs) - 1) . ', or "q" to quit] ';
+    $answer = trim(fgets(STDIN));
+
+    if (!ctype_digit($answer) || !in_array($answer, range(0, count($envs) - 1))) {
+        echo "\n  Quit initialization.\n";
+        exit(0);
+    }
+
+    if (isset($envNames[$answer])) {
+        $envName = $envNames[$answer];
+    }
+} else {
+    $envName = $params['env'];
+}
+
+if (!in_array($envName, $envNames)) {
+    $envsList = implode(', ', $envNames);
+    echo colorStr("\n  {$envName} is not a valid environment. Try one of the following: {$envsList}. \n", 'red');
+    exit(2);
+}
+
+$env = $envs[$envName];
+
+if (empty($params['env'])) {
+    echo colorStr("\n  Initialize the application under '{$envNames[$answer]}' environment? [yes|no] ", 'yellow');
+    $answer = trim(fgets(STDIN));
+    if (strncasecmp($answer, 'y', 1)) {
+        echo "\n  Quit initialization.\n";
+        exit(0);
+    }
+}
+
+echo colorStr("\n  Start initialization ...\n\n", 'cyan');
+$files = getFileList("{$root}/env/{$env['path']}");
+if (isset($env['skipFiles'])) {
+    $skipFiles = $env['skipFiles'];
+    array_walk($skipFiles, function(&$value) use($env, $root) { $value = "{$root}/{$value}"; });
+    $files = array_diff($files, array_intersect_key($env['skipFiles'], array_filter($skipFiles, 'file_exists')));
+}
+$all = false;
+foreach ($files as $file) {
+    if (!copyFile($root, "env/{$env['path']}/$file", $file, $all, $params)) {
+        break;
+    }
+}
+
+$callbacks = ['setWritable', 'setExecutable'];
+foreach ($callbacks as $callback) {
+    if (!empty($env[$callback])) {
+        $callback($root, $env[$callback]);
+    }
+}
+if (!empty($env['createSymlinks'])) {
+    createSymlinks($root, $env['createSymlinks'], isset($env['relativeSymlinks']) ? $env['relativeSymlinks'] : false);
+}
+
+echo colorStr("\n  ... initialization completed.\n\n", 'green');
+
+function getFileList($root, $basePath = '')
+{
+    $files = [];
+    $handle = opendir($root);
+    while (($path = readdir($handle)) !== false) {
+        if ($path === '.git' || $path === '.svn' || $path === '.' || $path === '..') {
+            continue;
+        }
+        $fullPath = "{$root}/{$path}";
+        $relativePath = $basePath === '' ? $path : "{$basePath}/{$path}";
+        if (is_dir($fullPath)) {
+            $files = array_merge($files, getFileList($fullPath, $relativePath));
+        } else {
+            $files[] = $relativePath;
+        }
+    }
+    closedir($handle);
+    return $files;
+}
+
+function copyFile($root, $source, $target, &$all, $params)
+{
+    if (!is_file($root . '/' . $source)) {
+        echo "       skip $target ($source not exist)\n";
+        return true;
+    }
+    if (is_file($root . '/' . $target)) {
+        if (file_get_contents($root . '/' . $source) === file_get_contents($root . '/' . $target)) {
+            echo "  unchanged {$target}\n";
+            return true;
+        }
+        if ($all) {
+            echo "  overwrite {$target}\n";
+        } else {
+            echo "      exist {$target}\n";
+            echo "            ...overwrite? [Yes|No|All|Quit] ";
+
+
+            $answer = !empty($params['overwrite']) ? $params['overwrite'] : trim(fgets(STDIN));
+            if (!strncasecmp($answer, 'q', 1)) {
+                return false;
+            } else {
+                if (!strncasecmp($answer, 'y', 1)) {
+                    echo "  overwrite {$target}\n";
+                } else {
+                    if (!strncasecmp($answer, 'a', 1)) {
+                        echo "  overwrite {$target}\n";
+                        $all = true;
+                    } else {
+                        echo "       skip {$target}\n";
+                        return true;
+                    }
+                }
+            }
+        }
+        file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
+        return true;
+    }
+    echo "   generate {$target}\n";
+    @mkdir(dirname($root . '/' . $target), 0777, true);
+    file_put_contents($root . '/' . $target, file_get_contents($root . '/' . $source));
+    return true;
+}
+
+function getParams()
+{
+    $rawParams = [];
+    if (isset($_SERVER['argv'])) {
+        $rawParams = $_SERVER['argv'];
+        array_shift($rawParams);
+    }
+
+    $params = [];
+    foreach ($rawParams as $param) {
+        if (preg_match('/^--(\w+)(=(.*))?$/', $param, $matches)) {
+            $name = $matches[1];
+            $params[$name] = isset($matches[3]) ? $matches[3] : true;
+        } else {
+            $params[] = $param;
+        }
+    }
+    return $params;
+}
+
+function setWritable($root, $paths)
+{
+    foreach ($paths as $writable) {
+        echo "      chmod 0777 {$writable}\n";
+        @chmod("{$root}/{$writable}", 0777);
+    }
+}
+
+function setExecutable($root, $paths)
+{
+    foreach ($paths as $executable) {
+        echo "      chmod 0755 {$executable}\n";
+        @chmod("{$root}/{$executable}", 0755);
+    }
+}
+
+function createSymlinks($root, $links, $relative = false)
+{
+    try {
+        foreach ($links as $link => $target) {
+            if ($relative) {
+                chdir($root);
+                $linkDir = explode('/', $link);
+                $linkName = array_pop($linkDir);
+                $targetPath = str_repeat('../', count($linkDir)) . $target;
+                $linkDir = implode('/', $linkDir);
+                chdir($linkDir);
+                $result = createSymlink($targetPath, $linkName);
+            } else {
+                $result = createSymlink("{$root}/{$target}", $link);
+            }
+            if ($result) {
+                echo sprintf("      %s: symlink %s/%s -> %s\n", colorStr('OK', 'green'), $root, $target, $link);
+            } else {
+                echo sprintf("      %s: no symlink %s/%s -> %s\n", colorStr('Error', 'red'), $root, $target, $link);
+            }
+        }
+    } catch (Exception $e) {
+        throw $e;
+    } finally {
+        chdir($root);
+    }
+}
+
+function createSymlink($target, $link)
+{
+    // first removing folders to avoid errors if the folder already exists
+    @rmdir($link);
+    // next removing existing symlink in order to update the target
+    if (is_link($link)) {
+        @unlink($link);
+    }
+    return @symlink($target, $link);
+}

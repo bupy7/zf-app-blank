@@ -1,0 +1,21 @@
+{% macro alert(items) %}
+    {% set templates = {
+        'default': '<div class="alert%s">%s%s</div>',
+        'success': '<div class="alert alert-success%s">%s%s</div>',
+        'info': '<div class="alert alert-info%s">%s%s</div>',
+        'warning': '<div class="alert alert-warning%s">%s%s</div>',
+        'error': '<div class="alert alert-danger%s">%s%s</div>'
+    } %}
+    {% for type, messages in items %}
+        {% for message in messages %}
+            {% set dismissable = {class: '', button: ''} %}
+            {% if message.dismissable %}
+                {% set dismissable = {
+                    class: ' alert-dismisable',
+                    button: '<button type="button" class="close" data-dismiss="alert">&times;</button>'
+                } %}
+            {% endif %}
+            {{ templates[type]|format(dismissable.class, dismissable.button, message.message) }}
+        {% endfor %}
+    {% endfor %}
+{% endmacro %}

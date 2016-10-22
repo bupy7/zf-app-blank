@@ -1,0 +1,9 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Run console application.
+ */
+
+require __DIR__ . '/../public/index.php';
+

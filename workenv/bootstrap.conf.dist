@@ -1,0 +1,22 @@
+# http://php.net/manual/ru/ini.core.php#ini.memory-limit
+PHP_MEMORY_LIMIT=256M
+# http://php.net/manual/ru/info.configuration.php#ini.max-execution-time
+PHP_EXECUTION_TIME=60
+# http://php.net/manual/ru/info.configuration.php#ini.max-input-time
+PHP_INPUT_TIME=120
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+TIME_ZONE=UTC
+# Database name
+PGSQL_DATABASE=zf_app_blank
+# Database username
+PGSQL_USERNAME=zf_app_blank
+# Database password
+PGSQL_PASSWORD=1234
+# https://www.postgresql.org/docs/9.1/static/locale.html
+PGSQL_LOCALE='en_US.utf8'
+# Server name
+SERVER_HOSTNAME='zf-app-blank'
+# https://wiki.debian.org/Locale
+SERVER_LOCALE='en_US.UTF-8 UTF-8'
+# https://github.com/blog/1509-personal-api-tokens
+GITHUB_OAUTH_TOKEN=''
