@@ -22,6 +22,8 @@ Features
 - [Support Composer](https://getcomposer.org/)
 - [Support Bower](https://bower.io/)
 - [Database is PostgreSQL](https://www.postgresql.org/)
+- [YUI Comressor](https://github.com/yui/yuicompressor)
+- [UglifyJS2](https://github.com/mishoo/UglifyJS2)
 - Multilanguage (English and Russian).
 - Simple example application (Sign in and Sign up).
 

@@ -60,7 +60,11 @@ $checkList = [
     ],
     [
         'name' => 'yui-compressor',
-        'condition' => shellCommandExists('yui-compressor'),
+        'condition' => shellCommandExists('yuicompressor'),
+    ],
+    [
+        'name' => 'uglify-js2',
+        'condition' => shellCommandExists('uglifyjs'),
     ],
 ];
 

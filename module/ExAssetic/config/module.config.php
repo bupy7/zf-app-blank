@@ -13,6 +13,8 @@ use ExAssetic\Filter\Yui\JsCompressorFilterFactory;
 use ExAssetic\Options\ModuleOptions;
 use ExAssetic\Options\ModuleOptionsFactory;
 use AsseticBundle\CacheBuster\LastModifiedStrategy;
+use Assetic\Filter\UglifyJs2Filter;
+use ExAssetic\Filter\UglifyJs2FilterFactory;
 
 return [
     'ex_assetic' => [
@@ -20,6 +22,7 @@ return [
         'node_paths' => [],
         'yui_path' => '',
         'java_path' => '/usr/bin/java',
+        'uglify_js2_path' => '',
     ],
     'service_manager' => [
         'invokables' => [
@@ -30,11 +33,13 @@ return [
             CssCompressorFilter::class => CssCompressorFilterFactory::class,
             JsCompressorFilter::class => JsCompressorFilterFactory::class,
             ModuleOptions::class => ModuleOptionsFactory::class,
+            UglifyJs2Filter::class => UglifyJs2FilterFactory::class,
         ],
         'aliases' => [
             'LessFilter' => LessFilter::class,
             'CssCompressorFilter' => CssCompressorFilter::class,
             'JsCompressorFilter' => CssCompressorFilter::class,
+            'UglifyJs2Filter' => UglifyJs2Filter::class,
         ],
     ],
 ];

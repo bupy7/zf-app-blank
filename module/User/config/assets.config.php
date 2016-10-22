@@ -25,7 +25,7 @@ return [
                             'js/routers/signup.js',
                         ],
                         'filters' => [
-                            '?JsCompressorFilter',
+                            '?UglifyJs2Filter',
                         ],
                         'options' => [
                             'output' => 'js/signup.min.js',

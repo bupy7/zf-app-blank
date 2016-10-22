@@ -29,7 +29,8 @@ return [
         'node_paths' => [
             '/usr/lib/node_modules',
         ],
-        'yui_path' => '/usr/share/yui-compressor/yui-compressor.jar',
+        'yui_path' => '/usr/lib/node_modules/yuicompressor/build/yuicompressor-2.4.8.jar',
         'java_path' => '/usr/bin/java',
+        'uglify_js2_path' => '/usr/bin/uglifyjs',
     ],
 ];

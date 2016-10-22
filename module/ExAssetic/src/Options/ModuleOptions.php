@@ -22,6 +22,10 @@ class ModuleOptions extends AbstractOptions
      * @var string Path to Java.
      */
     protected $javaPath;
+    /**
+     * @var string Path to UglifyJS2.
+     */
+    protected $uglifyJs2Path;
 
     /**
      * @param string $nodeBin
@@ -93,5 +97,23 @@ class ModuleOptions extends AbstractOptions
     public function getJavaPath()
     {
         return $this->javaPath;
+    }
+
+    /**
+     * @param string $uglifyJs2Path
+     * @return static
+     */
+    public function setUglifyJs2Path($uglifyJs2Path)
+    {
+        $this->uglifyJs2Path = $uglifyJs2Path;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUglifyJs2Path()
+    {
+        return $this->uglifyJs2Path;
     }
 }

@@ -111,7 +111,11 @@ npm install -g bower
 
 # yui compressor
 # --------------
-apt-get -y install yui-compressor
+npm install -g yuicompressor
+
+# uglifyjs 2
+# ----------
+npm install -g uglify-js
 
 # less
 # ----

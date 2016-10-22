@@ -40,7 +40,7 @@ return [
                             'js/validations/*.js',
                         ],
                         'filters' => [
-                            '?JsCompressorFilter',
+                            '?UglifyJs2Filter',
                         ],
                         'options' => [
                             'output' => 'js/common.min.js',
