@@ -34,7 +34,7 @@
         "zendframework/zend-mvc-plugin-fileprg": "^1.0",
         "zendframework/zend-json": "^3.0",
         "widmogrod/zf2-assetic-module": "2.0.0",
-        "zf-commons/zfc-rbac": "dev-master",
+        "zf-commons/zfc-rbac": "2.6.1",
         "doctrine/doctrine-orm-module": "1.1.0",
         "doctrine/migrations": "dev-master",
         "bupy7/zf-form": "1.0.0",
