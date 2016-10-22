@@ -29,7 +29,7 @@ return [
         'node_paths' => [
             '/usr/lib/node_modules',
         ],
-        'yui_path' => '/usr/bin/yui-compressor',
+        'yui_path' => '/usr/share/yui-compressor/yui-compressor.jar',
         'java_path' => '/usr/bin/java',
     ],
 ];
