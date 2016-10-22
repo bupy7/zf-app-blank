@@ -28,11 +28,7 @@ Features
 Installation
 ------------
 
-1) To create your new project:
-
-```
-$ composer create-project bupy7/zf-app-blank path/to/install
-```
+1) Download and unpack the repository.
 
 2) Copy the file `workenv/bootstrap.conf.dist` to `workenv/bootstrap.conf` and
 configure its.
