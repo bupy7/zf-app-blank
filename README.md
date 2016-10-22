@@ -44,7 +44,7 @@ configure its.
 $ vagrant up
 ```
 
-4) Run initialization tool:.
+4) Run initialization tool:
 
 ```
 $ vagrant ssh -c 'php bin/init'
