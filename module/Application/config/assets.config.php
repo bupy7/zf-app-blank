@@ -12,7 +12,7 @@ return [
             GuardInterface::GUARD_UNAUTHORIZED
         ],
         'debug' => APP_DEBUG,
-        'buildOnRequest' => true,
+        'buildOnRequest' => APP_ENV_DEV,
         'webPath' => getcwd() . '/public/assets',
         'basePath' => 'assets',
         'default' => [
