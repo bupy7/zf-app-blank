@@ -28,6 +28,7 @@ Features
 - [Database is PostgreSQL](https://www.postgresql.org/)
 - [YUI Comressor](https://github.com/yui/yuicompressor)
 - [UglifyJS2](https://github.com/mishoo/UglifyJS2)
+- [PHP Coding Standarts Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
 - Multilanguage (English and Russian).
 - Simple example application (Sign in and Sign up).
 
