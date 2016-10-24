@@ -6,5 +6,4 @@ use ExDoctrine\Repository\RepositoryInterface;
 
 interface UserRepositoryInterface extends RepositoryInterface
 {
-
 }

@@ -61,5 +61,8 @@
     },
     "require-dev": {
         "snapshotpl/zf-snap-php-debug-bar": "0.12.0-beta"
+    },
+    "scripts": {
+        "phpcs": "php vendor/bin/php-cs-fixer fix"
     }
 }

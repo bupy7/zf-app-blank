@@ -1,7 +1,7 @@
 <?php
 
 namespace Application\Controller\Plugin;
- 
+
 use Interop\Container\ContainerInterface;
 use Zend\ServiceManager\Factory\FactoryInterface;
 

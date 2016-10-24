@@ -17,4 +17,3 @@ require_once 'config/constants.php';
 
 // Run the application!
 Application::init(require 'config/application.config.php')->run();
-

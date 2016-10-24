@@ -36,7 +36,7 @@ class TranslatePlugin extends AbstractPlugin
     {
         if ($textDomain === null) {
             $textDomain = $this->translatorTextDomain;
-        } 
+        }
         return $this->translator->translate($message, $textDomain, $locale);
     }
     

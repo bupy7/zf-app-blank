@@ -18,7 +18,7 @@ class SignUpForm extends FormAbstract
      */
     public function __construct(UserRepositoryInterface $userRepository)
     {
-        $this->userRepository = $userRepository;   
+        $this->userRepository = $userRepository;
     }
 
     /**

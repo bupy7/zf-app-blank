@@ -10,7 +10,7 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  * @see https://github.com/doctrine/DoctrineModule/blob/master/docs/authentication.md
  */
 class AuthServiceFactory implements FactoryInterface
-{    
+{
     /**
      * {@inheritDoc}
      */
@@ -21,10 +21,9 @@ class AuthServiceFactory implements FactoryInterface
         $authService
             ->getAdapter()
             ->getOptions()
-            ->setCredentialCallable(function(UserInterface $user, $password) use ($passHashService) {
+            ->setCredentialCallable(function (UserInterface $user, $password) use ($passHashService) {
                 return $passHashService->verify($password, $user->getPassword());
             });
         return $authService;
     }
 }
-

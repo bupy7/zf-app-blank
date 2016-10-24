@@ -23,7 +23,7 @@ class AlertMessageHelper extends AbstractHelper
     /**
      * @var FlashMessenger Holds a FlashMessenger instance
      */
-    protected $flashMessenger = null;      
+    protected $flashMessenger = null;
     /**
      * @var array Holds the messages
      */
@@ -50,7 +50,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a new message
-     * 
+     *
      * @param string $message
      * @param bool $dismissable
      */
@@ -61,7 +61,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a new success message
-     * 
+     *
      * @param string $successMessage
      * @param bool $dismissable
      */
@@ -72,7 +72,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a new info message
-     * 
+     *
      * @param string $infoMessage
      * @param bool $dismissable
      */
@@ -83,7 +83,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a new warning message
-     * 
+     *
      * @param string $warningMessage
      * @param bool $dismissable
      */
@@ -94,7 +94,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a new error message
-     * 
+     *
      * @param string $errorMessage
      * @param bool $dismissable
      */
@@ -105,7 +105,7 @@ class AlertMessageHelper extends AbstractHelper
     
     /**
      * Add a message by type
-     * 
+     *
      * @param string $type
      * @param string $message
      * @param bool $dismissable

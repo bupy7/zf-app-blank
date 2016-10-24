@@ -22,4 +22,3 @@ abstract class RepositoryAbstract extends EntityRepository implements Repository
         $this->getEntityManager()->flush();
     }
 }
-
