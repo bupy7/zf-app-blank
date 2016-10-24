@@ -63,8 +63,6 @@ $ vagrant ssh -c 'composer install'
 $ vagrant ssh -c 'bower install'
 ```
 
-and follow steps.
-
 7) Run create the database schema:
 
 ```
