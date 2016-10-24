@@ -7,6 +7,8 @@ zf-app-blank
 
 Autoloading standart [PSR-4](http://www.php-fig.org/psr/psr-4/). Coding standart [PSR-2](http://www.php-fig.org/psr/psr-2/).
 
+![zf-app-blank](docs/screenshot.png)
+
 Features
 --------
 
