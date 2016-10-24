@@ -2,7 +2,6 @@ zf-app-blank
 ============
 
 [![Latest Stable Version](https://poser.pugx.org/bupy7/zf-app-blank/v/stable)](https://packagist.org/packages/bupy7/zf-app-blank)
-[![Total Downloads](https://poser.pugx.org/bupy7/zf-app-blank/downloads)](https://packagist.org/packages/bupy7/zf-app-blank)
 [![Latest Unstable Version](https://poser.pugx.org/bupy7/zf-app-blank/v/unstable)](https://packagist.org/packages/bupy7/zf-app-blank)
 [![License](https://poser.pugx.org/bupy7/zf-app-blank/license)](https://packagist.org/packages/bupy7/zf-app-blank)
 
