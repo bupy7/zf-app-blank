@@ -19,6 +19,12 @@
             "email": "bupy765@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "https://github.com/bupy7/ZfSnapPhpDebugBar"
+        }
+    ],
     "require": {
         "php": "^7.0",
         "zendframework/zend-mvc": "^3.0.1",
@@ -54,6 +60,6 @@
         }
     },
     "require-dev": {
-        "snapshotpl/zf-snap-php-debug-bar": "dev-master"
+        "snapshotpl/zf-snap-php-debug-bar": "0.12.0-beta"
     }
 }
