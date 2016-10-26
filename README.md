@@ -46,22 +46,22 @@ configure its.
 $ vagrant up
 ```
 
-4) Run initialization tool:
-
-```
-$ vagrant ssh -c 'php bin/init'
-```
-
-5) Run install PHP packages:
+4) Run install PHP packages:
 
 ```
 $ vagrant ssh -c 'composer install'
 ```
 
-6) Run install client-side packages:
+5) Run install client-side packages:
 
 ```
 $ vagrant ssh -c 'bower install'
+```
+
+6) Run initialization tool:
+
+```
+$ vagrant ssh -c 'php bin/init'
 ```
 
 7) Run create the database schema:
