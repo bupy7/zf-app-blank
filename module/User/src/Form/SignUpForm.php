@@ -45,6 +45,7 @@ class SignUpForm extends FormAbstract
                 'validators' => [
                     [
                         'name' => 'EmailAddress',
+                        'break_chain_on_failure' => true,
                     ],
                     [
                         'name' => NoObjectExists::class,
