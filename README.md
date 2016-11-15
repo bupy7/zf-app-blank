@@ -67,7 +67,7 @@ $ vagrant ssh -c 'php bin/init'
 7) Run create the database schema:
 
 ```
-$ php bin/console orm:schema-tool:create
+$ vagrant ssh -c 'php bin/console orm:schema-tool:create'
 ```
 
 8) Done.
