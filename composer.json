@@ -54,7 +54,8 @@
         }
     },
     "require-dev": {
-        "snapshotpl/zf-snap-php-debug-bar": "0.12.1"
+        "snapshotpl/zf-snap-php-debug-bar": "0.12.1",
+        "friendsofphp/php-cs-fixer": "1.13.1"
     },
     "scripts": {
         "phpcs": "php vendor/bin/php-cs-fixer fix"
