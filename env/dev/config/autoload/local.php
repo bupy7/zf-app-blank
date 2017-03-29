@@ -4,16 +4,19 @@
  * Local configuration of application.
  */
 
-use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSQLDriver;
+//use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSqlDriver;
+use Doctrine\DBAL\Driver\PDOMySql\Driver as MySqlDriver;
 
 return [
     'doctrine' => [
         'connection' => [
             'orm_default' => [
-                'driverClass' => PgSQLDriver::class,
+//                'driverClass' => PgSqlDriver::class,
+                'driverClass' => MySqlDriver::class,
                 'params' => [
                     'host' => '127.0.0.1',
-                    'port' => 5432,
+//                    'port' => 5432,
+                    'port' => 3306,
                     'user' => 'zf_app_blank',
                     'password' => '1234',
                     'dbname' => 'zf_app_blank',

@@ -1,0 +1,52 @@
+# https://github.com/blog/1509-personal-api-tokens
+github_token: <your token>
+
+# https://wiki.debian.org/Locale
+server_locale: 'en_US.UTF-8 UTF-8'
+
+# https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+server_time_zone: Europe/London
+
+# are we need check box updates for every 'vagrant up'?
+box_check_update: false
+
+# virtual machine name
+server_name: zf-app-blank
+
+# virtual machine IP
+ip: 192.168.20.22
+
+# virtual machine CPU cores number
+server_cpus: 1
+
+# virtual machine RAM
+server_memory: 512
+
+# http://php.net/manual/ru/ini.core.php#ini.memory-limit
+php_memory_limit: 256M
+
+# http://php.net/manual/ru/info.configuration.php#ini.max-execution-time
+php_execution_time: 60
+
+# http://php.net/manual/ru/info.configuration.php#ini.max-input-time
+php_input_time: 120
+
+# http://php.net/manual/ru/timezones.php
+php_time_zone: UTC
+
+# https://dev.mysql.com/doc/refman/5.7/en/adding-users.html
+# https://dev.mysql.com/doc/refman/5.7/en/creating-database.html
+mysql_db: zf_app_blank
+mysql_user: zf_app_blank
+mysql_pass: 1234
+
+# https://www.postgresql.org/docs/9.6/static/sql-createdatabase.html
+# https://www.postgresql.org/docs/9.6/static/sql-createuser.html
+# https://www.postgresql.org/docs/9.6/static/locale.html
+pgsql_db: zf_app_blank
+pgsql_user: zf_app_blank
+pgsql_pass: 1234
+pgsql_locale: 'en_US.utf8'
+
+# using database (mysql or pgsql)
+db_type: mysql

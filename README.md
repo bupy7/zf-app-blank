@@ -26,6 +26,7 @@ Features
 - [Support Composer](https://getcomposer.org/)
 - [Support Bower](https://bower.io/)
 - [Database is PostgreSQL](https://www.postgresql.org/)
+- [Database is MySQL](https://www.mysql.com/)
 - [YUI Comressor](https://github.com/yui/yuicompressor)
 - [UglifyJS2](https://github.com/mishoo/UglifyJS2)
 - [PHP Coding Standarts Fixer](https://github.com/FriendsOfPHP/PHP-CS-Fixer)
@@ -35,42 +36,40 @@ Features
 Installation
 ------------
 
-1) Download and unpack the repository.
+- Download and unpack the repository.
 
-2) Copy the file `workenv/bootstrap.conf.dist` to `workenv/bootstrap.conf` and
-configure its.
+- [Install Vagrant](https://www.vagrantup.com/docs/installation/)
 
-3) Run install the work environment using `Vargant`:
+- Install plugins for Vagrant:
+
+```
+$ vagrant plugin install vagrant-vbguest
+$ vagrant plugin install vagrant-hostmanager
+```
+
+- Run install the work environment:
 
 ```
 $ vagrant up
 ```
 
-4) Run install PHP packages:
+- Paste GitHub token into `/workenv/config/vagrant-local.yml`
+
+- Run again:
 
 ```
-$ vagrant ssh -c 'composer install'
+$ vagrant up
 ```
 
-5) Run install client-side packages:
+- Configure your projects into `/config/local.php`.
 
-```
-$ vagrant ssh -c 'bower install'
-```
-
-6) Run initialization tool:
-
-```
-$ vagrant ssh -c 'php bin/init'
-```
-
-7) Run create the database schema:
+- Create the database schema:
 
 ```
 $ vagrant ssh -c 'php bin/console orm:schema-tool:create'
 ```
 
-8) Done.
+- Done.
 
 License
 -------
