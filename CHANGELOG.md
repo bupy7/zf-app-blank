@@ -8,7 +8,7 @@ zf-app-blank
 - [Enh]: Rewrite Vagrant configuration.
 - [New]: Added MySQL.
 
-1.0.0 [2016]
+1.0.0 [2016-11-15]
 ------------
 
 - First release.
