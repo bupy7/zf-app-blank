@@ -7,7 +7,7 @@
 
 require_once __DIR__ . '/include/functions.php';
 
-echo "Zend Framework Application Requirement Checker Script\n\n";
+echo colorStr("Zend Framework Application Requirement Checker Script\n", 'yellow');
 
 $checkList = [
     [
@@ -31,8 +31,8 @@ $checkList = [
         'condition' => extension_loaded('mbstring'),
     ],
     [
-        'name' => 'php-pdo-pgsql',
-        'condition' => extension_loaded('pdo_pgsql'),
+        'name' => 'php-pdo-(pgsql|mysql)',
+        'condition' => extension_loaded('pdo_pgsql') || extension_loaded('pdo_mysql'),
     ],
     [
         'name' => 'php-mcrypt',
@@ -87,5 +87,6 @@ if ($errors) {
 
 function shellCommandExists($cmd)
 {
-    return !empty(shell_exec(sprintf('which %s', $cmd)));
+    $exec = shell_exec(sprintf('which %s', $cmd));
+    return !empty($exec);
 }
