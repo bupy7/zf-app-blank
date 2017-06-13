@@ -3,13 +3,12 @@
 namespace User;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
+use Zend\EventManager\EventInterface;
+use Zend\ModuleManager\Feature\BootstrapListenerInterface;
 
-class Module implements ConfigProviderInterface
+class Module implements ConfigProviderInterface, BootstrapListenerInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfig()
+    public function getConfig(): array
     {
         return array_merge(
             require __DIR__ . '/../config/module.config.php',
@@ -19,5 +18,17 @@ class Module implements ConfigProviderInterface
             require __DIR__ . '/../config/navigation.config.php',
             require __DIR__ . '/../config/assets.config.php'
         );
+    }
+
+    public function onBootstrap(EventInterface $e)
+    {
+        $sm = $e->getApplication()->getServiceManager();
+
+        // confirm email request
+        $confirmEmailService = $sm->get('User\Service\ConfirmEmailService');
+        $signUpEventManager = $sm->get('User\Service\SignUpService')->getEventManager();
+        $signUpEventManager->attach('signup', function (EventInterface $event) use ($confirmEmailService) {
+            $confirmEmailService->request($event->getParam('userEntity'));
+        });
     }
 }

@@ -1,5 +1,19 @@
 #!/usr/bin/env bash
 
-service php7.0-fpm restart
+# import script args
+# ------------------
+DB_TYPE=$(echo "$1")
+
+# restart services
+# ----------------
+service php7.1-fpm restart
 service nginx restart
-service mysql restart
+case $DB_TYPE in
+    mysql)
+        service mysql restart
+        ;;
+
+    pgsql)
+        service postgresql restart
+        ;;
+esac

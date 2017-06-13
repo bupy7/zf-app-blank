@@ -13,6 +13,15 @@ return [
             'signup' => [
                 '@signup_js',
             ],
+            'confirm-again' => [
+                '@confirm_again_js'
+            ],
+            'forgot-pass' => [
+                '@access_js',
+            ],
+            'restore-pass' => [
+                '@access_js',
+            ],
         ],
         'modules' => [
             'User' => [
@@ -42,6 +51,34 @@ return [
                         ],
                         'options' => [
                             'output' => 'js/auth.min.js',
+                        ],
+                    ],
+                    'confirm_again_js' => [
+                        'assets' => [
+                            'js/models/confirm-again.js',
+                            'js/views/confirm-again.js',
+                            'js/routers/confirm-email.js',
+                        ],
+                        'filters' => [
+                            '?UglifyJs2Filter',
+                        ],
+                        'options' => [
+                            'output' => 'js/confirm-again.min.js',
+                        ],
+                    ],
+                    'access_js' => [
+                        'assets' => [
+                            'js/models/forgot-pass.js',
+                            'js/models/restore-pass.js',
+                            'js/views/forgot-pass.js',
+                            'js/views/restore-pass.js',
+                            'js/routers/access.js',
+                        ],
+                        'filters' => [
+                            '?UglifyJs2Filter',
+                        ],
+                        'options' => [
+                            'output' => 'js/access.min.js',
                         ],
                     ],
                 ],

@@ -1,0 +1,15 @@
+{% block content %}
+    <p>{{ translate('EMAIL_HELLO', 'User')|format(userEntity.getPerson()|e) }}</p>
+    {% set link %}
+        <a href="{{ url('confirm-email', {
+            e: userEntity.getEmail(),
+            k: userEntity.getConfirmKey()
+        }, {
+            force_canonical: true
+        }) }}">{{ translate('EMAIL_CONFIRM_EMAIL', 'User') }}</a>
+    {% endset %}
+    <p>{{ translate('EMAIL_BODY_CONFIRM_EMAIL', 'User')|format(link) }}</p>
+    ---
+    <br>
+    {{ translate('EMAIL_WITH_THE_RESPECT', 'User')|format(translate('TITLE_HOMEPAGE', 'Application')) }}
+{% endblock content %}

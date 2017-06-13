@@ -16,6 +16,8 @@ PGSQL_USER=$(echo "${11}")
 PGSQL_PASS=$(echo "${12}")
 PGSQL_LOCALE=$(echo "${13}")
 DB_TYPE=$(echo "${14}")
+XDEBUG_IDEKEY=$(echo "${15}")
+MACHINE_IP=$(echo "${16}")
 
 # env
 # ---
@@ -62,6 +64,7 @@ case $DB_TYPE in
         echo "skip-character-set-client-handshake" >> /etc/mysql/mysql.conf.d/mysqld.cnf
         service mysql restart
         echo "CREATE DATABASE ${MYSQL_DB}" | mysql -uroot -prootpass 2>/dev/null
+        echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
         ;;
 
     pgsql)
@@ -73,6 +76,7 @@ case $DB_TYPE in
         pg_createcluster --locale $PGSQL_LOCALE --start 9.6 main
         sudo -u postgres psql -c "CREATE USER ${PGSQL_USER} WITH SUPERUSER CREATEDB LOGIN PASSWORD '${PGSQL_PASS}';"
         sudo -u postgres psql -c "CREATE DATABASE ${PGSQL_DB};"
+        sudo -u postgres psql -c "CREATE DATABASE ${PGSQL_DB}_test;"
         sed -i "s/^#listen_addresses.*/listen_addresses = '*'/" /etc/postgresql/9.6/main/postgresql.conf
         echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/9.6/main/pg_hba.conf
         service postgresql restart
@@ -86,22 +90,23 @@ rm /etc/nginx/sites-available/default
 ln -s /vagrant/workenv/nginx/site.conf /etc/nginx/sites-available/default
 service nginx restart
 
-# php7 and php-fpm
-# ----------------
-echo "deb http://packages.dotdeb.org $(lsb_release -sc) all" > /etc/apt/sources.list.d/dotdeb.list
-echo "deb-src http://packages.dotdeb.org $(lsb_release -sc) all" >> /etc/apt/sources.list.d/dotdeb.list
-wget http://www.dotdeb.org/dotdeb.gpg -O- | apt-key add -
+# php7.1 and php-fpm
+# -------
+apt-get -y install apt-transport-https lsb-release ca-certificates
+echo "deb https://packages.sury.org/php/ $(lsb_release -sc) main" > /etc/apt/sources.list.d/php.list
+echo "deb-src https://packages.sury.org/php/ $(lsb_release -sc) main" >> /etc/apt/sources.list.d/php.list
+wget https://packages.sury.org/php/apt.gpg -O- | apt-key add -
 apt-get update
-apt-get -y install php7.0-fpm php7.0-cli php7.0-bcmath php7.0-curl \
-    php7.0-intl php7.0-json php7.0-mbstring php7.0-opcache \
-    php7.0-xdebug php7.0-mcrypt php7.0-gd php7.0-bz2 php7.0-zip php7.0-xml
+apt-get -y install php7.1-fpm php7.1-cli php7.1-bcmath php7.1-curl \
+    php7.1-intl php7.1-json php7.1-mbstring php7.1-opcache \
+    php7.1-xdebug php7.1-mcrypt php7.1-gd php7.1-bz2 php7.1-zip php7.1-xml
 case $DB_TYPE in
     mysql)
-        apt-get -y install php7.0-mysql
+        apt-get -y install php7.1-mysql
         ;;
 
     pgsql)
-        apt-get -y install php7.0-pgsql
+        apt-get -y install php7.1-pgsql
         ;;
 esac
 php_ini_set() {
@@ -119,9 +124,21 @@ php_ini_set() {
     esc_tz=$(echo $PHP_TIME_ZONE | sed 's/\//\\&/')
     sed -i "s/^;date\.timezone.*/date.timezone=${esc_tz}/" $ini_file
 }
-php_ini_set /etc/php/7.0/fpm/php.ini
-php_ini_set /etc/php/7.0/cli/php.ini
-service php7.0-fpm restart
+php_ini_set /etc/php/7.1/fpm/php.ini
+php_ini_set /etc/php/7.1/cli/php.ini
+xdebug=$(cat <<EOF
+zend_extension=xdebug.so
+xdebug.remote_enable=1
+xdebug.remote_connect_back=1
+xdebug.remote_log=/tmp/php7.1-xdebug.log
+xdebug.idekey=${XDEBUG_IDEKEY}
+xdebug.remote_host=${MACHINE_IP}
+xdebug.max_nesting_level=1000
+EOF
+)
+echo "${xdebug}" > /etc/php/7.1/cli/conf.d/20-xdebug.ini
+echo "${xdebug}" > /etc/php/7.1/fpm/conf.d/20-xdebug.ini
+service php7.1-fpm restart
 
 # composer
 # --------
@@ -130,17 +147,13 @@ curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin
 echo "export COMPOSER_DISABLE_XDEBUG_WARN=1" >> /home/vagrant/.profile
 
 # node.js
-# -------
+# ------
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
 apt-get -y install nodejs build-essential
 
 # java
 # ----
 apt-get -y install default-jre-headless java-wrappers libjargs-java
-
-# bower
-# -----
-npm install -g bower
 
 # yui compressor
 # --------------

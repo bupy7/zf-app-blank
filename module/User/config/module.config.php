@@ -1,21 +1,6 @@
 <?php
 
-/**
- * Main User module config file.
- */
-
-use User\Controller\AuthControllerFactory;
-use User\Controller\SignupControllerFactory;
-use User\Service\AuthServiceFactory;
-use Zend\Authentication\AuthenticationService;
-use User\Form\SignUpForm;
-use User\Form\SignUpFormFactory;
-use User\Service\PasswordHashService;
-use User\Service\PasswordHashServiceFactory;
-use User\Controller\AuthController;
-use User\Controller\SignupController;
-use User\Service\SignUpServiceFactory;
-use User\Service\SignUpService;
+namespace User;
 
 return [
     'translator' => [
@@ -24,7 +9,7 @@ return [
                 'type' => 'phparray',
                 'base_dir' => __DIR__ . '/../language',
                 'pattern' => '%s.php',
-                'text_domain' => 'User',
+                'text_domain' => __NAMESPACE__,
             ],
         ],
     ],
@@ -32,19 +17,33 @@ return [
         'template_path_stack' => [
             __DIR__ . '/../view',
         ],
+        'template_map' => [
+            'user/mail/confirm-request' => __DIR__ . '/../view/mail/confirm-request.twig',
+            'user/mail/restore-pass' => __DIR__ . '/../view/mail/restore-pass.twig'
+        ],
     ],
     'controllers' => [
         'factories' => [
-            AuthController::class => AuthControllerFactory::class,
-            SignupController::class => SignupControllerFactory::class,
+            Controller\AuthController::class => Controller\AuthControllerFactory::class,
+            Controller\SignupController::class => Controller\SignupControllerFactory::class,
+            Controller\ConfirmEmailController::class => Controller\ConfirmEmailControllerFactory::class,
+            Controller\AccessController::class => Controller\AccessControllerFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            AuthenticationService::class => AuthServiceFactory::class,
-            SignUpForm::class => SignUpFormFactory::class,
-            PasswordHashService::class => PasswordHashServiceFactory::class,
-            SignUpService::class => SignUpServiceFactory::class,
+            \Zend\Authentication\AuthenticationService::class => Service\AuthServiceFactory::class,
+            Form\SignUpForm::class => Form\SignUpFormFactory::class,
+            Service\SignUpService::class => Service\SignUpServiceFactory::class,
+            Service\ConfirmEmailService::class => Service\ConfirmEmailServiceFactory::class,
+            Service\AccessService::class => Service\AccessServiceFactory::class,
+        ],
+    ],
+    'di' => [
+        'instance' => [
+            'preference' => [
+                \Zend\Crypt\Password\PasswordInterface::class => \Zend\Crypt\Password\BcryptSha::class,
+            ],
         ],
     ],
 ];

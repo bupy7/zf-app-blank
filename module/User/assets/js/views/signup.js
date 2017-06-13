@@ -1,28 +1,30 @@
 var App = App || {};
 
-(function() {
+(function () {
     'use strict';
 
     App.SignUpView = Backbone.View.extend({
         events: {
-            'click button[type="submit"]': function (e) {
+            'change input': function (e) {
+                this.validate(e.target.getAttribute('name'));
+            },
+            'submit': function (e) {
                 e.preventDefault();
-                this.signUp();
+                this.submit();
             }
         },
         initialize: function () {
-            Backbone.Validation.bind(this);
+            this.bindValidation();
         },
-        signUp: function () {
-            var data = this.$el.serializeObject();
-            this.model.set(data);
-            if(this.model.isValid(true)){
-                this.$el.submit();
+        validate: function(name) {
+            this.model.set(this.$el.serializeForm());
+            this.model.validate(name);
+        },
+        submit: function () {
+            this.model.set(this.$el.serializeForm());
+            if (this.model.isValid()) {
+                this.el.submit();
             }
-        },
-        remove: function() {
-            Backbone.Validation.unbind(this);
-            return Backbone.View.prototype.remove.apply(this, arguments);
         }
     });
 })();

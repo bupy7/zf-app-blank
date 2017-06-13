@@ -7,13 +7,10 @@ use Zend\ServiceManager\Factory\FactoryInterface;
 
 class SignUpServiceFactory implements FactoryInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
+    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): SignUpService
     {
         $userRepository = $container->get('Doctrine\ORM\EntityManager')->getRepository('User\Entity\User');
-        $passwordHashService = $container->get('User\Service\PasswordHashService');
+        $passwordHashService = $container->get('Di')->get('Zend\Crypt\Password\BcryptSha');
         return new SignUpService($userRepository, $passwordHashService);
     }
 }

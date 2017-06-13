@@ -6,6 +6,8 @@
 
 use ZfcRbac\Guard\GuardInterface;
 
+$npmPath = getcwd() . '/vendor/npm-asset';
+
 return [
     'assetic_configuration' => [
         'acceptableErrors' => [
@@ -48,13 +50,12 @@ return [
                     ],
                     'library_js' => [
                         'assets' => [
-                            getcwd() . '/vendor/bower/jquery/dist/jquery.min.js',
-                            getcwd() . '/vendor/bower/bootstrap/dist/js/bootstrap.min.js',
-                            getcwd() . '/vendor/bower/underscore/underscore-min.js',
-                            getcwd() . '/vendor/bower/backbone/backbone-min.js',
-                            getcwd() . '/vendor/bower/backbone.validation/dist/backbone-validation-min.js',
-                            getcwd() . '/vendor/bower/i18next/i18next.min.js',
-                            getcwd() . '/vendor/bower/js-lib-url/dist/url.min.js',
+                            $npmPath . '/jbone/dist/jbone.min.js',
+                            $npmPath . '/underscore/underscore-min.js',
+                            $npmPath . '/backbone/backbone-min.js',
+                            $npmPath . '/backbone-validator.js/backbone-validator-min.js',
+                            $npmPath . '/i18next/i18next.min.js',
+                            $npmPath . '/js-lib-url/dist/url.min.js',
                         ],
                         'options' => [
                             'output' => 'js/library.min.js',
@@ -75,7 +76,7 @@ return [
                     'library_css' => [
                         'assets' => [
                             'css/bs/bootstrap.less',
-                            getcwd() . '/vendor/bower/font-awesome/css/font-awesome.css',
+                            $npmPath . '/font-awesome/css/font-awesome.css',
                         ],
                         'filters' => [
                             'LessFilter',
@@ -95,7 +96,7 @@ return [
                     ],
                     'bootstrap_fonts' => [
                         'assets' => [
-                            getcwd() . '/vendor/bower/bootstrap/fonts/*',
+                            $npmPath . '/bootstrap/fonts/*',
                         ],
                         'options' => [
                             'move_raw' => true,
@@ -104,7 +105,7 @@ return [
                     ],
                     'font_awesome_fonts' => [
                         'assets' => [
-                            getcwd() . '/vendor/bower/font-awesome/fonts/*',
+                            $npmPath . '/font-awesome/fonts/*',
                         ],
                         'options' => [
                             'move_raw' => true,

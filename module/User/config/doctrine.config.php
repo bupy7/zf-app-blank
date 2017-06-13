@@ -6,6 +6,7 @@
 
 use Doctrine\ORM\EntityManager;
 use User\Entity\User;
+use User\Adapter\AuthAdapterFactory;
 
 return [
     'doctrine' => [
@@ -28,5 +29,8 @@ return [
                 ],
             ],
         ],
+    ],
+    'doctrine_factories' => [
+        'authenticationadapter' => AuthAdapterFactory::class,
     ],
 ];

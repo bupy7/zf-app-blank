@@ -2,21 +2,21 @@
 
 namespace User\Controller;
 
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\ViewModel;
-use Zend\View\Model\JsonModel;
 use Bupy7\Form\FormAbstract;
+use User\Entity\User;
+use User\Repository\UserRepository;
+use User\Service\SignUpService;
 use Zend\Authentication\AuthenticationServiceInterface;
-use User\Entity\UserInterface;
 use Zend\Hydrator\HydratorInterface;
-use User\Service\SignUpServiceInterface;
+use Zend\Mvc\Controller\AbstractActionController;
+use Zend\View\Model\JsonModel;
+use Zend\View\Model\ViewModel;
+use Zend\Http\Response;
 
 class SignupController extends AbstractActionController
 {
-    /**
-     * Route name to home.
-     */
-    const ROUTE_TO_HOME = 'home';
+    private const ROUTE_TO_HOME = 'home';
+    private const ROUTE_TO_SIGNIN = 'signin';
 
     /**
      * @var FormAbstract
@@ -27,7 +27,7 @@ class SignupController extends AbstractActionController
      */
     protected $authService;
     /**
-     * @var UserInterface
+     * @var User
      */
     protected $userEntity;
     /**
@@ -38,32 +38,27 @@ class SignupController extends AbstractActionController
      * @var SignUpServiceInterface
      */
     protected $signUpService;
-
     /**
-     * @param AuthenticationServiceInterface $authService
-     * @param Form $signUpForm
-     * @param UserInterface $userEntity
-     * @param HydratorInterface $entityHydrator
-     * @param SignUpServiceInterface $signUpService
+     * @var UserRepository
      */
+    protected $userRepository;
+
     public function __construct(
         AuthenticationServiceInterface $authService,
         FormAbstract $signUpForm,
-        UserInterface $userEntity,
+        User $userEntity,
         HydratorInterface $entityHydrator,
-        SignUpServiceInterface $signUpService
+        SignUpService $signUpService,
+        UserRepository $userRepository
     ) {
         $this->authService = $authService;
         $this->signUpForm = $signUpForm;
         $this->userEntity = $userEntity;
         $this->entityHydrator = $entityHydrator;
         $this->signUpService = $signUpService;
+        $this->userRepository = $userRepository;
     }
 
-    /**
-     * Sign up a new user.
-     * @return mixed
-     */
     public function signupAction()
     {
         if ($this->authService->getIdentity()) {
@@ -78,7 +73,7 @@ class SignupController extends AbstractActionController
                 if ($this->signUpService->signup($userEntity)) {
                     $this->flashMessenger()
                         ->addSuccessMessage($this->translate('SUCCESS_SIGNUP', 'User'));
-                    return $this->redirect()->toRoute(self::ROUTE_TO_HOME);
+                    return $this->redirect()->toRoute(self::ROUTE_TO_SIGNIN);
                 }
             }
         }
@@ -87,23 +82,36 @@ class SignupController extends AbstractActionController
         ]);
     }
 
-    /**
-     * Validate an Email for sign up.
-     * @return mixed
-     */
-    public function emailValidAction()
+    public function emailValidAction(): JsonModel
     {
         $email = $this->getRequest()->getQuery('email');
         $errors = [];
         if ($email) {
             $signUpForm = $this->signUpForm;
             $signUpForm->setValues(['email' => $email]);
-            if (!$signUpForm->getInputFilter()->setValidationGroup('email')->isValid()) {
+            if (!$signUpForm->isValid('email')) {
                 $errors = $signUpForm->getErrors();
             }
         }
         return new JsonModel([
             'errors' => $errors,
         ]);
+    }
+
+    public function confirmEmailAction(): Response
+    {
+        $email = $this->params()->fromRoute('e');
+        $key = $this->params()->fromRoute('k');
+        $userEntity = $this->userRepository->findNotConfirm($email, $key);
+        if ($userEntity === null) {
+            $this->flashMessenger()
+                ->addWarningMessage($this->translate('WARNING_CONFIRM_EMAIL_NOT_FOUND', 'User'));
+        } else {
+            if ($this->signUpService->confirmEmail($userEntity)) {
+                $this->flashMessenger()
+                    ->addSuccessMessage($this->translate('SUCCESS_CONFIRM_EMAIL', 'User'));
+            }
+        }
+        return $this->redirect()->toRoute(self::ROUTE_TO_SIGNIN);
     }
 }

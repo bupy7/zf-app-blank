@@ -1,6 +1,6 @@
 var App = App || {};
 
-(function() {
+(function () {
     'use strict';
 
     App.SignUp = Backbone.Model.extend({
@@ -8,23 +8,16 @@ var App = App || {};
             person: {
                 required: true
             },
-            email: [
-                {
-                    required: true,
-                    pattern: 'email'
-                },
-                {
-                    noExists: {
-                        url: '/signup/email-valid'
-                    }
-                }
-            ],
+            email: {
+                required: true,
+                format: 'email'
+            },
             password: [
                 {
                     required: true
                 },
                 {
-                    rangeLength: [4, 25]
+                    minLength: 4
                 }
             ]
         }

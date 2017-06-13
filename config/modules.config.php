@@ -5,6 +5,7 @@
  */
 
 $modules = [
+    'Zend\ServiceManager\Di',
     'Zend\Router',
     'Zend\I18n',
     'Zend\Mvc\I18n',
@@ -20,6 +21,8 @@ $modules = [
     'ZfcTwig',
     'ExTwig',
     'Bupy7\Form',
+    'Bupy7\Mailgun',
+    'Mail',
     'ZfcRbac',
     'ExRbac',
     'Application',

@@ -7,9 +7,15 @@ use Bupy7\Form\FormAbstract;
 class SignInForm extends FormAbstract
 {
     /**
-     * {@inheritDoc}
+     * @var string
      */
-    protected function inputs()
+    public $email;
+    /**
+     * @var string
+     */
+    public $password;
+
+    protected function inputs(): array
     {
         return [
             [

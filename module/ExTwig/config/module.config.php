@@ -1,15 +1,11 @@
 <?php
 
-/**
- * The ExTwig module configurations.
- */
-
-use ExTwig\Extension\ClassExtension;
+namespace ExTwig;
 
 return [
     'zfctwig' => [
         'extensions' => [
-            'class' => ClassExtension::class,
+            'class' => Extension\ClassExtension::class,
         ],
     ],
 ];

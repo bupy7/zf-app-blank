@@ -3,4 +3,8 @@
 /vendor
 /.vagrant
 /nbproject
+/*.sublime-project
+/*.sublime-workspace
+/.idea
+/.php_cs.cache
 /composer.lock

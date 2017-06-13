@@ -2,21 +2,18 @@
 
 namespace User\Controller;
 
+use Bupy7\Form\FormAbstract;
+use User\Auth\Result;
+use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Bupy7\Form\FormAbstract;
-use Zend\Authentication\AuthenticationServiceInterface;
+use Zend\Http\Response;
 
 class AuthController extends AbstractActionController
 {
-    /**
-     * Route name to home.
-     */
-    const ROUTE_TO_HOME = 'home';
-    /**
-     * Route name to signin.
-     */
-    const ROUTE_TO_SIGNIN = 'signin';
+    private const ROUTE_TO_HOME = 'home';
+    private const ROUTE_TO_SIGNIN = 'signin';
+    private const ROUTE_TO_CONFIRM_AGAIN = 'confirm-again';
     
     /**
      * @var FormAbstract
@@ -27,10 +24,6 @@ class AuthController extends AbstractActionController
      */
     protected $authService;
 
-    /**
-     * @param AuthenticationServiceInterface $authService
-     * @param Form $signInForm
-     */
     public function __construct(AuthenticationServiceInterface $authService, FormAbstract $signInForm)
     {
         $this->authService = $authService;
@@ -38,7 +31,6 @@ class AuthController extends AbstractActionController
     }
 
     /**
-     * Signin user.
      * @return mixed
      */
     public function signinAction()
@@ -50,32 +42,29 @@ class AuthController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             $signInForm->setValues($this->getRequest()->getPost());
             if ($signInForm->isValid()) {
-                $values = $signInForm->getValues();
                 $auth = $this->authService;
-                $auth
-                    ->getAdapter()
-                    ->setIdentity($values['email'])
-                    ->setCredential($values['password']);
+                $auth->getAdapter()
+                    ->setIdentity($signInForm->email)
+                    ->setCredential($signInForm->password);
                 $result = $auth->authenticate();
                 if ($result->isValid()) {
-                    $this->flashMessenger()
-                        ->addSuccessMessage($this->translate('SUCCESS_SIGNIN', 'User'));
+                    $this->flashMessenger()->addSuccessMessage($this->translate('SUCCESS_SIGNIN', 'User'));
+                    return $this->redirect()->toRoute(self::ROUTE_TO_HOME);
+                } elseif ($result->getCode() == Result::FAILURE_DIDNT_CONFIRM) {
+                    $message = $this->translate('FAILED_SIGNIN_DIDNT_CONFIRM', 'User');
+                    $message = sprintf($message, $this->url()->fromRoute(self::ROUTE_TO_CONFIRM_AGAIN));
+                    $this->flashMessenger()->addWarningMessage($message);
                     return $this->redirect()->toRoute(self::ROUTE_TO_HOME);
                 }
             }
-            $this->flashMessenger()
-                ->addErrorMessage($this->translate('FAILED_SIGNIN', 'User'));
+            $this->flashMessenger()->addErrorMessage($this->translate('FAILED_SIGNIN', 'User'));
         }
         return new ViewModel([
             'signInForm' => $signInForm,
         ]);
     }
 
-    /**
-     * Logout user.
-     * @return mixed
-     */
-    public function logoutAction()
+    public function logoutAction(): Response
     {
         $this->authService->clearIdentity();
         return $this->redirect()->toRoute(self::ROUTE_TO_SIGNIN);

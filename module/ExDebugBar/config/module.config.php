@@ -5,8 +5,7 @@
  */
 
 use DebugBar\Bridge\DoctrineCollector;
-use ExDebugBar\Collector\DoctrineCollectorFactory;
-use ExDebugBar\Delegator\DoctrineConfigurationDelegatorFactory;
+use ZfSnapPhpDebugBar\Delegator\DoctrineConfigurationDelegatorFactory;
 
 return [
     'php-debug-bar' => [
@@ -16,9 +15,6 @@ return [
         ],
     ],
     'service_manager' => [
-        'factories' => [
-            DoctrineCollector::class => DoctrineCollectorFactory::class,
-        ],
         'delegators' => [
             'doctrine.configuration.orm_default' => [
                 DoctrineConfigurationDelegatorFactory::class,

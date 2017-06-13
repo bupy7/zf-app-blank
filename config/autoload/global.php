@@ -20,4 +20,8 @@ return [
     'php-debug-bar' => [
         'enabled' => APP_ENV_DEV,
     ],
+    // Bupy7\Mailgun
+    'mailgun' => [
+        'debug' => APP_DEBUG,
+    ],
 ];

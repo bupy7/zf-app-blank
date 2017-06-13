@@ -4,19 +4,32 @@ namespace User\Form;
 
 use Bupy7\Form\FormAbstract;
 use DoctrineModule\Validator\NoObjectExists;
-use User\Repository\UserRepositoryInterface;
+use User\Repository\UserRepository;
 
 class SignUpForm extends FormAbstract
 {
     /**
-     * @var UserRepositoryInterface
+     * @var string
+     */
+    public $person;
+    /**
+     * @var string
+     */
+    public $email;
+    /**
+     * @var string
+     */
+    public $password;
+
+    /**
+     * @var UserRepository
      */
     protected $userRepository;
 
     /**
-     * @param UserRepositoryInterface $userRepository
+     * @param UserRepository $userRepository
      */
-    public function __construct(UserRepositoryInterface $userRepository)
+    public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
@@ -64,7 +77,6 @@ class SignUpForm extends FormAbstract
                         'name' => 'StringLength',
                         'options' => [
                             'min' => 4,
-                            'max' => 25,
                         ],
                     ]
                 ],

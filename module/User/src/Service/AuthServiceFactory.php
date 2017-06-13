@@ -2,8 +2,9 @@
 
 namespace User\Service;
 
+use Zend\Authentication\AuthenticationServiceInterface;
 use Interop\Container\ContainerInterface;
-use User\Entity\UserInterface;
+use User\Entity\User;
 use Zend\ServiceManager\Factory\FactoryInterface;
 
 /**
@@ -11,17 +12,17 @@ use Zend\ServiceManager\Factory\FactoryInterface;
  */
 class AuthServiceFactory implements FactoryInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null)
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ): AuthenticationServiceInterface {
         $authService = $container->get('doctrine.authenticationservice.orm_default');
-        $passHashService = $container->get('User\Service\PasswordHashService');
+        $passHashService = $container->get('Di')->get('Zend\Crypt\Password\BcryptSha');
         $authService
             ->getAdapter()
             ->getOptions()
-            ->setCredentialCallable(function (UserInterface $user, $password) use ($passHashService) {
+            ->setCredentialCallable(function (User $user, $password) use ($passHashService) {
                 return $passHashService->verify($password, $user->getPassword());
             });
         return $authService;

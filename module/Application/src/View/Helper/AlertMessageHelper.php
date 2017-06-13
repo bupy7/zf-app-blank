@@ -4,6 +4,7 @@ namespace Application\View\Helper;
 
 use Zend\Mvc\Plugin\FlashMessenger\FlashMessenger;
 use Zend\View\Helper\AbstractHelper;
+use cebe\markdown\GithubMarkdown;
 
 /**
  * Helper to return messages and flash messages.
@@ -28,6 +29,10 @@ class AlertMessageHelper extends AbstractHelper
      * @var array Holds the messages
      */
     protected static $flashMessages = [];
+    /**
+     * @var GithubMarkdown
+     */
+    protected $markdown;
     
     /**
      * Invoke Method
@@ -46,6 +51,7 @@ class AlertMessageHelper extends AbstractHelper
     public function __construct()
     {
         $this->setFlashMessenger();
+        $this->markdown = new GithubMarkdown;
     }
     
     /**
@@ -102,7 +108,17 @@ class AlertMessageHelper extends AbstractHelper
     {
         $this->addMessageByType(self::MESSAGE_TYPE_ERROR, $errorMessage, $dismissable);
     }
-    
+
+    /**
+     * Set a instance of the FlashMessenger.
+     */
+    public function setFlashMessenger()
+    {
+        if ($this->flashMessenger === null) {
+            $this->flashMessenger = new FlashMessenger;
+        }
+    }
+
     /**
      * Add a message by type
      *
@@ -113,7 +129,7 @@ class AlertMessageHelper extends AbstractHelper
     protected function addMessageByType($type, $message, $dismissable = true)
     {
         self::$flashMessages[$type][] = [
-            'message' => $message,
+            'message' => $this->markdown->parse($message),
             'dismissable' => $dismissable,
         ];
     }
@@ -149,15 +165,5 @@ class AlertMessageHelper extends AbstractHelper
             }
         }
         return self::$flashMessages;
-    }
-    
-    /**
-     * Set a instance of the FlashMessenger.
-     */
-    public function setFlashMessenger()
-    {
-        if ($this->flashMessenger === null) {
-            $this->flashMessenger = new FlashMessenger;
-        }
     }
 }

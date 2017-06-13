@@ -1,0 +1,15 @@
+{% block content %}
+    <p>{{ translate('EMAIL_HELLO', 'User')|format(userEntity.getPerson()|e) }}</p>
+    {% set link %}
+        <a href="{{ url('restore-pass', {
+            e: userEntity.getEmail(),
+            k: userEntity.getRestoreKey()
+        }, {
+            force_canonical: true
+        }) }}">{{ translate('EMAIL_RESTORE_PASS', 'User') }}</a>
+    {% endset %}
+    <p>{{ translate('EMAIL_BODY_RESTORE_PASS', 'User')|format(link) }}</p>
+    ---
+    <br>
+    {{ translate('EMAIL_WITH_THE_RESPECT', 'User')|format(translate('TITLE_HOMEPAGE', 'Application')) }}
+{% endblock content %}

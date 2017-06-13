@@ -34,6 +34,9 @@ php_input_time: 120
 # http://php.net/manual/ru/timezones.php
 php_time_zone: UTC
 
+# https://xdebug.org/docs/all_settings#idekey
+xdebug_idekey: vagrant-xdebug
+
 # https://dev.mysql.com/doc/refman/5.7/en/adding-users.html
 # https://dev.mysql.com/doc/refman/5.7/en/creating-database.html
 mysql_db: zf_app_blank

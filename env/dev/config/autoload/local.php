@@ -19,7 +19,7 @@ return [
                     'port' => 3306,
                     'user' => 'zf_app_blank',
                     'password' => '1234',
-                    'dbname' => 'zf_app_blank',
+                    'dbname' => 'zf_app_blank' . (APP_ENV_TEST ? '_test' : ''),
                 ],
             ],
         ],
@@ -35,5 +35,12 @@ return [
         'yui_path' => '/usr/lib/node_modules/yuicompressor/build/yuicompressor-2.4.8.jar',
         'java_path' => '/usr/bin/java',
         'uglify_js2_path' => '/usr/bin/uglifyjs',
+    ],
+    'mailgun' => [
+        'key' => 'key-example',
+        'endpoint' => 'http://bin.mailgun.net/not-create',
+    ],
+    'mail' => [
+        'domain' => 'example.mailgun.org',
     ],
 ];

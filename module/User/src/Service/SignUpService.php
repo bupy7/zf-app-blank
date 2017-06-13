@@ -2,48 +2,80 @@
 
 namespace User\Service;
 
-use User\Entity\UserInterface;
+use User\Entity\User;
 use Zend\Crypt\Password\PasswordInterface;
-use User\Repository\UserRepositoryInterface;
+use User\Repository\UserRepository;
+use Zend\EventManager\EventManagerInterface;
+use Zend\EventManager\EventManager;
+use Zend\EventManager\EventManagerAwareInterface;
+use Zend\Math\Rand;
+use DateTime;
 
-class SignUpService implements SignUpServiceInterface
+class SignUpService implements EventManagerAwareInterface
 {
-    /**
-     * Role a new user by default.
-     */
-    const DEFAULT_ROLE = UserInterface::ROLE_REGISTERED;
+    public const DEFAULT_ROLE = User::ROLE_REGISTERED;
+    public const LENGTH_CONFIRM_KEY = 18;
+    public const CONFIRM_KEY_DICT = 'abcdefghijklmnopqrstuvwxyz0123456789-_@$^';
     
     /**
-     * @var UserRepositoryInterface
+     * @var UserRepository
      */
     protected $userRepository;
     /**
      * @var PasswordInterface
      */
     protected $passwordHashService;
-
     /**
-     * @param UserRepositoryInterface $userRepository
-     * @param PasswordInterface $passwordHashService
+     * @var EventManagerInterface
      */
-    public function __construct(UserRepositoryInterface $userRepository, PasswordInterface $passwordHashService)
+    protected $eventManager;
+
+    public function setEventManager(EventManagerInterface $eventManager)
     {
+        $eventManager->setIdentifiers([__CLASS__, get_called_class()]);
+        $this->eventManager = $eventManager;
+        return $this;
+    }
+
+    public function getEventManager(): EventManagerInterface
+    {
+        if ($this->eventManager === null) {
+            $this->setEventManager(new EventManager);
+        }
+        return $this->eventManager;
+    }
+
+    public function __construct(
+        UserRepository $userRepository,
+        PasswordInterface $passwordHashService
+    ) {
         $this->userRepository = $userRepository;
         $this->passwordHashService = $passwordHashService;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public function signup(UserInterface $userEntity)
+    public function signup(User $userEntity): bool
     {
-        if ($userEntity->getRole() === null) {
-            $userEntity->setRole(self::DEFAULT_ROLE);
+        if ($userEntity->getRoleId() === null) {
+            $userEntity->setRoleId(self::DEFAULT_ROLE);
         }
         $hashPassword = $this->passwordHashService->create($userEntity->getPassword());
-        $userEntity->setPassword($hashPassword);
+        $userEntity->setPassword($hashPassword)
+            ->setConfirmKey(Rand::getString(self::LENGTH_CONFIRM_KEY, self::CONFIRM_KEY_DICT))
+            ->setCreatedAt(new DateTime);
         $this->userRepository->persist($userEntity);
         $this->userRepository->flush();
-        return $userEntity->getId() !== null;
+        if ($userEntity->getId() === null) {
+            return false;
+        }
+        $this->getEventManager()->trigger(__FUNCTION__, $this, ['userEntity' => $userEntity]);
+        return true;
+    }
+
+    public function confirmEmail(User $userEntity): bool
+    {
+        $userEntity->setEmailConfirm(true);
+        $this->userRepository->persist($userEntity);
+        $this->userRepository->flush();
+        return true;
     }
 }

@@ -49,6 +49,9 @@
                     .attribute('type', 'submit')
                     .addClass('btn btn-primary')
                 }}
+                <a href="{{ url('forgot-pass') }}" class="btn btn-link">
+                    {{ translate('LABEL_FORGOT_PASS', 'User') }}
+                </a>
             </div>
         </div>
     {{ formBuilder.close() }}

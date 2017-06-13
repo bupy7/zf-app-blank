@@ -80,7 +80,9 @@ Vagrant.configure(2) do |config|
             options['pgsql_user'],
             options['pgsql_pass'],
             options['pgsql_locale'],
-            options['db_type']
+            options['db_type'],
+            options['xdebug_idekey'],
+            options['ip']
         ]
     end
     config.vm.provision 'shell' do |s|
@@ -88,7 +90,8 @@ Vagrant.configure(2) do |config|
         s.args = [options['github_token']]
         s.privileged = false
     end
-    config.vm.provision 'shell', path: './workenv/provision/always-as-root.sh', run: 'always'
+    config.vm.provision 'shell', path: './workenv/provision/always-as-root.sh',
+        run: 'always', args: [options['db_type']]
 
     # post-install message (vagrant console)
     config.vm.post_up_message = "Main URL: http://#{domains[:main]}"

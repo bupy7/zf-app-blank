@@ -4,6 +4,8 @@
  * Assets configuration file for ExDebugBar module.
  */
 
+$debugBarRes = getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources';
+
 return [
     'assetic_configuration' => [
         'routes' => [
@@ -18,11 +20,12 @@ return [
                 'collections' => [
                     'ex_debugbar_js' => [
                         'assets' => [
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/vendor/highlightjs/highlight.pack.js',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/debugbar.js',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/widgets.js',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/openhandler.js',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/widgets/sqlqueries/widget.js',
+                            getcwd() . '/vendor/npm-asset/jquery/dist/jquery.min.js',
+                            $debugBarRes . '/vendor/highlightjs/highlight.pack.js',
+                            $debugBarRes . '/debugbar.js',
+                            $debugBarRes . '/widgets.js',
+                            $debugBarRes . '/openhandler.js',
+                            $debugBarRes . '/widgets/sqlqueries/widget.js',
                         ],
                         'options' => [
                             'output' => 'js/ex-debugbar.js',
@@ -30,12 +33,12 @@ return [
                     ],
                     'ex_debugbar_css' => [
                         'assets' => [
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/vendor/font-awesome/css/font-awesome.min.css',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/vendor/highlightjs/styles/github.css',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/debugbar.css',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/widgets.css',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/openhandler.css',
-                            getcwd() . '/vendor/maximebf/debugbar/src/DebugBar/Resources/widgets/sqlqueries/widget.css',
+                            $debugBarRes . '/vendor/font-awesome/css/font-awesome.min.css',
+                            $debugBarRes . '/vendor/highlightjs/styles/github.css',
+                            $debugBarRes . '/debugbar.css',
+                            $debugBarRes . '/widgets.css',
+                            $debugBarRes . '/openhandler.css',
+                            $debugBarRes . '/widgets/sqlqueries/widget.css',
                             getcwd() . '/vendor/snapshotpl/zf-snap-php-debug-bar/assets/zf-snap-php-debug-bar.css',
                         ],
                         'options' => [

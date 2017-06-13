@@ -4,15 +4,9 @@ namespace Application;
 
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
 
-/**
- * Base application module.
- */
 class Module implements ConfigProviderInterface
 {
-    /**
-     * {@inheritDoc}
-     */
-    public function getConfig()
+    public function getConfig(): array
     {
         return array_merge(
             require __DIR__ . '/../config/module.config.php',

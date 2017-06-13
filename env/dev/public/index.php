@@ -9,10 +9,11 @@ use Zend\Mvc\Application;
 chdir(dirname(__DIR__));
 
 // Setup autoloading
-require 'vendor/autoload.php';
+require_once 'vendor/autoload.php';
 
 // Include constants of application
-require_once 'config/constants-local.php';
+defined('APP_ENV') or define('APP_ENV', 'dev');
+defined('APP_DEBUG') or define('APP_DEBUG', true);
 require_once 'config/constants.php';
 
 // Run the application!

@@ -1,13 +1,13 @@
 var App = App || {};
 
-(function() {
+(function () {
     'use strict';
 
     App.SignIn = Backbone.Model.extend({
         validation: {
             email: {
                 required: true,
-                pattern: 'email'
+                format: 'email'
             },
             password: {
                 required: true

@@ -219,5 +219,5 @@ function createSymlink($target, $link)
     if (is_link($link)) {
         @unlink($link);
     }
-    return @symlink($target, $link);
+    return symlink($target, $link);
 }
