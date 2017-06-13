@@ -1,6 +1,25 @@
 zf-app-blank
 ============
 
+1.2.0 [2017-06-?]
+-----------------
+- Add: Mailgun.
+- Add: Confirm email action.
+- Add: Recovery password action.
+- Add: Asset packagist.
+- Add: Codeception.
+- Add: XDebug.
+- Add: DI.
+- Add: Markdown in flash messages.
+- Enh: Composer packages.
+- Enh: PHP to 7.1.
+- Enh: Vagrant configuration.
+- Enh: Form.
+- Rep: Backbone validation package.
+- Rem: Ajax Email validation.
+- Rem: jQuery dependency.
+- Rem: Bower.
+
 1.1.2 [2017-05-26]
 ------------------
 
