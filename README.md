@@ -14,6 +14,7 @@ TODO
 
 - Refactoring code to PHP 7.1.
 - Add Ajax validation.
+- Add tests.
 
 Features
 --------
