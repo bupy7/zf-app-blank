@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Functional\User;
+namespace Test\User;
 
 use Test\FunctionalTester;
 
@@ -18,6 +18,6 @@ class SignInCest
             'email' => 'jack@gmail.com',
             'password' => '1234'
         ]);
-        // TODO: Doctrine
+        $I->seeInRepository('User\Entity\User', ['email' => 'jack@gmail.com']);
     }
 }
