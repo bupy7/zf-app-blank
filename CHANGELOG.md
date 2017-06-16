@@ -1,7 +1,7 @@
 zf-app-blank
 ============
 
-1.2.0 [2017-06-?]
+1.2.0 [2017-06-16]
 -----------------
 - Add: Mailgun.
 - Add: Confirm email action.
