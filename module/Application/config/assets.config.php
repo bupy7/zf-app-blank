@@ -20,9 +20,7 @@ return [
         'default' => [
             'assets' => [
                 '@library_css',
-                '@app_css',
-                '@library_js',
-                '@common_js',
+                '@app_css'
             ],
             'options' => [
                 'mixin' => true,
@@ -32,35 +30,6 @@ return [
             'Application' => [
                 'root_path' => __DIR__ . '/../assets',
                 'collections' => [
-                    'common_js' => [
-                        'assets' => [
-                            'js/utils/*.js',
-                            'js/locales/*.js',
-                            'js/app.js',
-                            'js/validations/callbacks/*.js',
-                            'js/validations/messages/*.js',
-                            'js/validations/*.js',
-                        ],
-                        'filters' => [
-                            '?UglifyJs2Filter',
-                        ],
-                        'options' => [
-                            'output' => 'js/common.min.js',
-                        ],
-                    ],
-                    'library_js' => [
-                        'assets' => [
-                            $npmPath . '/jbone/dist/jbone.min.js',
-                            $npmPath . '/underscore/underscore-min.js',
-                            $npmPath . '/backbone/backbone-min.js',
-                            $npmPath . '/backbone-validator.js/backbone-validator-min.js',
-                            $npmPath . '/i18next/i18next.min.js',
-                            $npmPath . '/js-lib-url/dist/url.min.js',
-                        ],
-                        'options' => [
-                            'output' => 'js/library.min.js',
-                        ],
-                    ],
                     'app_css' => [
                         'assets' => [
                             'css/style.less',

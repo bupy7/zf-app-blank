@@ -13,15 +13,13 @@ TODO
 ----
 
 - Refactoring code to PHP 7.1.
-- Add Ajax validation.
-- Add tests.
+- Add PHP tests.
 
 Features
 --------
 
 - PHP7.1
 - [Zend Framework 3](https://github.com/zendframework/zendframework)
-- [Backbone.js](http://backbonejs.org/)
 - [Bootstrap 3](http://getbootstrap.com/)
 - [Doctrine ORM 2](http://www.doctrine-project.org/)
 - [Debug Bar](https://github.com/snapshotpl/ZfSnapPhpDebugBar)

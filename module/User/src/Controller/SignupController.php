@@ -82,22 +82,6 @@ class SignupController extends AbstractActionController
         ]);
     }
 
-    public function emailValidAction(): JsonModel
-    {
-        $email = $this->getRequest()->getQuery('email');
-        $errors = [];
-        if ($email) {
-            $signUpForm = $this->signUpForm;
-            $signUpForm->setValues(['email' => $email]);
-            if (!$signUpForm->isValid('email')) {
-                $errors = $signUpForm->getErrors();
-            }
-        }
-        return new JsonModel([
-            'errors' => $errors,
-        ]);
-    }
-
     public function confirmEmailAction(): Response
     {
         $email = $this->params()->fromRoute('e');

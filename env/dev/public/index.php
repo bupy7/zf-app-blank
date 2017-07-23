@@ -12,8 +12,7 @@ chdir(dirname(__DIR__));
 require_once 'vendor/autoload.php';
 
 // Include constants of application
-defined('APP_ENV') or define('APP_ENV', 'dev');
-defined('APP_DEBUG') or define('APP_DEBUG', true);
+require_once 'config/constants-local.php';
 require_once 'config/constants.php';
 
 // Run the application!

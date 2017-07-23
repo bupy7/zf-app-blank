@@ -1,6 +1,13 @@
 zf-app-blank
 ============
 
+1.3.0 [2017-07-23]
+------------------
+
+- Fix (#4): Revert local constants.
+- Rem: JS framework integration.
+- Fix: Small bugs.
+
 1.2.0 [2017-06-16]
 -----------------
 - Add: Mailgun.

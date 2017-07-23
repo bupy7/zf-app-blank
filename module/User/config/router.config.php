@@ -40,16 +40,6 @@ return [
                     ],
                 ],
             ],
-            'signup-email-valid' => [
-                'type' => Literal::class,
-                'options' => [
-                    'route' => '/signup/email-valid',
-                    'defaults' => [
-                        'controller' => SignupController::class,
-                        'action' => 'email-valid',
-                    ],
-                ],
-            ],
             'confirm-email' => [
                 'type' => Segment::class,
                 'options' => [

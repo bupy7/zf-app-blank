@@ -15,8 +15,7 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
             require __DIR__ . '/../config/router.config.php',
             require __DIR__ . '/../config/doctrine.config.php',
             require __DIR__ . '/../config/rbac.config.php',
-            require __DIR__ . '/../config/navigation.config.php',
-            require __DIR__ . '/../config/assets.config.php'
+            require __DIR__ . '/../config/navigation.config.php'
         );
     }
 

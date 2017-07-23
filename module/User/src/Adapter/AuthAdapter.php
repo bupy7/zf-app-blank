@@ -15,7 +15,7 @@ class AuthAdapter extends ObjectRepository
         $identity = $options->getObjectRepository()
             ->findOneBy([$options->getIdentityProperty() => $this->identity]);
         if (!$identity) {
-            $this->authenticationResultInfo['code'] = AuthenticationResult::FAILURE_IDENTITY_NOT_FOUND;
+            $this->authenticationResultInfo['code'] = Result::FAILURE_IDENTITY_NOT_FOUND;
             $this->authenticationResultInfo['messages'][] = 'A record with the supplied identity could not be found.';
             return $this->createAuthenticationResult();
         }
