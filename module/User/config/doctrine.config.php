@@ -29,6 +29,9 @@ return [
                 ],
             ],
         ],
+        'fixtures' => [
+            'User' => __DIR__ . '/../test/fixture',
+        ],
     ],
     'doctrine_factories' => [
         'authenticationadapter' => AuthAdapterFactory::class,

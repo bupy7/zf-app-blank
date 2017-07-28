@@ -8,3 +8,4 @@
 /.idea
 /.php_cs.cache
 /composer.lock
+/_codeceptOutput

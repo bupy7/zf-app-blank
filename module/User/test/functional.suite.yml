@@ -8,10 +8,9 @@
 actor: FunctionalTester
 modules:
     enabled:
-        - \Test\Module\ZF3:
-            config: 'config/application-test.config.php'
-            parts: services
+        - \ExCodeception\Module\ZF3:
+            configFile: '../../config/application-test.config.php'
         - Doctrine2:
-            depends: \Test\Module\ZF3
-        - \Test\Helper\Functional
+            depends: \ExCodeception\Module\ZF3
+        - \User\Test\Helper\Functional
         - Asserts

@@ -15,6 +15,7 @@ $modules = [
     'ExValidate',
     'DoctrineModule',
     'DoctrineORMModule',
+    'DoctrineFixturesModule',
     'ExDoctrine',
     'AsseticBundle',
     'ExAssetic',

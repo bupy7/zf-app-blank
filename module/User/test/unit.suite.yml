@@ -6,4 +6,4 @@ actor: UnitTester
 modules:
     enabled:
         - Asserts
-        - \Test\Helper\Unit
+        - \User\Test\Helper\Unit

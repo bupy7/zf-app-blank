@@ -1,6 +1,5 @@
 <?php
-
-namespace Test;
+namespace User\Test;
 
 /**
  * Inherited Methods

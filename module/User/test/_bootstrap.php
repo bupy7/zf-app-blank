@@ -1,10 +1,7 @@
 <?php
 
 // application root
-chdir(__DIR__ . '/..');
-
-// composer
-require_once getcwd() . '/vendor/autoload.php';
+chdir(__DIR__ . '/../../..');
 
 // constants
 defined('APP_ENV') or define('APP_ENV', 'test');

@@ -1,6 +1,11 @@
 zf-app-blank
 ============
 
+1.4.0
+-----
+
+- Enh: Moved tests to each module.
+
 1.3.0 [2017-07-23]
 ------------------
 

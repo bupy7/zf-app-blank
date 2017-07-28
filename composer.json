@@ -1,7 +1,7 @@
 {
     "name": "bupy7/zf-app-blank",
     "description": "A blank application Zend Framework 3.",
-    "version": "1.3.0",
+    "version": "1.4.0",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywoards": [
@@ -56,7 +56,8 @@
         "npm-asset/jquery": "^3.2",
         "friendsofphp/php-cs-fixer": "~2.3.2",
         "codeception/codeception": "^2.3",
-        "snapshotpl/zf-snap-php-debug-bar": "~0.13.0"
+        "snapshotpl/zf-snap-php-debug-bar": "~0.13.0",
+        "kenkataiwa/doctrine-fixtures-module": "dev-master"
     },
     "autoload": {
         "psr-4": {
@@ -67,18 +68,17 @@
             "ExRbac\\": "module/ExRbac/src",
             "ExTwig\\": "module/ExTwig/src",
             "ExValidate\\": "module/ExValidate/src",
+            "ExCodeception\\": "module/ExCodeception/src",
             "User\\": "module/User/src",
+            "User\\Test\\": "module/User/test",
             "Mail\\": "module/Mail/src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Test\\": "test"
         }
     },
     "scripts": {
         "fix": "./vendor/bin/php-cs-fixer fix",
-        "test": "./vendor/bin/codecept run",
-        "test:build": "./vendor/bin/codecept build"
+        "test:run": "./vendor/bin/codecept run",
+        "test:build": "./vendor/bin/codecept build",
+        "fixture:load": "@php bin/console-test fixtures:load -n",
+        "test": ["@fixture:load", "@test:run"]
     }
 }
