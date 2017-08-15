@@ -5,6 +5,7 @@ zf-app-blank
 -----
 
 - Enh: Moved tests to each module.
+- Fix (#8): Doctrine proxy config.
 
 1.3.0 [2017-07-23]
 ------------------

@@ -15,5 +15,10 @@ return [
                 'column' => 'version',
             ],
         ],
+        'configuration' => [
+            'orm_default' => [
+                'proxy_dir' => 'data/runtime/DoctrineORMModule/Proxy'
+            ],
+        ],
     ],
 ];
