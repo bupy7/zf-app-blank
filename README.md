@@ -39,6 +39,7 @@ Features
 - [Mailgun](https://www.mailgun.com/)
 - Multilanguage (English and Russian).
 - Simple example application: (Sign in, Sign up, Log out, Confirm Email address, Recovery password).
+- [Symfony CLI](https://github.com/symfony/console)
 
 Installation
 ------------
