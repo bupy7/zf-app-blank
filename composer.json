@@ -1,7 +1,7 @@
 {
     "name": "bupy7/zf-app-blank",
     "description": "A blank application Zend Framework 3.",
-    "version": "1.4.0",
+    "version": "1.4.0-beta.1",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywoards": [
@@ -44,13 +44,14 @@
         "doctrine/doctrine-orm-module": "~1.1.0",
         "doctrine/migrations": "dev-master",
         "zendframework/zend-mvc-console": "~1.1.11",
-        "zendframework/zend-servicemanager-di": "~1.1.0",
         "bupy7/zf-mailgun": "~1.0.0",
         "cebe/markdown": "~1.1.1",
         "npm-asset/bootstrap": "~3.3.6",
         "npm-asset/font-awesome": "~4.5.0",
         "bupy7/zf-form": "~1.2.0",
-        "kokspflanze/zfc-twig": "^2.1"
+        "kokspflanze/zfc-twig": "^2.1",
+        "symfony/console": "^3.3",
+        "zendframework/zend-log": "^2.9"
     },
     "require-dev": {
         "npm-asset/jquery": "^3.2",
@@ -71,14 +72,14 @@
             "ExCodeception\\": "module/ExCodeception/src",
             "User\\": "module/User/src",
             "User\\Test\\": "module/User/test",
-            "Mail\\": "module/Mail/src"
+            "Mail\\": "module/Mail/src",
+            "Cli\\": "module/Cli/src"
         }
     },
     "scripts": {
         "fix": "./vendor/bin/php-cs-fixer fix",
         "test:run": "./vendor/bin/codecept run",
         "test:build": "./vendor/bin/codecept build",
-        "fixture:load": "@php bin/console-test fixtures:load -n",
-        "test": ["@fixture:load", "@test:run"]
+        "fixture:load": "@php bin/console-test fixtures:load"
     }
 }

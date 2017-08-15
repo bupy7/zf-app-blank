@@ -2,10 +2,11 @@
 
 /**
  * The list of modules application.
+ * Legends:
+ *  - Symbol "!" (exclamation mark) - A module is not for the production mode (APP_ENV_PROD).
  */
 
 $modules = [
-    'Zend\ServiceManager\Di',
     'Zend\Router',
     'Zend\I18n',
     'Zend\Mvc\I18n',
@@ -15,7 +16,7 @@ $modules = [
     'ExValidate',
     'DoctrineModule',
     'DoctrineORMModule',
-    'DoctrineFixturesModule',
+    '!DoctrineFixturesModule',
     'ExDoctrine',
     'AsseticBundle',
     'ExAssetic',
@@ -26,13 +27,20 @@ $modules = [
     'Mail',
     'ZfcRbac',
     'ExRbac',
+    'Cli',
     'Application',
     'User',
+    '!ZfSnapPhpDebugBar',
+    '!ExDebugBar',
 ];
-if (APP_ENV_DEV) {
-    $modules = array_merge($modules, [
-        'ZfSnapPhpDebugBar',
-        'ExDebugBar',
-    ]);
+$result = [];
+for ($i = 0; $i != count($modules); $i++) {
+    if (strpos($modules[$i], '!') === 0) {
+        if (!APP_ENV_PROD) {
+            $result[] = ltrim($modules[$i], '!');
+        }
+    } else {
+        $result[] = $modules[$i];
+    }
 }
-return $modules;
+return $result;

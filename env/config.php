@@ -31,6 +31,10 @@ return [
             'public/assets',
             'data/cache',
         ],
+        'setExecutable' => [
+            'bin/console',
+            'bin/console-test',
+        ],
         'relativeSymlinks' => true,
         'createSymlinks' => [
             'module/Application/assets/css/bs' => 'vendor/npm-asset/bootstrap/less'

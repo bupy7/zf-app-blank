@@ -12,7 +12,7 @@ class AccessServiceFactory implements FactoryInterface
         return new AccessService(
             $container->get('Mail\Service\MailService'),
             $container->get('Doctrine\ORM\EntityManager')->getRepository('User\Entity\User'),
-            $container->get('Di')->get('Zend\Crypt\Password\BcryptSha')
+            $container->get('User\Crypt\PasswordCrypt')
         );
     }
 }

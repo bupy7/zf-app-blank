@@ -1,11 +1,18 @@
 zf-app-blank
 ============
 
-1.4.0
------
+1.4.0-beta.1 [2017-08-15]
+-------------------------
 
 - Enh: Moved tests to each module.
 - Fix (#8): Doctrine proxy config.
+- Add (#9): CLI.
+- Fix: Small bugs.
+- Rem: DI.
+- Rem: Local constants.
+- Enh: Small changes.
+- Add: Clear chache Bash command.
+- Add: Error logs to `module/Application/logs`.
 
 1.3.0 [2017-07-23]
 ------------------

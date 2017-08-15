@@ -4,17 +4,7 @@
  * The ExAssetic module configurations.
  */
 
-use Assetic\Filter\LessFilter;
-use Assetic\Filter\Yui\CssCompressorFilter;
-use Assetic\Filter\Yui\JsCompressorFilter;
-use ExAssetic\Filter\LessFilterFactory;
-use ExAssetic\Filter\Yui\CssCompressorFilterFactory;
-use ExAssetic\Filter\Yui\JsCompressorFilterFactory;
-use ExAssetic\Options\ModuleOptions;
-use ExAssetic\Options\ModuleOptionsFactory;
-use AsseticBundle\CacheBuster\LastModifiedStrategy;
-use Assetic\Filter\UglifyJs2Filter;
-use ExAssetic\Filter\UglifyJs2FilterFactory;
+namespace ExAssetic;
 
 return [
     'ex_assetic' => [
@@ -26,20 +16,18 @@ return [
     ],
     'service_manager' => [
         'invokables' => [
-            'AsseticCacheBuster' => LastModifiedStrategy::class,
+            'AsseticCacheBuster' => \AsseticBundle\CacheBuster\LastModifiedStrategy::class,
         ],
         'factories' => [
-            LessFilter::class => LessFilterFactory::class,
-            CssCompressorFilter::class => CssCompressorFilterFactory::class,
-            JsCompressorFilter::class => JsCompressorFilterFactory::class,
-            ModuleOptions::class => ModuleOptionsFactory::class,
-            UglifyJs2Filter::class => UglifyJs2FilterFactory::class,
+            \Assetic\Filter\LessFilter::class => Filter\LessFilterFactory::class,
+            \Assetic\Filter\Yui\CssCompressorFilter::class => Filter\Yui\CssCompressorFilterFactory::class,
+            Options\ModuleOptions::class => Options\ModuleOptionsFactory::class,
+            \Assetic\Filter\UglifyJs2Filter::class => Filter\UglifyJs2FilterFactory::class,
         ],
         'aliases' => [
-            'LessFilter' => LessFilter::class,
-            'CssCompressorFilter' => CssCompressorFilter::class,
-            'JsCompressorFilter' => CssCompressorFilter::class,
-            'UglifyJs2Filter' => UglifyJs2Filter::class,
+            'LessFilter' => \Assetic\Filter\LessFilter::class,
+            'CssCompressorFilter' => \Assetic\Filter\Yui\CssCompressorFilter::class,
+            'UglifyJs2Filter' => \Assetic\Filter\UglifyJs2Filter::class,
         ],
     ],
 ];

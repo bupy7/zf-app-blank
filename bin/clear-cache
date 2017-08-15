@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+ROOT_PATH=$(cd $(dirname $0) && pwd);
+
+if [ -f $ROOT_PATH/../data/runtime/module-classmap-cache.module_map.php ]; then
+    echo '>>> Removing "module-classmap-cache.module_map.php"'
+    rm $ROOT_PATH/../data/runtime/module-classmap-cache.module_map.php
+fi
+if [ -f $ROOT_PATH/../data/runtime/module-config-cache.app_config.php ]; then
+    echo '>>> Removing "module-config-cache.app_config.php"'
+    rm $ROOT_PATH/../data/runtime/module-config-cache.app_config.php
+fi
+if [ -d $ROOT_PATH/../data/runtime/DoctrineORMModule ]; then
+    echo '>>> Removing "DoctrineORMModule"'
+    rm -rf $ROOT_PATH/../data/runtime/DoctrineORMModule
+fi
+echo 'OK'

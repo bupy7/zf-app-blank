@@ -18,7 +18,7 @@ class AuthServiceFactory implements FactoryInterface
         array $options = null
     ): AuthenticationServiceInterface {
         $authService = $container->get('doctrine.authenticationservice.orm_default');
-        $passHashService = $container->get('Di')->get('Zend\Crypt\Password\BcryptSha');
+        $passHashService = $container->get('User\Crypt\PasswordCrypt');
         $authService
             ->getAdapter()
             ->getOptions()

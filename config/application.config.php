@@ -14,7 +14,7 @@ return [
         'config_cache_key' => 'app_config',
         'module_map_cache_enabled' => APP_ENV_PROD,
         'module_map_cache_key' => 'module_map',
-        'cache_dir' => 'data/cache',
+        'cache_dir' => 'data/runtime',
         'check_dependencies' => APP_ENV_DEV || APP_ENV_TEST,
     ],
 ];

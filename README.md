@@ -99,6 +99,7 @@ Run tests:
 
 ```
 $ vagrant ssh -c 'composer test:build'
+$ vagrant ssh -c 'composer fixture:load'
 $ vagrant ssh -c 'composer test'
 ```
 

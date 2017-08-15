@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+use Zend\Mvc\Application;
+use Symfony\Component\Console\Application as Cli;
+use Zend\Json\Json;
+
+chdir(dirname(__DIR__));
+
+// Setup autoloading
+require_once 'vendor/autoload.php';
+
+// Include constants of application
+defined('APP_ENV') or define('APP_ENV', 'test');
+defined('APP_DEBUG') or define('APP_DEBUG', true);
+require_once 'config/constants.php';
+
+// init main application
+$app = Application::init(require 'config/application.config.php');
+
+// configuration cli application
+$composerConfig = Json::decode(file_get_contents('composer.json'));
+$cli = new Cli($composerConfig->name, $composerConfig->version);
+
+/** @var \Zend\ServiceManager\ServiceManager $sm */
+$sm = $app->getServiceManager();
+
+// adding commands
+foreach ($sm->get('Cli\Options\ModuleOptions')->getCommands() as $command) {
+    $cli->add($sm->get('CommandManager')->get($command));
+}
+
+// adding doctrine commands
+/** @var Cli $doctrineCli */
+$doctrineCli = $sm->get('doctrine.cli');
+$cli->setHelperSet($doctrineCli->getHelperSet());
+foreach ($doctrineCli->all() as $command) {
+    $cli->add($command);
+}
+
+// run cli
+$cli->run();

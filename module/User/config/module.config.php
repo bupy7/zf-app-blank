@@ -37,13 +37,10 @@ return [
             Service\SignUpService::class => Service\SignUpServiceFactory::class,
             Service\ConfirmEmailService::class => Service\ConfirmEmailServiceFactory::class,
             Service\AccessService::class => Service\AccessServiceFactory::class,
+            \Zend\Crypt\Password\BcryptSha::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
         ],
-    ],
-    'di' => [
-        'instance' => [
-            'preference' => [
-                \Zend\Crypt\Password\PasswordInterface::class => \Zend\Crypt\Password\BcryptSha::class,
-            ],
+        'aliases' => [
+            'User\Crypt\PasswordCrypt' => \Zend\Crypt\Password\BcryptSha::class,
         ],
     ],
 ];

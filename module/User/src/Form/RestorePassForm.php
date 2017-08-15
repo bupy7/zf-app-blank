@@ -6,6 +6,11 @@ use Bupy7\Form\FormAbstract;
 
 class RestorePassForm extends FormAbstract
 {
+    /**
+     * @var string
+     */
+    public $password;
+
     protected function inputs(): array
     {
         return [
