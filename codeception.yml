@@ -1,4 +1,4 @@
 include:
     - module/User
 paths:
-  output: _codeceptOutput
+    output: _codeceptOutput

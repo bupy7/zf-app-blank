@@ -88,7 +88,6 @@ Also, create [Postbin](http://bin.mailgun.net/).
 
 ```
 $ vagrant ssh -c 'php bin/console orm:schema-tool:create'
-$ vagrant ssh -c 'php bin/console-test orm:schema-tool:create'
 ```
 
 - Done.
@@ -99,9 +98,9 @@ Testing
 Run tests:
 
 ```
+$ vagrant ssh -c 'bin/console-test orm:schema-tool:create'
 $ vagrant ssh -c 'composer test:build'
-$ vagrant ssh -c 'composer fixture:load'
-$ vagrant ssh -c 'composer test'
+$ vagrant ssh -c 'composer test:run'
 ```
 
 License

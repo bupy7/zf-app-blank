@@ -10,6 +10,7 @@ class BuildCommandFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): BuildCommand
     {
-        return new BuildCommand($container->get('AsseticService'));
+        $cmd = new BuildCommand($container->get('AsseticService'));
+        return $cmd->setName('assetic:build');
     }
 }

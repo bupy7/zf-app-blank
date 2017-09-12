@@ -1,7 +1,7 @@
 {
     "name": "bupy7/zf-app-blank",
     "description": "A blank application Zend Framework 3.",
-    "version": "1.4.0-beta.1",
+    "version": "1.5.0",
     "type": "project",
     "license": "BSD-3-Clause",
     "keywoards": [
@@ -39,26 +39,25 @@
         "zendframework/zend-mvc-plugin-prg": "~1.0.0",
         "zendframework/zend-mvc-plugin-fileprg": "~1.0.0",
         "zendframework/zend-json": "~3.0.0",
-        "widmogrod/zf2-assetic-module": "~2.2.0",
+        "widmogrod/zf2-assetic-module": "~2.3",
         "zf-commons/zfc-rbac": "~2.6.3",
         "doctrine/doctrine-orm-module": "~1.1.0",
         "doctrine/migrations": "dev-master",
-        "zendframework/zend-mvc-console": "~1.1.11",
         "bupy7/zf-mailgun": "~1.0.0",
         "cebe/markdown": "~1.1.1",
         "npm-asset/bootstrap": "~3.3.6",
         "npm-asset/font-awesome": "~4.5.0",
         "bupy7/zf-form": "~1.2.0",
-        "kokspflanze/zfc-twig": "^2.1",
-        "symfony/console": "^3.3",
-        "zendframework/zend-log": "^2.9"
+        "kokspflanze/zfc-twig": "~2.1",
+        "symfony/console": "~3.3",
+        "zendframework/zend-log": "~2.9"
     },
     "require-dev": {
         "npm-asset/jquery": "^3.2",
-        "friendsofphp/php-cs-fixer": "~2.3.2",
-        "codeception/codeception": "^2.3",
+        "friendsofphp/php-cs-fixer": "~2.6",
+        "codeception/codeception": "~2.3",
         "snapshotpl/zf-snap-php-debug-bar": "~0.13.0",
-        "kenkataiwa/doctrine-fixtures-module": "dev-master"
+        "doctrine/data-fixtures": "~1.2"
     },
     "autoload": {
         "psr-4": {
@@ -77,9 +76,10 @@
         }
     },
     "scripts": {
-        "fix": "./vendor/bin/php-cs-fixer fix",
-        "test:run": "./vendor/bin/codecept run",
-        "test:build": "./vendor/bin/codecept build",
-        "fixture:load": "@php bin/console-test fixtures:load"
+        "cs:fix": "./vendor/bin/php-cs-fixer fix",
+        "cs:check": "./vendor/bin/php-cs-fixer fix --dry-run --diff",
+        "test:run": "./vendor/bin/codecept run --ansi",
+        "test:run-with-cov": "./vendor/bin/codecept run --ansi --coverage-html",
+        "test:build": "./vendor/bin/codecept build --ansi"
     }
 }

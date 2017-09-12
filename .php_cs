@@ -10,9 +10,9 @@ $finder = Finder::create()
     ->in(__DIR__ . '/module')
     ->in(__DIR__ . '/public');
 return Config::create()->setRules([
-    '@PSR2' => true,
-    'array_syntax' => [
-        'syntax' => 'short',
-    ],
-])
+        '@PSR2' => true,
+        'array_syntax' => [
+            'syntax' => 'short',
+        ],
+    ])
     ->setFinder($finder);

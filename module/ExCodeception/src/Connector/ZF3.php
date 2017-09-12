@@ -13,6 +13,7 @@ use Zend\Http\Request as HttpRequest;
 use Zend\Mvc\Application;
 use Zend\Stdlib\Parameters;
 use Zend\Uri\Http as HttpUri;
+use PHPUnit_Framework_Exception;
 
 class ZF3 extends Client
 {
@@ -24,6 +25,15 @@ class ZF3 extends Client
      * @var Application
      */
     protected $app;
+    /**
+     * @var array
+     */
+    protected $authData;
+
+    public function setAuthData(array $authData): void
+    {
+        $this->authData = $authData;
+    }
 
     public function setAppConfig(array $appConfig): void
     {
@@ -128,6 +138,24 @@ class ZF3 extends Client
         $sendResponseListener = $this->app->getServiceManager()->get('SendResponseListener');
         $events = $this->app->getEventManager();
         $events->detach([$sendResponseListener, 'sendResponse']);
+        $this->authentication();
+    }
+
+    public function authentication(): void
+    {
+        if (empty($this->authData)) {
+            return;
+        }
+        /** @var \Zend\Authentication\AuthenticationService $auth */
+        $auth = $this->grabService('Zend\Authentication\AuthenticationService');
+        $auth->clearIdentity();
+        $auth->getAdapter()
+            ->setIdentity($this->authData['identity'])
+            ->setCredential($this->authData['credential']);
+        $result = $auth->authenticate();
+        if (!$result->isValid()) {
+            throw new PHPUnit_Framework_Exception(sprintf('User "%s" is not authorized', $this->authData['identity']));
+        }
     }
 
     protected function destroyApp(): void

@@ -31,11 +31,12 @@ class Module implements ConfigProviderInterface, BootstrapListenerInterface
         /** @var \Zend\Mvc\MvcEvent $e */
         $sharedManager = $e->getApplication()->getEventManager()->getSharedManager();
         $logger = $this->getLogger();
-        $sharedManager->attach('Zend\Mvc\Application', 'dispatch.error', function($e) use ($logger) {
+        $sharedManager->attach('Zend\Mvc\Application', 'dispatch.error', function ($e) use ($logger) {
             if ($e->getParam('exception')) {
                 $logger->crit($e->getParam('exception'));
             }
         });
+        Logger::registerFatalErrorShutdownFunction($logger);
     }
 
     protected function getLogger(): Logger

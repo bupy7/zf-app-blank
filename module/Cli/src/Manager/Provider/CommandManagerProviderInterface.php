@@ -4,5 +4,5 @@ namespace Cli\Manager\Provider;
 
 interface CommandManagerProviderInterface
 {
-    public function getCommandManager(): array;
+    public function getCommandManagerConfig(): array;
 }

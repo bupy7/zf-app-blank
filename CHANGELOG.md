@@ -1,6 +1,22 @@
 zf-app-blank
 ============
 
+1.5.0 [2017-09-13]
+------------------
+
+- Enh: Rename Composer command `fix` to `cs:fix`.
+- Add: Composer command `cs:check`.
+- Add: Composer command `test:run-with-cov`.
+- Fix: Package versions.
+- Add: #15.
+- Fix: #14.
+- Fix: #13.
+- Enh: #12.
+- Fix: #10.
+- Add: Authentication user on test.
+- Add: Autoload fixtures on each test.
+- Add: Signin, signup and login action tests.
+
 1.4.0-beta.1 [2017-08-15]
 -------------------------
 

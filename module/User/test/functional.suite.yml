@@ -10,7 +10,14 @@ modules:
     enabled:
         - \ExCodeception\Module\ZF3:
             configFile: '../../config/application-test.config.php'
+        - \ExCodeception\Module\Fixture
         - Doctrine2:
-            depends: \ExCodeception\Module\ZF3
+            depends:
+                - \ExCodeception\Module\ZF3
+                - \ExCodeception\Module\Fixture
         - \User\Test\Helper\Functional
         - Asserts
+    config:
+        \ExCodeception\Module\Fixture:
+            fixturePaths:
+                - '_fixture'

@@ -8,24 +8,18 @@ use Codeception\Lib\Interfaces\DoctrineProvider;
 use Codeception\Lib\Interfaces\PartedModule;
 use Codeception\TestInterface;
 use ExCodeception\Connector\ZF3 as ZF3Connector;
-use Zend\Console\Console;
 use Zend\EventManager\StaticEventManager;
 
 class ZF3 extends Framework implements DoctrineProvider, PartedModule
 {
-    protected $config = [
-        'configFile' => 'tests/application.config.php',
-    ];
-    protected $requiredFields = ['configFile'];
     /**
      * @var ZF3Connector
      */
     public $client;
-
-    public function _initialize(): void
-    {
-        Console::overrideIsConsole(false);
-    }
+    protected $config = [
+        'configFile' => 'tests/application.config.php',
+    ];
+    protected $requiredFields = ['configFile'];
 
     public function _before(TestInterface $test): void
     {
@@ -120,6 +114,22 @@ class ZF3 extends Framework implements DoctrineProvider, PartedModule
         $router = $this->grabService('router');
         $url = $router->assemble($params, ['name' => $routeName]);
         $this->seeCurrentUrlEquals($url);
+    }
+
+    /**
+     * Authenticates user.
+     *
+     * @param string $identity
+     * @param string $credential
+     * @throws
+     */
+    public function amAuthenticated(string $identity, string $credential): void
+    {
+        $this->client->setAuthData([
+            'identity' => $identity,
+            'credential' => $credential,
+        ]);
+        $this->client->authentication();
     }
 
     protected function configuration(): void

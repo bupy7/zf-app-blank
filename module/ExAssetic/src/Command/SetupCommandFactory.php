@@ -10,6 +10,7 @@ class SetupCommandFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): SetupCommand
     {
-        return new SetupCommand($container->get('AsseticService'));
+        $cmd = new SetupCommand($container->get('AsseticService'));
+        return $cmd->setName('assetic:setup');
     }
 }
