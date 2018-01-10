@@ -2,6 +2,7 @@
 
 namespace User\Service;
 
+use Doctrine\ORM\EntityManager;
 use User\Entity\User;
 use Zend\Crypt\Password\PasswordInterface;
 use User\Repository\UserRepository;
@@ -20,15 +21,19 @@ class SignUpService implements EventManagerAwareInterface
     /**
      * @var UserRepository
      */
-    protected $userRepository;
+    private $userRepository;
     /**
      * @var PasswordInterface
      */
-    protected $passwordHashService;
+    private $passwordHashService;
     /**
      * @var EventManagerInterface
      */
-    protected $eventManager;
+    private $eventManager;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     public function setEventManager(EventManagerInterface $eventManager)
     {
@@ -40,17 +45,19 @@ class SignUpService implements EventManagerAwareInterface
     public function getEventManager(): EventManagerInterface
     {
         if ($this->eventManager === null) {
-            $this->setEventManager(new EventManager);
+            $this->setEventManager(new EventManager());
         }
         return $this->eventManager;
     }
 
     public function __construct(
         UserRepository $userRepository,
-        PasswordInterface $passwordHashService
+        PasswordInterface $passwordHashService,
+        EntityManager $entityManager
     ) {
         $this->userRepository = $userRepository;
         $this->passwordHashService = $passwordHashService;
+        $this->entityManager = $entityManager;
     }
 
     public function signup(User $userEntity): bool
@@ -62,20 +69,25 @@ class SignUpService implements EventManagerAwareInterface
         $userEntity->setPassword($hashPassword)
             ->setConfirmKey(Rand::getString(self::LENGTH_CONFIRM_KEY, self::CONFIRM_KEY_DICT))
             ->setCreatedAt(new DateTime);
-        $this->userRepository->persist($userEntity);
-        $this->userRepository->flush();
+
+        $this->entityManager->persist($userEntity);
+        $this->entityManager->flush();
+
         if ($userEntity->getId() === null) {
             return false;
         }
         $this->getEventManager()->trigger(__FUNCTION__, $this, ['userEntity' => $userEntity]);
+
         return true;
     }
 
     public function confirmEmail(User $userEntity): bool
     {
         $userEntity->setEmailConfirm(true);
-        $this->userRepository->persist($userEntity);
-        $this->userRepository->flush();
+
+        $this->entityManager->persist($userEntity);
+        $this->entityManager->flush();
+
         return true;
     }
 }

@@ -10,7 +10,7 @@
 
     <table class="table table-striped table-hover">
         <thead>
-            <th>{{ translate('COLUMN_USERNAME', 'User') }}</th>
+            <th>#</th>
             <th>{{ translate('COLUMN_EMAIL', 'User') }}</th>
             <th>{{ translate('COLUMN_ROLE', 'User') }}</th>
             <th>{{ translate('COLUMN_EMAIL_CONFIRM', 'User') }}</th>
@@ -18,12 +18,14 @@
         </thead>
         <tbody>
         {% set paginator = dataProvider.getPaginator() %}
+        {% set index = 1 %}
         {% if paginator | length > 0 %}
             {% for item in paginator %}
                 {% include 'user/index/row.twig' %}
+                {% set index = index + 1 %}
             {% endfor %}
         {% else %}
-            {{ table.emptyRow(5) }}
+            {{ table.emptyRow(6) }}
         {% endif %}
         </tbody>
     </table>

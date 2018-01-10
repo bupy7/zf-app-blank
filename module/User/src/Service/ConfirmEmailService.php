@@ -2,6 +2,7 @@
 
 namespace User\Service;
 
+use Doctrine\ORM\EntityManager;
 use Mail\Service\MailService;
 use User\Entity\User;
 use User\Repository\UserRepository;
@@ -12,18 +13,24 @@ class ConfirmEmailService
     /**
      * @var MailService
      */
-    protected $mailService;
+    private $mailService;
     /**
      * @var UserRepository
      */
-    protected $userRepository;
+    private $userRepository;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
 
     public function __construct(
         MailService $mailService,
-        UserRepository $userRepository
+        UserRepository $userRepository,
+        EntityManager $entityManager
     ) {
         $this->mailService = $mailService;
         $this->userRepository = $userRepository;
+        $this->entityManager = $entityManager;
     }
 
     public function request(User $user): bool
@@ -41,8 +48,10 @@ class ConfirmEmailService
     public function confirm(User $user): bool
     {
         $user->setEmailConfirm(true);
-        $this->userRepository->persist($user);
-        $this->userRepository->flush();
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+
         return true;
     }
 
@@ -52,10 +61,12 @@ class ConfirmEmailService
         if (!$form->isValid()) {
             return false;
         }
+
         $user = $this->userRepository->findOneByEmail($form->email);
         if ($user === null || $user->getEmailConfirm()) {
             return false;
         }
+
         return $this->request($user);
     }
 }

@@ -4,6 +4,7 @@ namespace User;
 
 use Zend\Mvc\Controller\LazyControllerAbstractFactory;
 use Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
+use ExDoctrine\Repository\RepositoryInvokableFactory;
 
 return [
     'translator' => [
@@ -40,12 +41,14 @@ return [
 
             \Zend\Authentication\AuthenticationService::class => Service\AuthServiceFactory::class,
             Service\SignUpService::class => Service\SignUpServiceFactory::class,
-            Service\ConfirmEmailService::class => Service\ConfirmEmailServiceFactory::class,
+            Service\ConfirmEmailService::class => ReflectionBasedAbstractFactory::class,
             Service\AccessService::class => Service\AccessServiceFactory::class,
 
             \Zend\Crypt\Password\BcryptSha::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
 
             Search\UserSearch::class => ReflectionBasedAbstractFactory::class,
+
+            Repository\UserRepository::class => RepositoryInvokableFactory::class,
         ],
         'aliases' => [
             'User\Crypt\PasswordCrypt' => \Zend\Crypt\Password\BcryptSha::class,

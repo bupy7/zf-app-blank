@@ -9,8 +9,10 @@ class SignUpServiceFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): SignUpService
     {
-        $userRepository = $container->get('Doctrine\ORM\EntityManager')->getRepository('User\Entity\User');
-        $passwordHashService = $container->get('User\Crypt\PasswordCrypt');
-        return new SignUpService($userRepository, $passwordHashService);
+        return new SignUpService(
+            $container->get('User\Repository\UserRepository'),
+            $container->get('User\Crypt\PasswordCrypt'),
+            $container->get('Doctrine\ORM\EntityManager')
+        );
     }
 }

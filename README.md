@@ -104,7 +104,6 @@ Testing
 Run tests:
 
 ```
-$ vagrant ssh -c 'bin/console-test orm:schema-tool:create'
 $ vagrant ssh -c 'composer test:build'
 $ vagrant ssh -c 'composer test:run'
 ```

@@ -8,21 +8,24 @@
         <indexes>
             <index name="user_idx_1" columns="role_id"/>
         </indexes>
+
         <unique-constraints>
             <unique-constraint name="user_idx_2" columns="email"/>
             <unique-constraint name="user_idx_3" columns="email,confirm_key,email_confirm"/>
             <unique-constraint name="user_idx_4" columns="email,restore_key"/>
         </unique-constraints>
+
         <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
+            <generator strategy="IDENTITY"/>
         </id>
-        <field name="person" type="string"/>
-        <field name="email" type="string" unique="true"/>
-        <field name="password" type="string" length="60"/>
-        <field name="roleId" column="role_id" type="string" length="64"/>
+
+        <field name="person"/>
+        <field name="email"/>
+        <field name="password" length="60"/>
+        <field name="roleId" column="role_id" length="64"/>
         <field name="emailConfirm" column="email_confirm" type="boolean"/>
-        <field name="confirmKey" column="confirm_key" type="string"/>
-        <field name="restoreKey" column="restore_key" type="string" nullable="true"/>
+        <field name="confirmKey" column="confirm_key"/>
+        <field name="restoreKey" column="restore_key" nullable="true"/>
         <field name="restoreKeyExpire" column="restore_key_expire" type="datetime" nullable="true"/>
         <field name="createdAt" column="created_at" type="datetime"/>
     </entity>
