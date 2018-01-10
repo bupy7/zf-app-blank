@@ -1,0 +1,28 @@
+{% extends 'layout/layout.twig' %}
+
+{% do headTitle(translate('TITLE_FATAL_ERROR', 'Core')) %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>
+            {{ translate('TITLE_FATAL_ERROR', 'Core') }}
+            {% if display_exceptions %}
+                <p class="text-danger">{{ message|e }}</p>
+            {% endif %}
+        </h1>
+    </div>
+    {% if display_exceptions %}
+        <h3>{{ translate('LABEL_ERROR_EXCEPTION', 'Core') }}: {{ get_class(exception) }}</h3>
+        <h4>{{ translate('LABEL_ERROR_FILE', 'Core') }}:</h4>
+        <pre>{{ exception.getFile() }}:{{ exception.getLine() }}</pre>
+        {% if exception.getMessage %}
+            <h4>{{ translate('LABEL_ERROR_MESSAGE', 'Core') }}:</h4>
+            <pre>{{ exception.getMessage()|e }}</pre>
+        {% endif %}
+        <h4>{{ translate('LABEL_ERROR_STACK_TRACE', 'Core') }}:</h4>
+        <pre>{{ exception.getTraceAsString()|e }}</pre>
+    {% endif %}
+    {% if not display_exceptions %}
+        <p>{{ translate('EXCEPTION_USER_MESSAGE', 'Core') }}</p>
+    {% endif %}
+{% endblock content %}

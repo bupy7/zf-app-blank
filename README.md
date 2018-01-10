@@ -12,13 +12,13 @@ Autoloading standart [PSR-4](http://www.php-fig.org/psr/psr-4/). Coding standart
 TODO
 ----
 
-- Refactoring code to PHP 7.1.
+- Refactoring code to PHP 7.2.
 - Add PHP tests.
 
 Features
 --------
 
-- PHP7.1
+- PHP 7.1
 - [Zend Framework 3](https://github.com/zendframework/zendframework)
 - [Bootstrap 3](http://getbootstrap.com/)
 - [Doctrine ORM 2](http://www.doctrine-project.org/)
@@ -29,7 +29,7 @@ Features
 - [Flexible Form Builder](https://github.com/bupy7/zf-form)
 - [Support Vagrant](https://www.vagrantup.com/)
 - [Support Composer](https://getcomposer.org/)
-- [Support Asset Packagist](https://asset-packagist.org/)
+- [Support Yarn](https://yarnpkg.com/)
 - [Database is PostgreSQL](https://www.postgresql.org/)
 - [Database is MySQL](https://www.mysql.com/)
 - [YUI Comressor](https://github.com/yui/yuicompressor)
@@ -38,7 +38,12 @@ Features
 - [XDebug](https://xdebug.org/)
 - [Mailgun](https://www.mailgun.com/)
 - Multilanguage (English and Russian).
-- Simple example application: (Sign in, Sign up, Log out, Confirm Email address, Recovery password).
+- Simple example application:
+    - Sign in
+    - Sign up
+    - Log out
+    - Confirm Email address
+    - Recovery password
 - [Symfony CLI](https://github.com/symfony/console)
 - [Codeception](http://codeception.com/)
 

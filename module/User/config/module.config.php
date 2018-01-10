@@ -2,6 +2,9 @@
 
 namespace User;
 
+use Zend\Mvc\Controller\LazyControllerAbstractFactory;
+use Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory;
+
 return [
     'translator' => [
         'translation_file_patterns' => [
@@ -28,16 +31,21 @@ return [
             Controller\SignupController::class => Controller\SignupControllerFactory::class,
             Controller\ConfirmEmailController::class => Controller\ConfirmEmailControllerFactory::class,
             Controller\AccessController::class => Controller\AccessControllerFactory::class,
+            Controller\IndexController::class => LazyControllerAbstractFactory::class,
         ],
     ],
     'service_manager' => [
         'factories' => [
-            \Zend\Authentication\AuthenticationService::class => Service\AuthServiceFactory::class,
             Form\SignUpForm::class => Form\SignUpFormFactory::class,
+
+            \Zend\Authentication\AuthenticationService::class => Service\AuthServiceFactory::class,
             Service\SignUpService::class => Service\SignUpServiceFactory::class,
             Service\ConfirmEmailService::class => Service\ConfirmEmailServiceFactory::class,
             Service\AccessService::class => Service\AccessServiceFactory::class,
+
             \Zend\Crypt\Password\BcryptSha::class => \Zend\ServiceManager\Factory\InvokableFactory::class,
+
+            Search\UserSearch::class => ReflectionBasedAbstractFactory::class,
         ],
         'aliases' => [
             'User\Crypt\PasswordCrypt' => \Zend\Crypt\Password\BcryptSha::class,

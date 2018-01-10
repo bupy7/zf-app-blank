@@ -24,9 +24,6 @@ return [
             ],
         ],
     ],
-    'translator' => [
-        'locale' => 'en',
-    ],
     'ex_assetic' => [
         'node_bin' => '/usr/bin/node',
         'node_paths' => [

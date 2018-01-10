@@ -7,5 +7,10 @@
 /*.sublime-workspace
 /.idea
 /.php_cs.cache
-/composer.lock
 /_codeceptOutput
+/yarn-error.log
+/node_modules
+
+# delete before to create own project
+/yarn.lock
+/composer.lock

@@ -19,5 +19,4 @@ modules:
         - Asserts
     config:
         \ExCodeception\Module\Fixture:
-            fixturePaths:
-                - '_fixture'
+            fixturePaths: '../../../test/_fixture'

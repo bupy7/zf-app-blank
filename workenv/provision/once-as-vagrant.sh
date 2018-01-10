@@ -13,6 +13,10 @@ cd /vagrant
 composer config --global github-oauth.github.com ${GITHUB_TOKEN}
 composer install
 
+# yarn
+# ----
+yarn install
+
 # init project
 # ------------
 php bin/init --env=dev --overwrite=y

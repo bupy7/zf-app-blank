@@ -12,11 +12,14 @@ return [
     'LABEL_SEND_RESTORE_KEY' => 'Отправить',
     'LABEL_RESTORE_PASS' => 'Сохранить',
     'LABEL_NEW_PASSWORD' => 'Новый пароль',
+    'LABEL_YES' => 'Да',
+    'LABEL_NO' => 'Нет',
     
     'PAGE_TITLE_SIGNUP' => 'Регистрация',
     'PAGE_TITLE_SIGNIN' => 'Форма входа',
     'PAGE_CONFIRM_AGAIN' => 'Подтверждение Email адреса',
     'PAGE_FORGOT_PASS' => 'Восстановление пароля',
+    'PAGE_TITLE_USER_LIST' => 'Пользователи',
     
     'SUCCESS_SIGNUP' => 'Регистрация завершилась успешно! Проверьте Ваш почтовый ящик, чтобы подтвердить Email.',
     'SUCCESS_SIGNIN' => 'Вы успешно вошли в систему!',
@@ -46,4 +49,10 @@ return [
     'EMAIL_BODY_RESTORE_PASS' => 'Для восстановления пароля перейдите по следующей ссылке: %s.',
 
     'WARNING_CONFIRM_EMAIL_NOT_FOUND' => 'Пользователь не найден или Email уже был подтвержден.',
+
+    'COLUMN_USERNAME' => 'Имя',
+    'COLUMN_EMAIL' => 'Email',
+    'COLUMN_ROLE' => 'Роль',
+    'COLUMN_EMAIL_CONFIRM' => 'Подтвржд. Email',
+    'COLUMN_CREATED_AT' => 'Дата/время',
 ];

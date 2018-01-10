@@ -6,10 +6,21 @@ use User\Controller\AuthController;
 use User\Controller\SignupController;
 use User\Controller\ConfirmEmailController;
 use User\Controller\AccessController;
+use User\Controller\IndexController;
 
 return [
     'router' => [
         'routes' => [
+            'home' => [
+                'type' => Literal::class,
+                'options' => [
+                    'route' => '/',
+                    'defaults' => [
+                        'controller' => IndexController::class,
+                        'action' => 'index',
+                    ],
+                ],
+            ],
             'signin' => [
                 'type' => Literal::class,
                 'options' => [

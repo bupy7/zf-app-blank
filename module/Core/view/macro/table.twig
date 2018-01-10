@@ -1,0 +1,5 @@
+{% macro emptyRow(colspan) %}
+    <tr>
+        <td colspan="{{ colspan | default(1) }}">{{ translate('LABEL_NOTHING_FOUND', 'Core') }}</td>
+    </tr>
+{% endmacro %}

@@ -1,6 +1,18 @@
 zf-app-blank
 ============
 
+1.5.1 [2018-01-10]
+------------------
+
+- Enh: Upgrade packages.
+- Enh: Refactoring composer.json.
+- Rem: Assets packagist repository.
+- Add: Yarn package manager.
+- Add: `Bupy7\Zf\TimeZone` module.
+- Enh: Replaced `Application` name module to `Core`.
+- Enh: Small refactoring.
+- Add: List users.
+
 1.5.0 [2017-09-13]
 ------------------
 

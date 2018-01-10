@@ -37,7 +37,7 @@ return [
         ],
         'relativeSymlinks' => true,
         'createSymlinks' => [
-            'module/Application/assets/css/bs' => 'vendor/npm-asset/bootstrap/less'
+            'module/Application/assets/css/bs' => 'node_modules/bootstrap/less'
         ],
     ],
 ];

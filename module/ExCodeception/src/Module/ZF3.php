@@ -92,7 +92,11 @@ class ZF3 extends Framework implements DoctrineProvider, PartedModule
     public function amOnRoute(string $routeName, array $params = []): void
     {
         $router = $this->grabService('router');
-        $url = $router->assemble($params, ['name' => $routeName]);
+        $options['name'] = $routeName;
+        if (isset($params['query'])) {
+            $options['query'] = $params['query'];
+        }
+        $url = $router->assemble($params, $options);
         $this->amOnPage($url);
     }
 
@@ -114,6 +118,39 @@ class ZF3 extends Framework implements DoctrineProvider, PartedModule
         $router = $this->grabService('router');
         $url = $router->assemble($params, ['name' => $routeName]);
         $this->seeCurrentUrlEquals($url);
+    }
+    
+    /**
+     * Checks over the given HTTP header and (optionally) its value,
+     * asserting that are there.
+     *
+     * @param $name
+     * @param $value
+     */
+    public function seeHttpHeader($name, $value = null): void
+    {
+        /** @var \Zend\Http\Response $response */
+        $response = $this->grabService('response');
+        $headers = $response->getHeaders();
+        
+        if ($value !== null) {
+            $this->assertEquals(
+                $name . ': ' . $value,
+                $headers->get($name)->toString()
+            );
+            return;
+        }
+        $this->assertNotNull($headers->get($name));
+    }
+    
+    public function sendAjaxGetRequestRoute(string $routeName, array $routeParams = [], array $query = []): void
+    {
+        $this->sendAjaxRequestRoute('GET', $routeName, $routeParams, $query);
+    }
+    
+    public function sendAjaxPostRequestRoute(string $routeName, array $routeParams = [], array $body = []): void
+    {
+        $this->sendAjaxRequestRoute('POST', $routeName, $routeParams, $body);
     }
 
     /**
@@ -138,5 +175,13 @@ class ZF3 extends Framework implements DoctrineProvider, PartedModule
             $this->client = new ZF3Connector;
             $this->client->setAppConfig(require Configuration::projectDir() . $this->config['configFile']);
         }
+    }
+
+    private function sendAjaxRequestRoute(string $method, string $routeName, array $params = [], array $data = []): void
+    {
+        $router = $this->grabService('router');
+        $url = $router->assemble($params, ['name' => $routeName]);
+
+        $this->sendAjaxRequest($method, $url, $data);
     }
 }

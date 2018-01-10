@@ -2,10 +2,13 @@
 
 namespace User\Repository;
 
-use ExDoctrine\Repository\RepositoryAbstract;
+use Doctrine\ORM\EntityRepository;
 use User\Entity\User;
 
-class UserRepository extends RepositoryAbstract
+/**
+ * @method User findOneByEmail(string $email)
+ */
+class UserRepository extends EntityRepository
 {
     public function findNotConfirm(string $email, string $confirmKey): ?User
     {

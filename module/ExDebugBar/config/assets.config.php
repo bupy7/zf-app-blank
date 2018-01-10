@@ -20,7 +20,7 @@ return [
                 'collections' => [
                     'ex_debugbar_js' => [
                         'assets' => [
-                            getcwd() . '/vendor/npm-asset/jquery/dist/jquery.min.js',
+                            getcwd() . '/node_modules/jquery/dist/jquery.min.js',
                             $debugBarRes . '/vendor/highlightjs/highlight.pack.js',
                             $debugBarRes . '/debugbar.js',
                             $debugBarRes . '/widgets.js',
@@ -39,7 +39,7 @@ return [
                             $debugBarRes . '/widgets.css',
                             $debugBarRes . '/openhandler.css',
                             $debugBarRes . '/widgets/sqlqueries/widget.css',
-                            getcwd() . '/vendor/snapshotpl/zf-snap-php-debug-bar/assets/zf-snap-php-debug-bar.css',
+                            getcwd() . '/vendor/bupy7/zf-php-debug-bar/assets/zf-snap-php-debug-bar.css',
                         ],
                         'options' => [
                             'output' => 'css/ex-debugbar.css',

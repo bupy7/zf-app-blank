@@ -12,11 +12,14 @@ return [
     'LABEL_SEND_RESTORE_KEY' => 'Send',
     'LABEL_RESTORE_PASS' => 'Save',
     'LABEL_NEW_PASSWORD' => 'New password',
+    'LABEL_YES' => 'Yes',
+    'LABEL_NO' => 'No',
 
     'PAGE_TITLE_SIGNUP' => 'Signup',
     'PAGE_TITLE_SIGNIN' => 'Signin',
     'PAGE_CONFIRM_AGAIN' => 'Email validation',
     'PAGE_FORGOT_PASS' => 'Password recovery',
+    'PAGE_TITLE_USER_LIST' => 'Users',
 
     'SUCCESS_SIGNUP' => 'You have registered successfully! Check your mail inbox in order to verify his '
         . 'Email address.',
@@ -47,4 +50,10 @@ return [
     'EMAIL_BODY_RESTORE_PASS' => 'For recovery password you should follow by link: %s',
 
     'WARNING_CONFIRM_EMAIL_NOT_FOUND' => 'The user not found either Email has been confirmed.',
+
+    'COLUMN_USERNAME' => 'Username',
+    'COLUMN_EMAIL' => 'Email',
+    'COLUMN_ROLE' => 'Role',
+    'COLUMN_EMAIL_CONFIRM' => 'Confirmed Email',
+    'COLUMN_CREATED_AT' => 'Date/time',
 ];

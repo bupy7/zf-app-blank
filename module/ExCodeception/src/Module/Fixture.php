@@ -22,7 +22,7 @@ class Fixture extends \Codeception\Module implements DoctrineProvider
     {
         parent::_before($test);
 
-        $loader = new Loader;
+        $loader = new Loader();
         $fixturePaths = (array) $this->config['fixturePaths'];
 
         foreach ($fixturePaths as $path) {
@@ -46,7 +46,7 @@ class Fixture extends \Codeception\Module implements DoctrineProvider
      */
     public function pushFixtures(array $fixtures): void
     {
-        $purger = new ORMPurger;
+        $purger = new ORMPurger();
         $executor = new ORMExecutor($this->_getEntityManager(), $purger);
         $executor->execute($fixtures);
     }

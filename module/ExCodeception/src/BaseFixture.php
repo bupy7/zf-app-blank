@@ -4,45 +4,71 @@ namespace ExCodeception;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\Mapping\ClassMetadataInfo;
 
-abstract class BaseFixture extends AbstractFixture implements FixtureInterface
+abstract class BaseFixture extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
+    /**
+     * @var string
+     */
+    protected $entityClass;
+    /**
+     * @var string
+     */
+    protected $reference;
     /**
      * @var string
      */
     protected $dataFile;
     /**
-     * @var object
+     * @var array
      */
-    protected $entityClass;
+    protected $items;
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        foreach ($this->getData() as $item) {
-            $enitity = new $this->entityClass;
+        if ($this->dataFile) {
+            $this->items = require $this->dataFile;
+        }
+        
+        foreach ($this->items as $item) {
+            /** @var ClassMetadataInfo $metadata */
+            $metadata = $manager->getClassMetadata($this->entityClass);
+            $metadata->setIdGeneratorType(ClassMetadataInfo::GENERATOR_TYPE_AUTO);
+            
+            $entity = new $this->entityClass;
+
             foreach ($item as $name => $value) {
-                $method = 'set' . ucfirst($name);
-                $enitity->$method($value);
+                $setValueMethodName = $this->createSetValueMethodName($name);
+                
+                if (method_exists($this, $setValueMethodName)) {
+                    $this->$setValueMethodName($entity, $item, $name);
+                } else {
+                    $entity->$setValueMethodName($value);
+                }
+                
+                if ($this->reference) {
+                    $this->setReference($this->reference . $item['id'], $entity);
+                }
             }
-            $manager->persist($enitity);
+            
+            $manager->persist($entity);
         }
         $manager->flush();
     }
-
-    /**
-     * @return array
-     */
-    public function getData(): array
+    
+    public function getOrder(): int
     {
-        return require $this->getPath();
+        return 0;
     }
-
-    /**
-     * @return string
-     */
-    public function getPath(): string
+    
+    protected function createSetValueMethodName(string $name): string
     {
-        return codecept_data_dir() . $this->dataFile . '.php';
+        $ucfirstName = ucfirst($name);
+        $setValueMethodName = 'set' . $ucfirstName;
+        
+        return $setValueMethodName;
     }
 }

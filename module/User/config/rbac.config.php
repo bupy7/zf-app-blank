@@ -5,19 +5,13 @@ use ZfcRbac\Role\InMemoryRoleProvider;
 
 return [
     'zfc_rbac' => [
-        'guards' => [
-            RoutePermissionsGuard::class => [
-                'signin' => 'user/auth/signin',
-                'logout' => 'user/auth/logout',
-                'signup' => 'user/signup/signup',
-                'confirm-email' => 'user/confirm-email/confirm',
-                'confirm-again' => 'user/confirm-again/again',
-                'forgot-pass' => 'user/access/forgot-pass',
-                'restore-pass' => 'user/access/restore-pass',
-            ],
-        ],
         'role_provider' => [
             InMemoryRoleProvider::class => [
+                'registered' => [
+                    'permissions' => [
+                        'user/index/index',
+                    ],
+                ],
                 'guest' => [
                     'permissions' => [
                         'user/auth/signin',
@@ -29,6 +23,23 @@ return [
                         'user/access/restore-pass',
                     ],
                 ],
+            ],
+        ],
+        'guards' => [
+            RoutePermissionsGuard::class => [
+                'home' => 'user/index/index',
+
+                'signin' => 'user/auth/signin',
+                'logout' => 'user/auth/logout',
+
+                'signup' => 'user/signup/signup',
+
+                'confirm-email' => 'user/confirm-email/confirm',
+
+                'confirm-again' => 'user/confirm-again/again',
+
+                'forgot-pass' => 'user/access/forgot-pass',
+                'restore-pass' => 'user/access/restore-pass',
             ],
         ],
     ],

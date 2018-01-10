@@ -2,6 +2,7 @@
 
 namespace User\Service;
 
+use Doctrine\ORM\EntityManager;
 use User\Form\ForgotPassForm;
 use User\Form\RestorePassForm;
 use Mail\Service\MailService;
@@ -21,24 +22,30 @@ class AccessService
     /**
      * @var MailService
      */
-    protected $mailService;
+    private $mailService;
     /**
      * @var UserRepository
      */
-    protected $userRepository;
+    private $userRepository;
     /**
      * @var PasswordInterface
      */
-    protected $passwordHashService;
-    
+    private $passwordHashService;
+    /**
+     * @var EntityManager
+     */
+    private $entityManager;
+
     public function __construct(
         MailService $mailService,
         UserRepository $userRepository,
-        PasswordInterface $passwordHashService
+        PasswordInterface $passwordHashService,
+        EntityManager $entityManager
     ) {
         $this->mailService = $mailService;
         $this->userRepository = $userRepository;
         $this->passwordHashService = $passwordHashService;
+        $this->entityManager = $entityManager;
     }
 
     public function forgotPass(array $data, ForgotPassForm $form): bool
@@ -47,23 +54,28 @@ class AccessService
         if (!$form->isValid()) {
             return false;
         }
+        
         $entity = $this->userRepository->findOneByEmail($form->email);
         if (!$entity) {
             return false;
         }
+        
         // generate restore key
         $restoreKeyExpire = new DateTime;
         $restoreKeyExpire->add(new DateInterval(sprintf('PT%dS', self::RESTORE_KEY_DURATION)));
         $entity->setRestoreKey(Rand::getString(self::RESTORE_KEY_LENGTH, self::RESTORE_KEY_DICT))
             ->setRestoreKeyExpire($restoreKeyExpire);
-        $this->userRepository->persist($entity);
-        $this->userRepository->flush();
+
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+        
         // send email
         $message = $this->mailService->createMessageBuilder();
         $message->addToRecipient($entity->getEmail(), ['full_name' => $entity->getPerson()]);
         $message->setTranslateSubject('EMAIL_SUBJECT_RESTORE_PASS', 'User');
         $message->setRenderHtmlBody('user/mail/restore-pass', ['userEntity' => $entity]);
         $this->mailService->send($message);
+        
         return true;
     }
 
@@ -85,8 +97,10 @@ class AccessService
         $hashPassword = $this->passwordHashService->create($form->password);
         $entity->setPassword($hashPassword)
             ->setRestoreKeyExpire(new DateTime);
-        $this->userRepository->persist($entity);
-        $this->userRepository->flush();
+
+        $this->entityManager->persist($entity);
+        $this->entityManager->flush();
+
         return true;
     }
 }

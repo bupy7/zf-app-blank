@@ -1,0 +1,61 @@
+{% macro alert(items) %}
+    {% set templates = {
+        'default': '<div class="alert%s">%s%s</div>',
+        'success': '<div class="alert alert-success%s">%s%s</div>',
+        'info': '<div class="alert alert-info%s">%s%s</div>',
+        'warning': '<div class="alert alert-warning%s">%s%s</div>',
+        'error': '<div class="alert alert-danger%s">%s%s</div>'
+    } %}
+    {% for type, messages in items %}
+        {% for message in messages %}
+            {% set dismissable = {class: '', button: ''} %}
+            {% if message.dismissable %}
+                {% set dismissable = {
+                    class: ' alert-dismisable',
+                    button: '<button type="button" class="close" data-dismiss="alert">&times;</button>'
+                } %}
+            {% endif %}
+            {{ templates[type]|format(dismissable.class, dismissable.button, message.message) }}
+        {% endfor %}
+    {% endfor %}
+{% endmacro %}
+
+{% macro paginator(paginator, queryParams, part, displayTotal) %}
+    {% set displayTotal = displayTotal is null ? true : displayTotal %}
+
+    <div class="row">
+        <div class="{{ displayTotal ? 'col-md-8' : 'col-md-12' }}">
+            {{ paginationControl(
+            paginator,
+            'sliding',
+            ['layout', part | default(''), 'paginator.twig'] | join('/'),
+            {
+                query: queryParams | default({})
+            }
+            ) }}
+        </div>
+        {% if displayTotal %}
+            <div class="col-md-4">
+                <div class="text-right">
+                    {% set inc = 0 %}
+                    {% if paginator.getTotalItemCount() > 0 %}
+                        {% set inc = 1 %}
+                    {% endif %}
+
+                    {% set start = (paginator.getCurrentPageNumber() - 1) * paginator.getItemCountPerPage() + inc %}
+                    {% if paginator.getItemCountPerPage() != paginator.getCurrentItemCount() %}
+                        {% set diff = (paginator.getItemCountPerPage() - paginator.getCurrentItemCount()) | abs %}
+                        {% set end = paginator.getCurrentPageNumber() * paginator.getItemCountPerPage() - diff %}
+                    {% else %}
+                        {% set end = paginator.getCurrentPageNumber() * paginator.getItemCountPerPage() %}
+                    {% endif %}
+
+                    {% set total = paginator.getTotalItemCount() %}
+
+                    {{ translate('LABEL_PAGINATION_INFO', 'Core') | format(start, end, total) }}
+                </div>
+            </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
