@@ -52,7 +52,7 @@ $checkList = [
     ],
     [
         'name' => 'less',
-        'condition' => shellCommandExists('lessc'),
+        'condition' => shellCommandExists('sass'),
     ],
     [
         'name' => 'yui-compressor',
@@ -65,6 +65,10 @@ $checkList = [
     [
         'name' => 'java',
         'condition' => shellCommandExists('java'),
+    ],
+    [
+        'name' => 'ruby',
+        'condition' => shellCommandExists('ruby'),
     ],
 ];
 

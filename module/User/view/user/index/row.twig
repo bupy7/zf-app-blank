@@ -2,7 +2,6 @@
   <td>{{ index }}</td>
   <td>{{ item.getPerson() | e }}</td>
   <td>{{ item.getEmail() | e }}</td>
-  <td>{{ item.getRoleId() }}</td>
   <td>{{ item.getEmailConfirm() ? translate('LABEL_YES', 'User') : translate('LABEL_NO', 'User') }}</td>
   <td>{{ item.getCreatedAt() | date('Y-m-d H:i') }}</td>
 </tr>

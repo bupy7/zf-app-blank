@@ -1,6 +1,13 @@
 zf-app-blank
 ============
 
+1.6.1 [2018-01-11]
+------------------
+
+- Fix: Requirements checker.
+- Fix: Email templates.
+- Fix: User demo list.
+
 1.6.0 [2018-01-11]
 ------------------
 
