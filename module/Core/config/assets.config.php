@@ -19,8 +19,10 @@ return [
         'basePath' => 'assets',
         'default' => [
             'assets' => [
-                '@library_css',
-                '@app_css'
+                '@library_js',
+
+                '@app_css',
+                '@app_js',
             ],
             'options' => [
                 'mixin' => true,
@@ -32,27 +34,36 @@ return [
                 'collections' => [
                     'app_css' => [
                         'assets' => [
-                            'css/style.less',
+                            'css/style.sass',
                         ],
                         'filters' => [
-                            'LessFilter',
+                            'SassFilter',
                             '?CssCompressorFilter',
                         ],
                         'options' => [
                             'output' => 'css/app.min.css',
                         ],
                     ],
-                    'library_css' => [
+                    'app_js' => [
                         'assets' => [
-                            'css/bs/bootstrap.less',
-                            $npmPath . '/font-awesome/css/font-awesome.css',
+                            'js/navbar.js',
                         ],
                         'filters' => [
-                            'LessFilter',
-                            '?CssCompressorFilter',
+                            '?UglifyJs2Filter',
                         ],
                         'options' => [
-                            'output' => 'css/library.min.css',
+                            'output' => 'js/app.min.js',
+                        ],
+                    ],
+                    'library_js' => [
+                        'assets' => [
+                            $npmPath . '/bootstrap.native/dist/bootstrap-native-v4.js',
+                        ],
+                        'filters' => [
+                            '?UglifyJs2Filter',
+                        ],
+                        'options' => [
+                            'output' => 'js/library.min.js',
                         ],
                     ],
                     'app_images' => [
@@ -63,15 +74,6 @@ return [
                             'move_raw' => true,
                         ],
                     ],
-                    'bootstrap_fonts' => [
-                        'assets' => [
-                            $npmPath . '/bootstrap/fonts/*',
-                        ],
-                        'options' => [
-                            'move_raw' => true,
-                            'targetPath' => 'fonts',
-                        ],
-                    ],
                     'font_awesome_fonts' => [
                         'assets' => [
                             $npmPath . '/font-awesome/fonts/*',
@@ -79,6 +81,7 @@ return [
                         'options' => [
                             'move_raw' => true,
                             'targetPath' => 'fonts',
+                            'disable_source_path' => true,
                         ],
                     ],
                 ],

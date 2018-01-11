@@ -6,5 +6,5 @@ use Zend\Authentication\Result as BaseResult;
 
 class Result extends BaseResult
 {
-    const FAILURE_DIDNT_CONFIRM = -5;
+    public const FAILURE_DIDNT_CONFIRM = -5;
 }

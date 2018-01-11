@@ -8,12 +8,11 @@ use User\Repository\UserRepository;
 use User\Service\SignUpService;
 use Zend\Authentication\AuthenticationServiceInterface;
 use Zend\Hydrator\HydratorInterface;
-use Zend\Mvc\Controller\AbstractActionController;
-use Zend\View\Model\JsonModel;
+use Core\Controller\ActionControllerAbstract;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
-class SignupController extends AbstractActionController
+class SignupController extends ActionControllerAbstract
 {
     private const ROUTE_TO_HOME = 'home';
     private const ROUTE_TO_SIGNIN = 'signin';
@@ -21,27 +20,27 @@ class SignupController extends AbstractActionController
     /**
      * @var FormAbstract
      */
-    protected $signUpForm;
+    private $signUpForm;
     /**
      * @var AuthenticationServiceInterface
      */
-    protected $authService;
+    private $authService;
     /**
      * @var User
      */
-    protected $userEntity;
+    private $userEntity;
     /**
      * @var HydratorInterface
      */
-    protected $entityHydrator;
+    private $entityHydrator;
     /**
-     * @var SignUpServiceInterface
+     * @var SignUpService
      */
-    protected $signUpService;
+    private $signUpService;
     /**
      * @var UserRepository
      */
-    protected $userRepository;
+    private $userRepository;
 
     public function __construct(
         AuthenticationServiceInterface $authService,

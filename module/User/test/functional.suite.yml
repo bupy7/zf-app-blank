@@ -17,6 +17,7 @@ modules:
                 - \ExCodeception\Module\Fixture
         - \User\Test\Helper\Functional
         - Asserts
+
     config:
         \ExCodeception\Module\Fixture:
             fixturePaths: '../../../test/_fixture'

@@ -7,49 +7,53 @@ use ZfcRbac\Identity\IdentityInterface;
 
 class User implements IdentityInterface
 {
-    const ROLE_GUEST = 'guest';
-    const ROLE_REGISTERED = 'registered';
+    public const ROLE_GUEST = 10;
+    public const ROLE_REGISTERED = 20;
+    public const ROLE_MAP = [
+        self::ROLE_GUEST => 'guest',
+        self::ROLE_REGISTERED => 'registered',
+    ];
     
     /**
      * @var integer
      */
-    protected $id;
+    private $id;
     /**
      * @var string
      */
-    protected $person;
+    private $person;
     /**
      * @var string
      */
-    protected $email;
+    private $email;
     /**
      * @var string
      */
-    protected $password;
+    private $password;
     /**
-     * @var string
+     * @var int
      */
-    protected $roleId;
+    private $roleId;
     /**
      * @var boolean
      */
-    protected $emailConfirm = false;
+    private $emailConfirm = false;
     /**
      * @var string
      */
-    protected $confirmKey;
+    private $confirmKey;
     /**
      * @var DateTime
      */
-    protected $createdAt;
+    private $createdAt;
     /**
      * @var string|null
      */
-    protected $restoreKey;
+    private $restoreKey;
     /**
      * @var DateTime|null
      */
-    protected $restoreKeyExpire;
+    private $restoreKeyExpire;
 
     /**
      * @return integer|null
@@ -99,14 +103,14 @@ class User implements IdentityInterface
     }
 
     /**
-     * @return string|null
+     * @return int|null
      */
     public function getRoleId()
     {
         return $this->roleId;
     }
 
-    public function setRoleId(string $role): User
+    public function setRoleId(int $role): User
     {
         $this->roleId = $role;
         return $this;
@@ -114,7 +118,7 @@ class User implements IdentityInterface
 
     public function getRoles(): array
     {
-        return [$this->getRoleId()];
+        return (array)(self::ROLE_MAP[$this->getRoleId()] ?? []);
     }
 
     public function getEmailConfirm(): bool

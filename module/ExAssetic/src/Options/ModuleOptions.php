@@ -9,111 +9,76 @@ class ModuleOptions extends AbstractOptions
     /**
      * @var string Path to bin of NodeJs.
      */
-    protected $nodeBin;
-    /**
-     * @var array Path to module or package NodeJs.
-     */
-    protected $nodePaths;
+    private $nodeBin = '/usr/bin/node';
     /**
      * @var string Path to Yui Compressor.
      */
-    protected $yuiPath;
+    private $yuiPath = '';
     /**
      * @var string Path to Java.
      */
-    protected $javaPath;
+    private $javaPath = '/usr/bin/java';
     /**
      * @var string Path to UglifyJS2.
      */
-    protected $uglifyJs2Path;
-
+    private $uglifyJs2Path = '';
     /**
-     * @param string $nodeBin
-     * @return static
+     * @var string Path to SASS post-processor.
      */
-    public function setNodeBin($nodeBin)
+    private $sassPath = '';
+
+    public function setNodeBin(string $nodeBin): ModuleOptions
     {
         $this->nodeBin = $nodeBin;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getNodeBin()
+    public function getNodeBin(): string
     {
         return $this->nodeBin;
     }
 
-    /**
-     * @param array $nodePaths
-     * @return static
-     */
-    public function setNodePaths($nodePaths)
-    {
-        $this->nodePaths = $nodePaths;
-        return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function getNodePaths()
-    {
-        return $this->nodePaths;
-    }
-
-    /**
-     * @param string $yuiPath
-     * @return static
-     */
-    public function setYuiPath($yuiPath)
+    public function setYuiPath(string $yuiPath): ModuleOptions
     {
         $this->yuiPath = $yuiPath;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getYuiPath()
+    public function getYuiPath(): string
     {
         return $this->yuiPath;
     }
 
-    /**
-     * @param string $javaPath
-     * @return static
-     */
-    public function setJavaPath($javaPath)
+    public function setJavaPath(string $javaPath): ModuleOptions
     {
         $this->javaPath = $javaPath;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getJavaPath()
+    public function getJavaPath(): string
     {
         return $this->javaPath;
     }
 
-    /**
-     * @param string $uglifyJs2Path
-     * @return static
-     */
-    public function setUglifyJs2Path($uglifyJs2Path)
+    public function setUglifyJs2Path(string $uglifyJs2Path): ModuleOptions
     {
         $this->uglifyJs2Path = $uglifyJs2Path;
         return $this;
     }
 
-    /**
-     * @return string
-     */
-    public function getUglifyJs2Path()
+    public function getUglifyJs2Path(): string
     {
         return $this->uglifyJs2Path;
+    }
+
+    public function setSassPath(string $sassPath): ModuleOptions
+    {
+        $this->sassPath = $sassPath;
+        return $this;
+    }
+
+    public function getSassPath(): string
+    {
+        return $this->sassPath;
     }
 }

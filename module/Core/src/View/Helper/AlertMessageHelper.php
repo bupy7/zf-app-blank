@@ -51,7 +51,7 @@ class AlertMessageHelper extends AbstractHelper
     public function __construct()
     {
         $this->setFlashMessenger();
-        $this->markdown = new GithubMarkdown;
+        $this->markdown = new GithubMarkdown();
     }
     
     /**
@@ -115,7 +115,7 @@ class AlertMessageHelper extends AbstractHelper
     public function setFlashMessenger()
     {
         if ($this->flashMessenger === null) {
-            $this->flashMessenger = new FlashMessenger;
+            $this->flashMessenger = new FlashMessenger();
         }
     }
 
@@ -129,7 +129,7 @@ class AlertMessageHelper extends AbstractHelper
     protected function addMessageByType($type, $message, $dismissable = true)
     {
         self::$flashMessages[$type][] = [
-            'message' => $this->markdown->parse($message),
+            'message' => $this->markdown->parseParagraph($message),
             'dismissable' => $dismissable,
         ];
     }

@@ -2,9 +2,9 @@
     {% for page in container if navigation().accept(page) %}
         {% set hasChildren = page.hasPages() %}
         {% if not hasChildren %}
-            <li{{ page.isActive() ? ' class="active"' : '' }}>
+            <li class="nav-item{{ page.isActive() ? ' active' : '' }}">
                 <a
-                    class="nav-header"
+                    class="nav-link"
                     href="{{ page.getHref() }}"
                     {% if page.getTarget() != '' %}
                         target="{{ page.getTarget() }}"
@@ -27,8 +27,8 @@
                 {% endif %}
             {% endfor %}
             {% if access %}
-                <li class="dropdown{{ page.isActive(true) ? ' active' : '' }}">
-                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                <li class="nav-item dropdown{{ page.isActive(true) ? ' active' : '' }}">
+                    <a class="nav-link dropdown-toggle" href="#">
                         {% if page.get('icon') != '' %}
                             <span class="{{ page.get('icon') }}"></span>
                         {% endif %}
@@ -43,7 +43,7 @@
                             {% if child.get('separator') %}
                                 <li class="divider"></li>
                             {% else %}
-                                <li{{ child.isActive() ? ' class="active"' : '' }}>
+                                <li class="dropdown-item{{ child.isActive() ? ' active' : '' }}">
                                     <a
                                         href="{{ child.getHref() }}"
                                         {% if (child.getTarget() != '') %}

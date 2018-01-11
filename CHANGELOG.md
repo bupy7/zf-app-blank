@@ -1,6 +1,18 @@
 zf-app-blank
 ============
 
+1.5.2 [2018-01-11]
+------------------
+
+- Fix: Symlinks.
+- Rem: Less.
+- Add: Sass.
+- Rem: Bootstrap 3.
+- Add: Bootstrap 4.
+- Enh: 2 intent instead of 4 for Twig, HTML, CSS, JS files.
+- Enh: Refactoring.
+
+
 1.5.1 [2018-01-10]
 ------------------
 

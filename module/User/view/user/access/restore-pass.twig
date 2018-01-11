@@ -1,42 +1,47 @@
-{% extends 'layout/layout.twig' %}
 {% import 'macro/icon.twig' as icon %}
 {% import 'macro/form.twig' as form %}
+
+{% extends 'layout/layout.twig' %}
 
 {% set title = translate('PAGE_FORGOT_PASS', 'User') %}
 
 {% do headTitle(title) %}
 
 {% block content %}
-    <div class="page-header">
-        <h1>{{ title|e }}</h1>
-    </div>
-    {% set formBuilder = formBuilder(restorePassForm) %}
+  <div class="page-header">
+    <h1>{{ title | e }}</h1>
+  </div>
+
+  {% set formBuilder = formBuilder(restorePassForm) %}
+  {{ formBuilder
+    .open()
+    .action(url('restore-pass', {e: email, k: key}))
+  }}
+  <div class="form-group required">
     {{ formBuilder
-        .open()
-        .action(url('restore-pass', {e: email, k: key}))
-        .addClass('form-horizontal')
+      .label(translate('LABEL_NEW_PASSWORD', 'User'))
+      .forId('password')
+      .addClass('control-label col-md-2')
     }}
-    <div class="form-group required{{ form.hasError(formBuilder, 'password') }}">
-        {{ formBuilder
-            .label(translate('LABEL_NEW_PASSWORD', 'User'))
-            .forId('password')
-            .addClass('control-label col-md-2')
-        }}
-        <div class="col-md-4">
-            {{ formBuilder.password('password').addClass('form-control') }}
-            <div class="help-block help-block-error">
-                {{ formBuilder.getError('password') }}
-            </div>
-        </div>
+    <div class="col-md-4">
+      {{ formBuilder
+        .password('password')
+        .addClass('form-control')
+        .addClass(form.hasError(formBuilder, 'password'))
+      }}
+      <div class="invalid-feedback">
+        {{ formBuilder.getError('password') }}
+      </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-4 col-md-offset-2">
-            {{ formBuilder
-                .button([icon.fa('check'), translate('LABEL_RESTORE_PASS', 'User')]|join(' '))
-                .attribute('type', 'submit')
-                .addClass('btn btn-primary')
-            }}
-        </div>
+  </div>
+  <div class="form-group">
+    <div class="col-md-4 col-md-offset-2">
+      {{ formBuilder
+        .button([icon.fa('check'), translate('LABEL_RESTORE_PASS', 'User')] | join(' '))
+        .attribute('type', 'submit')
+        .addClass('btn btn-primary')
+      }}
     </div>
-    {{ formBuilder.close() }}
+  </div>
+  {{ formBuilder.close() }}
 {% endblock content %}

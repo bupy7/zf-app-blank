@@ -1,91 +1,91 @@
 {
-    "name": "bupy7/zf-app-blank",
-    "description": "A blank application Zend Framework 3.",
-    "version": "1.5.1",
-    "type": "project",
-    "license": "BSD-3-Clause",
-    "keywoards": [
-        "zend",
-        "zf",
-        "zf3",
-        "framework",
-        "skeleton",
-        "blank",
-        "application",
-        "app"
-    ],
-    "authors": [
-        {
-            "name": "Vasily Belosludcev",
-            "email": "bupy765@gmail.com"
-        }
-    ],
-    "require": {
-        "php": "^7.1",
-        "zendframework/zend-mvc": "~3.1.0",
-        "zendframework/zend-mvc-i18n": "~1.0.0",
-        "zendframework/zend-navigation": "~2.8.2",
-        "zendframework/zend-validator": "~2.9.1",
-        "zendframework/zend-crypt": "~3.2.0",
-        "zendframework/zend-authentication": "~2.5.3",
-        "zendframework/zend-mvc-plugin-flashmessenger": "~1.0.0",
-        "zendframework/zend-mvc-plugin-identity": "~1.0.0",
-        "zendframework/zend-mvc-plugin-prg": "~1.0.0",
-        "zendframework/zend-mvc-plugin-fileprg": "~1.0.0",
-        "zendframework/zend-json": "~3.0.0",
-        "widmogrod/zf2-assetic-module": "~2.3",
-        "zf-commons/zfc-rbac": "~2.6.3",
-        "doctrine/doctrine-orm-module": "~1.1.0",
-        "bupy7/zf-mailgun": "~1.0.0",
-        "cebe/markdown": "~1.1.1",
-        "bupy7/zf-form": "~1.2.0",
-        "kokspflanze/zfc-twig": "~2.1",
-        "symfony/console": "~3.3",
-        "zendframework/zend-log": "~2.9",
-        "doctrine/migrations": "~1.6",
-        "bupy7/zf-time-zone": "~1.0"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "~2.6",
-        "codeception/codeception": "~2.3",
-        "doctrine/data-fixtures": "~1.3",
-        "bupy7/zf-php-debug-bar": "~0.13"
-    },
-    "autoload": {
-        "psr-4": {
-            "Core\\": "module/Core/src",
-            "ExAssetic\\": "module/ExAssetic/src",
-            "ExDebugBar\\": "module/ExDebugBar/src",
-            "ExDoctrine\\": "module/ExDoctrine/src",
-            "ExRbac\\": "module/ExRbac/src",
-            "ExTwig\\": "module/ExTwig/src",
-            "ExValidate\\": "module/ExValidate/src",
-            "ExCodeception\\": "module/ExCodeception/src",
-            "User\\": "module/User/src",
-            "Mail\\": "module/Mail/src",
-            "Cli\\": "module/Cli/src",
-            "DataProvider\\": "module/DataProvider/src",
-            "ExPaginator\\": "module/ExPaginator/src"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "User\\Test\\": "module/User/test"
-        }
-    },
-    "scripts": {
-        "cs:fix": "./vendor/bin/php-cs-fixer fix",
-        "cs:check": "./vendor/bin/php-cs-fixer fix --dry-run --diff",
-        "test:run": "./vendor/bin/codecept run --ansi",
-        "test:run-with-cov": "./vendor/bin/codecept run --ansi --coverage-html",
-        "test:build": [
-            "@db:test:drop",
-            "@db:test:create",
-            "@codecept:build"
-        ],
-        "db:test:drop": "bin/console-test orm:schema-tool:drop --force",
-        "db:test:create": "bin/console-test orm:schema-tool:create",
-        "db:test:update": "bin/console-test orm:schema-tool:update --force",
-        "codecept:build": "./vendor/bin/codecept build --ansi"
+  "name": "bupy7/zf-app-blank",
+  "description": "A blank application Zend Framework 3.",
+  "version": "1.5.1",
+  "type": "project",
+  "license": "BSD-3-Clause",
+  "keywoards": [
+    "zend",
+    "zf",
+    "zf3",
+    "framework",
+    "skeleton",
+    "blank",
+    "application",
+    "app"
+  ],
+  "authors": [
+    {
+      "name": "Vasily Belosludcev",
+      "email": "bupy765@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^7.1",
+    "zendframework/zend-mvc": "~3.1.0",
+    "zendframework/zend-mvc-i18n": "~1.0.0",
+    "zendframework/zend-navigation": "~2.8.2",
+    "zendframework/zend-validator": "~2.9.1",
+    "zendframework/zend-crypt": "~3.2.0",
+    "zendframework/zend-authentication": "~2.5.3",
+    "zendframework/zend-mvc-plugin-flashmessenger": "~1.0.0",
+    "zendframework/zend-mvc-plugin-identity": "~1.0.0",
+    "zendframework/zend-mvc-plugin-prg": "~1.0.0",
+    "zendframework/zend-mvc-plugin-fileprg": "~1.0.0",
+    "zendframework/zend-json": "~3.0.0",
+    "widmogrod/zf2-assetic-module": "~2.3",
+    "zf-commons/zfc-rbac": "~2.6.3",
+    "doctrine/doctrine-orm-module": "~1.1.0",
+    "bupy7/zf-mailgun": "~1.0.0",
+    "cebe/markdown": "~1.1.1",
+    "bupy7/zf-form": "~1.2.0",
+    "kokspflanze/zfc-twig": "~2.1",
+    "symfony/console": "~3.3",
+    "zendframework/zend-log": "~2.9",
+    "doctrine/migrations": "~1.6",
+    "bupy7/zf-time-zone": "~1.0"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "~2.6",
+    "codeception/codeception": "~2.3",
+    "doctrine/data-fixtures": "~1.3",
+    "bupy7/zf-php-debug-bar": "~0.13"
+  },
+  "autoload": {
+    "psr-4": {
+      "Core\\": "module/Core/src",
+      "ExAssetic\\": "module/ExAssetic/src",
+      "ExDebugBar\\": "module/ExDebugBar/src",
+      "ExDoctrine\\": "module/ExDoctrine/src",
+      "ExRbac\\": "module/ExRbac/src",
+      "ExTwig\\": "module/ExTwig/src",
+      "ExValidate\\": "module/ExValidate/src",
+      "ExCodeception\\": "module/ExCodeception/src",
+      "User\\": "module/User/src",
+      "Mail\\": "module/Mail/src",
+      "Cli\\": "module/Cli/src",
+      "DataProvider\\": "module/DataProvider/src",
+      "ExPaginator\\": "module/ExPaginator/src"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "User\\Test\\": "module/User/test"
+    }
+  },
+  "scripts": {
+    "cs:fix": "./vendor/bin/php-cs-fixer fix",
+    "cs:check": "./vendor/bin/php-cs-fixer fix --dry-run --diff",
+    "test:run": "./vendor/bin/codecept run --ansi",
+    "test:run-with-cov": "./vendor/bin/codecept run --ansi --coverage-html",
+    "test:build": [
+      "@db:test:drop",
+      "@db:test:create",
+      "@codecept:build"
+    ],
+    "db:test:drop": "bin/console-test orm:schema-tool:drop --force",
+    "db:test:create": "bin/console-test orm:schema-tool:create",
+    "db:test:update": "bin/console-test orm:schema-tool:update --force",
+    "codecept:build": "./vendor/bin/codecept build --ansi"
+  }
 }

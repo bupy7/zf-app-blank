@@ -22,6 +22,6 @@ abstract class ActionControllerAbstract extends BaseActionControllerAbstract
 
     public function asView(array $data = [], array $options = []): ViewModel
     {
-        return new ViewModel(!empty($data) ? $data : null, !empty($options) ? $options : null);
+        return new ViewModel(count($data) > 0 ? $data : null, count($options) > 0 ? $options : null);
     }
 }

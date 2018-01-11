@@ -5,21 +5,21 @@ namespace User\Controller;
 use User\Form\AgainConfirmForm;
 use User\Repository\UserRepository;
 use User\Service\ConfirmEmailService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Core\Controller\ActionControllerAbstract;
 use Zend\View\Model\ViewModel;
 
-class ConfirmEmailController extends AbstractActionController
+class ConfirmEmailController extends ActionControllerAbstract
 {
     private const ROUTE_TO_SIGNIN = 'signin';
 
     /**
      * @var ConfirmEmailService
      */
-    protected $confirmEmailService;
+    private $confirmEmailService;
     /**
      * @var UserRepository
      */
-    protected $userRepository;
+    private $userRepository;
 
     public function __construct(ConfirmEmailService $confirmEmailService, UserRepository $userRepository)
     {
@@ -51,10 +51,10 @@ class ConfirmEmailController extends AbstractActionController
             $result = $this->confirmEmailService->again($this->getRequest()->getPost()->toArray(), $form);
             if ($result) {
                 $this->flashMessenger()->addSuccessMessage($this->translate('SUCCESS_SENT_CONFIRM_KEY_AGAIN', 'User'));
+                return $this->redirect()->toRoute(self::ROUTE_TO_SIGNIN);
             } else {
                 $this->flashMessenger()->addWarningMessage($this->translate('FAILED_SENT_CONFIRM_KEY_AGAIN', 'User'));
             }
-            return $this->redirect()->toRoute(self::ROUTE_TO_SIGNIN);
         }
         return new ViewModel([
             'againForm' => $form,

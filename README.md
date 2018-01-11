@@ -20,7 +20,7 @@ Features
 
 - PHP 7.1
 - [Zend Framework 3](https://github.com/zendframework/zendframework)
-- [Bootstrap 3](http://getbootstrap.com/)
+- [Twitter Bootstrap 4](http://getbootstrap.com/)
 - [Doctrine ORM 2](http://www.doctrine-project.org/)
 - [Debug Bar](https://github.com/snapshotpl/ZfSnapPhpDebugBar)
 - [Twig](http://twig.sensiolabs.org/)
@@ -46,6 +46,7 @@ Features
     - Recovery password
 - [Symfony CLI](https://github.com/symfony/console)
 - [Codeception](http://codeception.com/)
+- [Sass](http://sass-lang.com/)
 
 Installation
 ------------

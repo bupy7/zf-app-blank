@@ -1,0 +1,31 @@
+html,
+body
+  height: 100%
+
+.wrap
+  height: auto
+  margin: 0 auto -60px
+  min-height: 100%
+  padding-bottom: 60px
+
+  > .container
+    padding: 15px 20px
+
+footer
+  height: 60px
+  background-color: #f5f5f5
+  border-top: 1px solid #ddd
+  padding-top: 20px
+
+.navbar-brand
+  img
+    margin-top: -3px
+    margin-right: 5px
+
+.form-group
+  &.required label::after
+    content: " *"
+    color: $danger
+
+  .help-block
+    font-size: $small-font-size

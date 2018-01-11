@@ -36,8 +36,6 @@ return [
             'bin/console-test',
         ],
         'relativeSymlinks' => true,
-        'createSymlinks' => [
-            'module/Application/assets/css/bs' => 'node_modules/bootstrap/less'
-        ],
+        'createSymlinks' => [],
     ],
 ];

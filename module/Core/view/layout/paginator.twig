@@ -1,38 +1,38 @@
 {% if pageCount > 1 %}
-    {% set query = query | default({}) %}
-    <nav>
-        <ul class="pagination">
-            {% if previous is defined %}
-                <li>
-                    <a href="{{ url(null, {}, {
-                        query: query | merge({_page: previous})
-                    }) }}">&laquo;</a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <a href="javascript:;">&laquo;</a>
-                </li>
-            {% endif %}
+  {% set query = query | default({}) %}
+  <nav>
+    <ul class="pagination">
+      {% if previous is defined %}
+        <li class="page-item">
+          <a class="page-link" href="{{ url(null, {}, {
+            query: query | merge({_page: previous})
+          }) }}">&laquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="javascript:;">&laquo;</a>
+        </li>
+      {% endif %}
 
-            {% for page in pagesInRange %}
-                <li{{ page == current ? ' class="active"' }}>
-                    <a href="{{ url(null, {}, {
-                        query: query | merge({_page: page})
-                    }) }}">{{ page }}</a>
-                </li>
-            {% endfor %}
+      {% for page in pagesInRange %}
+        <li class="page-item{{ page == current ? ' active' }}">
+          <a class="page-link" href="{{ url(null, {}, {
+            query: query | merge({_page: page})
+          }) }}">{{ page }}</a>
+        </li>
+      {% endfor %}
 
-            {% if next is defined %}
-                <li>
-                    <a href="{{ url(null, {}, {
-                        query: query | merge({_page: next})
-                    }) }}">&raquo;</a>
-                </li>
-            {% else %}
-                <li class="disabled">
-                    <a href="javascript:;">&raquo;</a>
-                </li>
-            {% endif %}
-        </ul>
-    </nav>
+      {% if next is defined %}
+        <li class="page-item">
+          <a class="page-link" href="{{ url(null, {}, {
+            query: query | merge({_page: next})
+          }) }}">&raquo;</a>
+        </li>
+      {% else %}
+        <li class="page-item disabled">
+          <a class="page-link" href="javascript:;">&raquo;</a>
+        </li>
+      {% endif %}
+    </ul>
+  </nav>
 {% endif %}

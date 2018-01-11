@@ -6,7 +6,7 @@ return [
         'person' => 'Vasily',
         'email' => 'vasily@zf-app-blank.com',
         'password' => '$2y$10$tdYs2O82NjKo7w98Gs9yKOjiF43hv31LfehjjJFSysIL1qXC9IDpi', // 1234
-        'roleId' => 'registered',
+        'roleId' => 20,
         'emailConfirm' => true,
         'confirmKey' => 'ub_e-bbf6jbwx0qrp4',
         'restoreKey' => null,

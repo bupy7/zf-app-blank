@@ -4,29 +4,29 @@
     xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
     https://raw.github.com/doctrine/doctrine2/master/doctrine-mapping.xsd"
 >
-    <entity name="User\Entity\User" table="`user`" repository-class="User\Repository\UserRepository">
-        <indexes>
-            <index name="user_idx_1" columns="role_id"/>
-        </indexes>
+  <entity name="User\Entity\User" table="`user`" repository-class="User\Repository\UserRepository">
+    <indexes>
+      <index name="user_idx_1" columns="role_id"/>
+    </indexes>
 
-        <unique-constraints>
-            <unique-constraint name="user_idx_2" columns="email"/>
-            <unique-constraint name="user_idx_3" columns="email,confirm_key,email_confirm"/>
-            <unique-constraint name="user_idx_4" columns="email,restore_key"/>
-        </unique-constraints>
+    <unique-constraints>
+      <unique-constraint name="user_idx_2" columns="email"/>
+      <unique-constraint name="user_idx_3" columns="email,confirm_key,email_confirm"/>
+      <unique-constraint name="user_idx_4" columns="email,restore_key"/>
+    </unique-constraints>
 
-        <id name="id" type="integer" column="id">
-            <generator strategy="IDENTITY"/>
-        </id>
+    <id name="id" type="integer" column="id">
+      <generator strategy="IDENTITY"/>
+    </id>
 
-        <field name="person"/>
-        <field name="email"/>
-        <field name="password" length="60"/>
-        <field name="roleId" column="role_id" length="64"/>
-        <field name="emailConfirm" column="email_confirm" type="boolean"/>
-        <field name="confirmKey" column="confirm_key"/>
-        <field name="restoreKey" column="restore_key" nullable="true"/>
-        <field name="restoreKeyExpire" column="restore_key_expire" type="datetime" nullable="true"/>
-        <field name="createdAt" column="created_at" type="datetime"/>
-    </entity>
+    <field name="person"/>
+    <field name="email"/>
+    <field name="password" length="60"/>
+    <field name="roleId" column="role_id" type="smallint"/>
+    <field name="emailConfirm" column="email_confirm" type="boolean"/>
+    <field name="confirmKey" column="confirm_key"/>
+    <field name="restoreKey" column="restore_key" nullable="true"/>
+    <field name="restoreKeyExpire" column="restore_key_expire" type="datetime" nullable="true"/>
+    <field name="createdAt" column="created_at" type="datetime"/>
+  </entity>
 </doctrine-mapping>

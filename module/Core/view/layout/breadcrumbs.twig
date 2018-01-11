@@ -1,28 +1,28 @@
 {% if pages is not empty %}
-<ol class="breadcrumb">
-    <li>
-        <a href="{{ url('home') }}">
-            <span class="fa fa-home"></span>
-        </a>
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{{ url('home') }}">
+        <span class="fa fa-home"></span>
+      </a>
     </li>
     {% for page in pages %}
-        {% if page.isActive() %}
-            <li class="active">
-                {{ translate(
-                    page.getLabel(),
-                    page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
-                ) }}
-            </li>
-        {% else %}
-            <li>
-                <a href="{{ page.getHref() }}">
-                    {{ translate(
-                        page.getLabel(),
-                        page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
-                    ) }}
-                </a>
-            </li>
-        {% endif %}
+      {% if page.isActive() %}
+        <li class="breadcrumb-item active">
+          {{ translate(
+            page.getLabel(),
+            page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
+          ) }}
+        </li>
+      {% else %}
+        <li class="breadcrumb-item">
+          <a href="{{ page.getHref() }}">
+            {{ translate(
+              page.getLabel(),
+              page.get('text_domain') ?: navigation(container).getTranslatorTextDomain()
+            ) }}
+          </a>
+        </li>
+      {% endif %}
     {% endfor %}
-</ol>
+  </ol>
 {% endif %}

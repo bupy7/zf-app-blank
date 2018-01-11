@@ -4,91 +4,84 @@
 
 {{ doctype() }}
 <html lang="{{ locale() }}">
-    <head>
-        <meta charset="utf-8">
+<head>
+  <meta charset="utf-8">
 
-        {{ headTitle(translate('TITLE_HOMEPAGE', 'Core')).setSeparator(' - ') }}
+  {{ headTitle(translate('TITLE_HOMEPAGE', 'Core')).setSeparator(' - ') }}
 
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-        {% block meta %}{% endblock meta %}
+  {% block meta %}{% endblock meta %}
 
-        {{ headMeta() }}
+  {{ headMeta() }}
 
-        <link href="{{ basePath('favicon.ico') }}" rel="shortcut icon" type="image/vnd.microsoft.icon">
+  <link href="{{ basePath('favicon.ico') }}" rel="shortcut icon" type="image/vnd.microsoft.icon">
 
-        {{ headLink() }}
+  {{ headLink() }}
 
-        {% block link %}{% endblock link %}
+  {% block link %}{% endblock link %}
 
-        {{ headScript() }}
+  {{ headScript() }}
 
-        {% block script %}{% endblock script %}
-    </head>
-    <body>
-        <div class="wrap">
-            <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-                <div class="container">
-                    <div class="navbar-header">
-                        <button 
-                            type="button" 
-                            class="navbar-toggle" 
-                            data-toggle="collapse" 
-                            data-target=".navbar-collapse"
-                        >
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="{{ url('home') }}">
-                            <img class="pull-left" src="{{ basePath('assets/img/logo.png') }}">
-                            {{ translate('TITLE_HOMEPAGE', 'Core') }}
-                        </a>
-                    </div>
-                    <div class="collapse navbar-collapse">
-                        {% if identity == null %}
-                            {{ navigation('Zend\\Navigation\\GuestRight')
-                                .menu()
-                                .setUlClass('nav navbar-nav pull-right')
-                                .setPartial('layout/navigation.twig')
-                            }}
-                        {% else %}
-                            {{ navigation('Zend\\Navigation\\Default')
-                                .menu()
-                                .setUlClass('nav navbar-nav')
-                                .setPartial('layout/navigation.twig')
-                            }}
-                            {{ navigation('Zend\\Navigation\\AuthRight')
-                                .menu()
-                                .setUlClass('nav navbar-nav pull-right')
-                                .setPartial('layout/navigation.twig')
-                            }}
-                        {% endif %}
-                    </div>
-                </div>
-            </nav>       
-            <div class="container">
-                {{ component.alert(alertMessage()) }}
-                {{ navigation('Zend\\Navigation\\Default')
-                    .breadcrumbs()
-                    .setPartial('layout/breadcrumbs.twig')
-                }}
-                {% block content %}{{ content ?? null }}{% endblock content %}
-            </div>
-        </div>
-        <footer>
-            <div class="footer-content">
-                <div class="container">
-                    <p class="pull-left">
-                        &copy; 2016 - {{ 'now' | date('Y') != 2016 ? 'now'|date('Y') : '' }}
-                        {{ translate('TITLE_HOMEPAGE', 'Core') }}.
-                        {{ translate('ALL_RIGHTS_RESERVED', 'Core') }}.
-                    </p>
-                </div>
-            </div>
-        </footer>
-        {{ inlineScript() }}
-        {% block inline %}{% endblock inline %}
-    </body>
+  {% block script %}{% endblock script %}
+</head>
+<body>
+<div class="wrap">
+  <nav id="main-navbar" class="navbar navbar-light bg-light navbar-expand-lg">
+    <div class="container">
+      <a class="navbar-brand" href="{{ url('home') }}">
+        <img src="{{ basePath('assets/img/logo.png') }}">
+        {{ translate('TITLE_HOMEPAGE', 'Core') }}
+      </a>
+
+      <button class="navbar-toggler" type="button" data-target="#main-navbar-collapse">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div id="main-navbar-collapse" class="collapse navbar-collapse">
+        {% if identity == null %}
+          {{ navigation('Zend\\Navigation\\GuestRight')
+            .menu()
+            .setUlClass('navbar-nav ml-auto')
+            .setPartial('layout/navigation.twig')
+          }}
+        {% else %}
+          {{ navigation('Zend\\Navigation\\Default')
+            .menu()
+            .setUlClass('navbar-nav')
+            .setPartial('layout/navigation.twig') }}
+          {{ navigation('Zend\\Navigation\\AuthRight')
+            .menu()
+            .setUlClass('navbar-nav ml-auto')
+            .setPartial('layout/navigation.twig')
+          }}
+        {% endif %}
+      </div>
+    </div>
+  </nav>
+
+  <div class="container">
+    {{ component.alert(alertMessage()) }}
+    {{ navigation('Zend\\Navigation\\Default')
+    .breadcrumbs()
+    .setPartial('layout/breadcrumbs.twig') }}
+    {% block content %}{% endblock content %}
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p class="pull-left">
+      &copy; 2016 - {{ 'now' | date('Y') != 2016 ? 'now'|date('Y') : '' }}
+      {{ translate('TITLE_HOMEPAGE', 'Core') }}.
+      {{ translate('ALL_RIGHTS_RESERVED', 'Core') }}.
+    </p>
+  </div>
+</footer>
+
+{{ inlineScript() }}
+
+{% block inline %}{% endblock inline %}
+</body>
 </html>

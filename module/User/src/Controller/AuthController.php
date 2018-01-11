@@ -5,11 +5,11 @@ namespace User\Controller;
 use Bupy7\Form\FormAbstract;
 use User\Auth\Result;
 use Zend\Authentication\AuthenticationServiceInterface;
-use Zend\Mvc\Controller\AbstractActionController;
+use Core\Controller\ActionControllerAbstract;
 use Zend\View\Model\ViewModel;
 use Zend\Http\Response;
 
-class AuthController extends AbstractActionController
+class AuthController extends ActionControllerAbstract
 {
     private const ROUTE_TO_HOME = 'home';
     private const ROUTE_TO_SIGNIN = 'signin';
@@ -18,11 +18,11 @@ class AuthController extends AbstractActionController
     /**
      * @var FormAbstract
      */
-    protected $signInForm;
+    private $signInForm;
     /**
      * @var AuthenticationServiceInterface
      */
-    protected $authService;
+    private $authService;
 
     public function __construct(AuthenticationServiceInterface $authService, FormAbstract $signInForm)
     {

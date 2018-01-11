@@ -170,9 +170,13 @@ npm install -g yuicompressor
 # ----------
 npm install -g uglify-js
 
-# less
+# ruby and gem
+# ------------
+apt-get -y install ruby-full
+
+# sass
 # ----
-npm install -g less
+gem install sass --no-user-install
 
 # link to site
 # ------------

@@ -5,17 +5,17 @@ namespace User\Controller;
 use User\Form\ForgotPassForm;
 use User\Form\RestorePassForm;
 use User\Service\AccessService;
-use Zend\Mvc\Controller\AbstractActionController;
+use Core\Controller\ActionControllerAbstract;
 use Zend\View\Model\ViewModel;
 
-class AccessController extends AbstractActionController
+class AccessController extends ActionControllerAbstract
 {
     private const ROUTE_TO_SIGNIN = 'signin';
     
     /**
      * @var AccessService
      */
-    protected $accessService;
+    private $accessService;
 
     public function __construct(AccessService $accessService)
     {
@@ -28,10 +28,10 @@ class AccessController extends AbstractActionController
         if ($this->getRequest()->isPost()) {
             if ($this->accessService->forgotPass($this->getRequest()->getPost()->toArray(), $form)) {
                 $this->flashMessenger()->addSuccessMessage($this->translate('SUCCESS_SENT_RESTORE_KEY', 'User'));
+                return $this->redirect()->refresh();
             } else {
                 $this->flashMessenger()->addWarningMessage($this->translate('FAILED_SEND_RESTORE_KEY', 'User'));
             }
-            return $this->redirect()->refresh();
         }
         return new ViewModel(['forgotPassForm' => $form]);
     }
