@@ -8,15 +8,12 @@
 {% do headTitle(title) %}
 
 {% block content %}
-  <div class="page-header">
-    <h1>{{ title | e }}</h1>
-  </div>
+  <h1 class="display-4">{{ title | e }}</h1>
 
   {% set formBuilder = formBuilder(againForm) %}
   {{ formBuilder
     .open()
     .action(url('confirm-again'))
-    .addClass('form-horizontal')
   }}
     <div class="form-group required">
       {{ formBuilder
