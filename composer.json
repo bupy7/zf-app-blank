@@ -1,7 +1,7 @@
 {
   "name": "bupy7/zf-app-blank",
   "description": "A blank application Zend Framework 3.",
-  "version": "1.5.1",
+  "version": "1.6.0",
   "type": "project",
   "license": "BSD-3-Clause",
   "keywoards": [
