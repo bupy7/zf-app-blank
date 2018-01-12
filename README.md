@@ -12,7 +12,7 @@ Autoloading standart [PSR-4](http://www.php-fig.org/psr/psr-4/). Coding standart
 TODO
 ----
 
-- Refactoring code to PHP 7.2.
+- Refactoring code to PHP 7.1.
 - Add PHP tests.
 
 Features

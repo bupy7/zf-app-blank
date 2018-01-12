@@ -51,7 +51,7 @@ $checkList = [
         'condition' => extension_loaded('xml'),
     ],
     [
-        'name' => 'less',
+        'name' => 'sass',
         'condition' => shellCommandExists('sass'),
     ],
     [

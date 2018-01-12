@@ -1,6 +1,12 @@
 zf-app-blank
 ============
 
+1.6.2 [2018-01-12]
+------------------
+
+- Enh: Add CLI and Web configuration of XDebug.
+- Fix: Small fixes.
+
 1.6.1 [2018-01-11]
 ------------------
 

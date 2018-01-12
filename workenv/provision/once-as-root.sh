@@ -126,18 +126,26 @@ php_ini_set() {
 }
 php_ini_set /etc/php/7.1/fpm/php.ini
 php_ini_set /etc/php/7.1/cli/php.ini
-xdebug=$(cat <<EOF
-zend_extension=xdebug.so
+xdebug_set() {
+    ini_file=$1
+    ide_key=$2
+    remote_host=$3
+
+    xdebug=$(cat <<EOF
 xdebug.remote_enable=1
 xdebug.remote_connect_back=1
 xdebug.remote_log=/tmp/php7.1-xdebug.log
-xdebug.idekey=${XDEBUG_IDEKEY}
-xdebug.remote_host=${MACHINE_IP}
+xdebug.idekey=${ide_key}
+xdebug.remote_host=${remote_host}
 xdebug.max_nesting_level=1000
 EOF
 )
-echo "${xdebug}" > /etc/php/7.1/cli/conf.d/20-xdebug.ini
-echo "${xdebug}" > /etc/php/7.1/fpm/conf.d/20-xdebug.ini
+
+    echo "${xdebug}" > $ini_file
+}
+foreign_ip=$(netstat -rn | grep "^0.0.0.0 " | cut -d " " -f10)
+xdebug_set /etc/php/7.1/cli/conf.d/50-xdebug.ini $XDEBUG_IDEKEY $foreign_ip
+xdebug_set /etc/php/7.1/fpm/conf.d/50-xdebug.ini $XDEBUG_IDEKEY $MACHINE_IP
 service php7.1-fpm restart
 
 # composer

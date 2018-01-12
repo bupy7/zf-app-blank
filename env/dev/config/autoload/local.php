@@ -32,6 +32,7 @@ return [
         'sass_path' => '/usr/local/bin/sass',
     ],
     'mailgun' => [
+        'debug' => true,
         'key' => 'key-example',
         'endpoint' => 'http://bin.mailgun.net/not-create',
     ],
