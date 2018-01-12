@@ -22,7 +22,7 @@ Features
 - [Zend Framework 3](https://github.com/zendframework/zendframework)
 - [Twitter Bootstrap 4](http://getbootstrap.com/)
 - [Doctrine ORM 2](http://www.doctrine-project.org/)
-- [Debug Bar](https://github.com/snapshotpl/ZfSnapPhpDebugBar)
+- [Debug Bar](https://github.com/bupy7/zf-php-debug-bar)
 - [Twig](http://twig.sensiolabs.org/)
 - [Assetic Management](https://github.com/kriswallsmith/assetic)
 - [RBAC](https://github.com/ZF-Commons/zfc-rbac)
