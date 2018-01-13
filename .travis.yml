@@ -5,6 +5,9 @@ php:
 
 dist: trusty
 
+services:
+  - mysql
+
 before_install: sudo bash ./travis/before-install.sh
 
 before_script: bash ./travis/before-script.sh
