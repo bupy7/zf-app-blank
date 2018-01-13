@@ -3,6 +3,8 @@ php:
   - '7.1'
   - '7.2'
 
+dist: trusty
+
 before_script: sudo bash ./travis/before-script.sh
 
 script:

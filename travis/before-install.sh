@@ -11,7 +11,7 @@ apt-get -y install curl
 # mysql
 # -----
 apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 5072E1F5
-echo "deb http://repo.mysql.com/apt/debian/ $(lsb_release -sc) mysql-5.7" > /etc/apt/sources.list.d/mysql.list
+echo "deb http://repo.mysql.com/apt/ubuntu/ $(lsb_release -sc) mysql-5.7" > /etc/apt/sources.list.d/mysql.list
 apt-get update
 debconf-set-selections <<< 'mysql-community-server mysql-community-server/root-pass password rootpass'
 debconf-set-selections <<< 'mysql-community-server mysql-community-server/re-root-pass password rootpass'
