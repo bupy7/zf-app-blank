@@ -33,10 +33,10 @@ return [
     ],
     'mailgun' => [
         'debug' => true,
-        'key' => 'key-example',
-        'endpoint' => 'http://bin.mailgun.net/not-create',
+        'key' => 'key-example', // example key-dfdfh87d765s45ra7s65a4sasdas76253e
+        'endpoint' => 'endpoint-example', // example http://bin.mailgun.net/sd7gs4wsd
     ],
     'mail' => [
-        'domain' => 'example.mailgun.org',
+        'domain' => 'example.mailgun.org',  // example mail.my-site.com
     ],
 ];
