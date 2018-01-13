@@ -13,10 +13,10 @@ apt-get -y install curl
 apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 5072E1F5
 echo "deb http://repo.mysql.com/apt/ubuntu/ $(lsb_release -sc) mysql-5.7" > /etc/apt/sources.list.d/mysql.list
 apt-get update
-debconf-set-selections <<< 'mysql-community-server mysql-community-server/root-pass password rootpass'
-debconf-set-selections <<< 'mysql-community-server mysql-community-server/re-root-pass password rootpass'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password password rootpass'
+debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password rootpass'
 apt-get -y install mysql-server
-echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass # 2>/dev/null
+echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
 echo "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot -prootpass 2>/dev/null
 echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION" | mysql -uroot -prootpass 2>/dev/null
 echo "FLUSH PRIVILEGES" | mysql -uroot -prootpass 2>/dev/null
