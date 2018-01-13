@@ -16,16 +16,15 @@ apt-get update
 debconf-set-selections <<< 'mysql-community-server mysql-community-server/root-pass password rootpass'
 debconf-set-selections <<< 'mysql-community-server mysql-community-server/re-root-pass password rootpass'
 apt-get -y install mysql-server
+echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
 echo "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot -prootpass 2>/dev/null
 echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION" | mysql -uroot -prootpass 2>/dev/null
 echo "FLUSH PRIVILEGES" | mysql -uroot -prootpass 2>/dev/null
-sed -i 's/^bind-address.*/bind-address=0.0.0.0/' /etc/mysql/mysql.conf.d/mysqld.cnf
 echo '[mysqld]' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo 'collation-server=utf8_unicode_ci' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo 'character-set-server=utf8' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "skip-character-set-client-handshake" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
-echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
 
 # node.js
 # ------
