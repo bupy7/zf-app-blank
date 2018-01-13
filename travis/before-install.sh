@@ -1,20 +1,8 @@
 #!/usr/bin/env bash
 
-DB_USER=zf_app_blank
-DB_PASS=1234
-DB_NAME=zf_app_blank_test
-
 # common
 # ------
 apt-get -y install curl
-
-# postgresql
-# -----
-# Using `sudo` for run command under the `postgres` user .
-sudo -u postgres psql -c "CREATE USER ${DB_USER} WITH SUPERUSER CREATEDB LOGIN PASSWORD '${DB_PASS}';"
-sudo -u postgres psql -c "CREATE DATABASE ${DB_NAME};"
-echo "host all all 0.0.0.0/0 md5" >> /etc/postgresql/9.6/main/pg_hba.conf
-service postgresql restart
 
 # node.js
 # ------
