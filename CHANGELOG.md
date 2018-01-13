@@ -2,6 +2,7 @@ zf-app-blank
 ============
 
 1.6.3 [2018-01-13]
+------------------
 
 - Fix: Link in README.
 - Enh: Upgrade `widmogrod/zf2-assetic-module` to 2.4.
