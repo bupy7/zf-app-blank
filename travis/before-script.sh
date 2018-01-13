@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-phpenv config-rm xdebug.ini
-
 # init
 php bin/init --env=dev --overwrite=y
 

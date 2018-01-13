@@ -5,11 +5,11 @@ php:
 
 dist: trusty
 
-before_script: sudo bash ./travis/before-script.sh
+before_install: sudo bash ./travis/before-install.sh
+
+before_script: bash ./travis/before-script.sh
 
 script:
   # run tests
   - composer test:build
   - composer test:run
-
-before_install: bash ./travis/before-install.sh
