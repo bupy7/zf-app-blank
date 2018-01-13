@@ -16,7 +16,7 @@ apt-get update
 debconf-set-selections <<< 'mysql-server mysql-server/root_password password rootpass'
 debconf-set-selections <<< 'mysql-server mysql-server/root_password_again password rootpass'
 apt-get -y install mysql-server
-echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
+echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass # 2>/dev/null
 echo "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot -prootpass 2>/dev/null
 echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION" | mysql -uroot -prootpass 2>/dev/null
 echo "FLUSH PRIVILEGES" | mysql -uroot -prootpass 2>/dev/null
