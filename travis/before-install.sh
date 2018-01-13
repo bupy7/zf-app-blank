@@ -17,8 +17,8 @@ debconf-set-selections <<< 'mysql-community-server mysql-community-server/root-p
 debconf-set-selections <<< 'mysql-community-server mysql-community-server/re-root-pass password rootpass'
 apt-get -y install mysql-server
 echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot -prootpass 2>/dev/null
-echo "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot -prootpass 2>/dev/null
-echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'%' WITH GRANT OPTION" | mysql -uroot -prootpass 2>/dev/null
+echo "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot -prootpass 2>/dev/null
+echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION" | mysql -uroot -prootpass 2>/dev/null
 echo "FLUSH PRIVILEGES" | mysql -uroot -prootpass 2>/dev/null
 echo '[mysqld]' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo 'collation-server=utf8_unicode_ci' >> /etc/mysql/mysql.conf.d/mysqld.cnf
