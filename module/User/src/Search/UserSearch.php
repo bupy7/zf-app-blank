@@ -42,6 +42,9 @@ class UserSearch
             $this->dataProvider->setQueryParams($form->getValues());
         }
 
+        // counter
+        $this->dataProvider->getCountBuilder()->resetDQLPart('orderBy');
+
         return $this->dataProvider;
     }
 }
