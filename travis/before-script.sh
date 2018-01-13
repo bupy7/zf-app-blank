@@ -13,8 +13,8 @@ sed -i '15d' config/autoload/local.php
 sed -i '8d' config/autoload/local.php
 
 sed -s "s/zf_app_blank/travis/" config/autoload/local.php # user: travis and database: travis_test
-sed -s "s/'1234'//" config/autoload/local.php
-sed -s "s/'1234'//" config/autoload/local.php
+sed -s "s/'1234'/''/" config/autoload/local.php
+sed -s "s/'1234'/''/" config/autoload/local.php
 
 psql -c 'CREATE DATABASE travis_test;' -U postgres
 
