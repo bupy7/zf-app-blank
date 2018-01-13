@@ -53,7 +53,10 @@ npm install -g uglify-js
 
 # ruby and gem
 # ------------
-apt-get -y install ruby-full
+apt-get -y install software-properties-common
+apt-add-repository -y ppa:brightbox/ruby-ng
+apt-get update
+apt-get -y install ruby2.4
 
 # sass
 # ----
