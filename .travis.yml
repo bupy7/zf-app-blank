@@ -5,6 +5,12 @@ php:
 
 dist: trusty
 
+services:
+  - postgresql
+
+addons:
+  postgresql: "9.6"
+
 before_install: sudo bash ./travis/before-install.sh
 
 before_script: bash ./travis/before-script.sh

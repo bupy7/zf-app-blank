@@ -1,28 +1,17 @@
 #!/usr/bin/env bash
 
-MYSQL_USER=zf_app_blank
-MYSQL_PASS=1234
-MYSQL_DB=zf_app_blank
+DB_USER=zf_app_blank
+DB_PASS=1234
+DB_NAME=zf_app_blank_test
 
 # common
 # ------
 apt-get -y install curl
 
-# mysql
+# postgresql
 # -----
-apt-key adv --keyserver ha.pool.sks-keyservers.net --recv-keys 5072E1F5
-echo "deb http://repo.mysql.com/apt/ubuntu/ $(lsb_release -sc) mysql-5.7" > /etc/apt/sources.list.d/mysql.list
-apt-get update
-apt-get -y install mysql-server
-echo "CREATE DATABASE ${MYSQL_DB}_test" | mysql -uroot 2> /dev/null
-echo "CREATE USER '${MYSQL_USER}'@'localhost' IDENTIFIED BY '${MYSQL_PASS}'" | mysql -uroot 2> /dev/null
-echo "GRANT ALL PRIVILEGES ON *.* TO '${MYSQL_USER}'@'localhost' WITH GRANT OPTION" | mysql -uroot 2> /dev/null
-echo "FLUSH PRIVILEGES" | mysql -uroot 2> /dev/null
-echo '[mysqld]' >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo 'collation-server=utf8_unicode_ci' >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo 'character-set-server=utf8' >> /etc/mysql/mysql.conf.d/mysqld.cnf
-echo "skip-character-set-client-handshake" >> /etc/mysql/mysql.conf.d/mysqld.cnf
-service mysql restart
+-u postgres psql -c "CREATE USER ${DB_USER} WITH SUPERUSER CREATEDB LOGIN PASSWORD '${DB_PASS}';"
+-u postgres psql -c "CREATE DATABASE ${DB_NAME};"
 
 # node.js
 # ------
