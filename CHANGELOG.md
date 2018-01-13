@@ -1,9 +1,12 @@
 zf-app-blank
 ============
 
-1.6.3 [????-??-??]
+1.6.3 [2018-01-13]
 
 - Fix: Link in README.
+- Enh: Upgrade `widmogrod/zf2-assetic-module` to 2.4.
+- Enh: Small refactoring of `ExAssetic`.
+- Rem: Mailgun config from the global config file.
 
 1.6.2 [2018-01-12]
 ------------------

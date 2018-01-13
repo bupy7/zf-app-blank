@@ -33,7 +33,7 @@
     "zendframework/zend-mvc-plugin-prg": "~1.0.0",
     "zendframework/zend-mvc-plugin-fileprg": "~1.0.0",
     "zendframework/zend-json": "~3.0.0",
-    "widmogrod/zf2-assetic-module": "~2.3",
+    "widmogrod/zf2-assetic-module": "~2.4",
     "zf-commons/zfc-rbac": "~2.6.3",
     "doctrine/doctrine-orm-module": "~1.1.0",
     "bupy7/zf-mailgun": "~1.0.0",
