@@ -4,7 +4,9 @@
 php bin/init --env=dev --overwrite=y
 
 # database
-sed -i 's/^\/\///' config/autoload/local.php
+sed -i '7s/^\/\///' config/autoload/local.php
+sed -i '14s/^\/\///' config/autoload/local.php
+sed -i '18s/^\/\///' config/autoload/local.php
 sed -i '17d' config/autoload/local.php
 sed -i '15d' config/autoload/local.php
 sed -i '8d' config/autoload/local.php

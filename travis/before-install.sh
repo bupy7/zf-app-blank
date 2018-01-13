@@ -10,8 +10,8 @@ apt-get -y install curl
 
 # postgresql
 # -----
--u postgres psql -c "CREATE USER ${DB_USER} WITH SUPERUSER CREATEDB LOGIN PASSWORD '${DB_PASS}';"
--u postgres psql -c "CREATE DATABASE ${DB_NAME};"
+sudo -u postgres psql -c "CREATE USER ${DB_USER} WITH SUPERUSER CREATEDB LOGIN PASSWORD '${DB_PASS}';"
+sudo -u postgres psql -c "CREATE DATABASE ${DB_NAME};"
 
 # node.js
 # ------
