@@ -26,6 +26,9 @@ echo 'character-set-server=utf8' >> /etc/mysql/mysql.conf.d/mysqld.cnf
 echo "skip-character-set-client-handshake" >> /etc/mysql/mysql.conf.d/mysqld.cnf
 service mysql restart
 
+echo "HERE!!!!!!!!"
+echo "SELECT host, user FROM mysql.user" | mysql -u${MYSQL_USER} -p${MYSQL_PASS} 2> /dev/null
+
 # node.js
 # ------
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
