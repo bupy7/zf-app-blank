@@ -16,7 +16,7 @@
     </unique-constraints>
 
     <id name="id" type="integer" column="id">
-      <generator strategy="IDENTITY"/>
+      <generator/>
     </id>
 
     <field name="person"/>
