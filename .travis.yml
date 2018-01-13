@@ -12,4 +12,4 @@ script:
   - composer test:build
   - composer test:run
 
-before_install: sudo bash ./travis/before-install.sh
+before_install: bash ./travis/before-install.sh
