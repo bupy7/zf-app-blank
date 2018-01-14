@@ -5,6 +5,7 @@ zf-app-blank
 ------------------
 
 - Add: Integration with Travis CI.
+- Add: Integration with Coveralls.
 
 1.6.3 [2018-01-13]
 ------------------
