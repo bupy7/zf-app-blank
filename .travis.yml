@@ -21,4 +21,4 @@ script:
   - composer test:run-with-cov
 
 after_script:
-  - vendor/bin/php-coveralls -v # --coverage_clover=_codeceptOutput/coverage.xml
+  - vendor/bin/php-coveralls -v --coverage_clover=_codeceptOutput/coverage.xml

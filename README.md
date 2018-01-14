@@ -5,6 +5,7 @@ zf-app-blank
 [![Latest Unstable Version](https://poser.pugx.org/bupy7/zf-app-blank/v/unstable)](https://packagist.org/packages/bupy7/zf-app-blank)
 [![License](https://poser.pugx.org/bupy7/zf-app-blank/license)](https://packagist.org/packages/bupy7/zf-app-blank)
 [![Build Status](https://travis-ci.org/bupy7/zf-app-blank.svg?branch=dev)](https://travis-ci.org/bupy7/zf-app-blank)
+[![Coverage Status](https://coveralls.io/repos/github/bupy7/zf-app-blank/badge.svg?branch=master)](https://coveralls.io/github/bupy7/zf-app-blank?branch=master)
 
 Autoloading standart [PSR-4](http://www.php-fig.org/psr/psr-4/). Coding standart [PSR-2](http://www.php-fig.org/psr/psr-2/).
 
