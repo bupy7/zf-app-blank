@@ -1,6 +1,11 @@
 zf-app-blank
 ============
 
+1.6.5
+-----
+
+- Enh: Disabled generate proxies for not debug mode.
+
 1.6.4 [2018-01-14]
 ------------------
 
