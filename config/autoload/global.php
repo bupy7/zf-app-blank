@@ -20,4 +20,12 @@ return [
     'php-debug-bar' => [
         'enabled' => APP_ENV_DEV,
     ],
+    // Doctrine
+    'doctrine' => [
+        'configuration' => [
+            'orm_default' => [
+                'generate_proxies' => APP_DEBUG,
+            ],
+        ],
+    ],
 ];
